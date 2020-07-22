@@ -65,8 +65,7 @@
     <xsl:apply-templates select="rdf:RDF"/>
   </xsl:template>
 
-
-  <xsl:template match="@*|node()[name(.)!= 'root']">
+  <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
@@ -225,7 +224,6 @@
               dct:accrualPeriodicity|
               dct:language|
               dcat:Dataset/dct:type|
-              dct:format|
               dcat:mediaType|
               adms:status|
               dct:LicenseDocument/dct:type|
@@ -359,7 +357,9 @@
   </xsl:template>
 
   <!-- Ignore all empty rdf:about -->
-  <xsl:template match="@rdf:about[normalize-space() = '']|@rdf:datatype[normalize-space() = '']" priority="10"/>
+  <xsl:template match="@rdf:about[normalize-space() = '']
+                       |@rdf:datatype[normalize-space() = '']"
+                priority="10"/>
 
   <!-- Remove non numeric byteSize and format scientific notation to decimal -->
   <xsl:template match="dcat:byteSize" priority="10">

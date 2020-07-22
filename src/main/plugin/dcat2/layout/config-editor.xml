@@ -78,18 +78,29 @@
   </tableFields-->
 
   <views>
-    <view name="advanced" displayTooltips="true" upAndDownControlHidden="true">
+    <view name="basic" upAndDownControlHidden="false">
       <sidePanel>
-        <directive data-gn-onlinesrc-list="" data-types="source"/>
+        <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
-      <tab id="default">
+      <tab id="default" default="true"  mode="flat">
+        <section xpath="rdf:RDF"/>
+      </tab>
+    </view>
+
+    <view name="advanced" upAndDownControlHidden="true">
+      <sidePanel>
+        <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
+        <directive data-gn-validation-report=""/>
+      </sidePanel>
+      <tab id="advanced" default="true" >
         <section xpath="rdf:RDF"/>
       </tab>
     </view>
 
     <view name="xml">
       <sidePanel>
+        <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
       <tab id="xml" default="true"/>

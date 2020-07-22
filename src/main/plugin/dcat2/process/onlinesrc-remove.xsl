@@ -23,6 +23,7 @@
   -->
 <xsl:stylesheet xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:geonet="http://www.fao.org/geonetwork"
                 version="2.0"
@@ -30,15 +31,15 @@
 
   <xsl:param name="url"/>
 
+  <xsl:template match="geonet:*
+                       |dcat:distribution[*/dcat:accessURL/text() = $url]
+                       |dcat:distribution[*/dcat:downloadURL/text() = $url]"
+                priority="2"/>
+
   <!-- Do a copy of every nodes and attributes -->
   <xsl:template match="@*|node()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
   </xsl:template>
-
-  <xsl:template match="geonet:*|
-                dct:references[text() = $url]|
-                dc:relation[text() = $url]"
-                priority="2"/>
 </xsl:stylesheet>

@@ -22,49 +22,64 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:dcat="http://www.w3.org/ns/dcat#"
+                xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 version="2.0"
                 exclude-result-prefixes="#all">
 
-  <xsl:template mode="relation" match="metadata[dataset]" priority="99">
-    <xsl:for-each select="*/descendant::*
-                        [name(.) = 'dct:references' or name(.) = 'dc:relation']
-                        [starts-with(., 'http')
-                         or contains(. , '/attachments/')]">
-      <xsl:variable name="name" select="tokenize(., '/')[last()]"/>
-      <relation type="onlinesrc">
-        <id>
-          <xsl:value-of select="."/>
-        </id>
-        <title>
-          <xsl:value-of select="$name"/>
-        </title>
-        <url>
-          <xsl:value-of select="."/>
-        </url>
-        <name>
-          <xsl:value-of select="$name"/>
-        </name>
-        <abstract>
-          <xsl:value-of select="."/>
-        </abstract>
-        <description>
-          <xsl:value-of select="$name"/>
-        </description>
-        <xsl:choose>
-          <xsl:when test="starts-with(., 'http')
-                          or contains(. , '/attachments/')">
-            <protocol>
-              <xsl:value-of select="'WWW:DOWNLOAD-1.0-http--download'"/>
-            </protocol>
-          </xsl:when>
-          <xsl:otherwise>
-            <protocol>
-              <xsl:value-of select="'WWW:LINK'"/>
-            </protocol>
-          </xsl:otherwise>
-        </xsl:choose>
-      </relation>
-    </xsl:for-each>
+  <xsl:template mode="relation"
+                match="metadata/rdf:RDF/dcat:*">
+    <thumbnails>
+      <xsl:for-each select=".//dcat:Distribution[dct:format = 'WWW:OVERVIEW']">
+        <xsl:variable name="url"
+                      select="dcat:accessURL|dcat:downloadURL"/>
+        <item>
+          <id>
+            <xsl:value-of select="$url"/>
+          </id>
+          <url>
+            <value lang="{$lang}">
+              <xsl:value-of select="$url"/>
+            </value>
+          </url>
+          <title>
+            <value lang="{$lang}">
+              <xsl:value-of select="dct:description"/>
+            </value>
+          </title>
+          <protocol>
+            <xsl:value-of select="dct:format"/>
+          </protocol>
+          <type>thumbnail</type>
+        </item>
+      </xsl:for-each>
+    </thumbnails>
+    <onlines>
+      <xsl:for-each select=".//dcat:Distribution[dct:format != 'WWW:OVERVIEW']">
+        <xsl:variable name="url"
+                      select="dcat:accessURL|dcat:downloadURL"/>
+        <item>
+          <id>
+            <xsl:value-of select="$url"/>
+          </id>
+          <url>
+            <value lang="{$lang}">
+              <xsl:value-of select="$url"/>
+            </value>
+          </url>
+          <title>
+            <value lang="{$lang}">
+              <xsl:value-of select="dct:description"/>
+            </value>
+          </title>
+          <protocol>
+            <xsl:value-of select="dct:format"/>
+          </protocol>
+          <type>onlinesrc</type>
+        </item>
+      </xsl:for-each>
+    </onlines>
   </xsl:template>
 
 </xsl:stylesheet>

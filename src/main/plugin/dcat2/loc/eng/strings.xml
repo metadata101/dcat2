@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <strings>
+  <basic>Basic</basic>
   <advanced>Advanced</advanced>
   <xml>XML</xml>
 </strings>

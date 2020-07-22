@@ -23,11 +23,7 @@
       XSLT, XQuery).
       The schema is not intended to be used outside GeoNetwork.
 
-      Created 2019-10-03
-      Modified
-
-      Author PW
-
+      Created 2019-10-03 / Author PW
     </xs:documentation>
   </xs:annotation>
   <xs:import namespace="http://www.w3.org/ns/adms#" schemaLocation="adms.xsd"/>
@@ -216,16 +212,19 @@
             <xs:element name="accessURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="byteSize" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="compressFormat" minOccurs="1" maxOccurs="unbounded"/>
-            <!-- http://purl.org/dc/terms/MediaType -->
             <xs:element name="downloadURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <!--
+            This property SHOULD be used when the media type of the distribution is defined in IANA [IANA-MEDIA-TYPES], otherwise dct:format MAY be used with different values.
+            -->
             <xs:element name="mediaType" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="packageFormat" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <!-- http://purl.org/dc/terms/MediaType -->
             <xs:element name="spatialResolutionInMeters" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="temporalResolution" type="xs:duration" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element ref="dct:accessRights" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
+
+            <!-- The file format, physical medium, or dimensions of the resource. -->
             <xs:element ref="dct:format" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="dct:license" minOccurs="1" maxOccurs="1"/>

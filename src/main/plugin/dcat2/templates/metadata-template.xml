@@ -28,5 +28,26 @@
       </foaf:Agent>
     </dct:publisher>
     <dct:title xml:lang="en">DCAT Template</dct:title>
+
+    <dcat:distribution>
+      <dcat:Distribution>
+        <dcat:accessService></dcat:accessService>
+        <dcat:accessURL ></dcat:accessURL>
+        <dcat:byteSize></dcat:byteSize>
+        <dcat:compressFormat></dcat:compressFormat>
+        <dcat:downloadURL></dcat:downloadURL>
+        <dcat:mediaType></dcat:mediaType>
+        <dcat:packageFormat></dcat:packageFormat>
+        <dcat:spatialResolutionInMeters></dcat:spatialResolutionInMeters>
+        <dcat:temporalResolution></dcat:temporalResolution>
+        <dct:accessRights>
+          <skos:Concept></skos:Concept>
+        </dct:accessRights>
+        <dct:description></dct:description>
+        <dct:license>
+          <dct:LicenseDocument></dct:LicenseDocument>
+        </dct:license>
+      </dcat:Distribution>
+    </dcat:distribution>
   </dcat:Dataset>
 </rdf:RDF>
