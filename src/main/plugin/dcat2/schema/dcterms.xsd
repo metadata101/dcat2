@@ -4,6 +4,7 @@
            xmlns:dct="http://purl.org/dc/terms/"
            xmlns:locn="http://www.w3.org/ns/locn#"
            xmlns:schema="http://schema.org/"
+           xmlns:dcat="http://www.w3.org/ns/dcat#"
            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
            targetNamespace="http://purl.org/dc/terms/"
@@ -130,8 +131,8 @@
         <xs:complexType>
           <xs:sequence>
             <!-- optional properties for dct:PeriodOfTime-->
-            <xs:element ref="schema:startDate" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="schema:endDate" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="dcat:startDate" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="dcat:endDate" minOccurs="0" maxOccurs="1"/>
           </xs:sequence>
           <xs:attribute ref="rdf:about"/>
           <xs:attribute ref="rdf:nodeID"/>
