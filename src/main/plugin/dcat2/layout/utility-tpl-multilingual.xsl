@@ -25,6 +25,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
                 version="2.0"
                 exclude-result-prefixes="#all">
@@ -76,7 +77,7 @@
   <!-- Get the list of other languages -->
   <xsl:template name="get-dcat2-other-languages">
     <xsl:choose>
-      <xsl:when test="count($metadata/descendant::node()/*[@xml:lang!=''])>1">
+      <xsl:when test="count($metadata/descendant::node()/*[@xml:lang != '']) > 1">
         <xsl:for-each select="$metadata/*/dct:language/@rdf:resource">
           <xsl:variable name="languageCode">
             <xsl:call-template name="get-dcat2-language">

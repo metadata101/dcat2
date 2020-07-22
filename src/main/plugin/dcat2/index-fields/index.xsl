@@ -33,6 +33,7 @@
                 version="2.0">
 
   <xsl:import href="common/index-utils.xsl"/>
+  <xsl:import href="../layout/utility-tpl-multilingual.xsl"/>
 
   <xsl:output method="xml" indent="yes"/>
 
@@ -42,12 +43,22 @@
               encoding="utf-8"
               escape-uri-attributes="yes"/>
 
+  <xsl:variable name="metadata"
+                select="//rdf:RDF"/>
 
   <xsl:variable name="allLanguages">
-    <lang id="default" value="eng"/>
-    <!--<xsl:for-each select="$otherLanguages">
-      <lang id="{../../../@id}" value="{.}"/>
-    </xsl:for-each>-->
+    <xsl:variable name="listOfLanguages">
+      <xsl:call-template name="get-dcat2-other-languages"/>
+    </xsl:variable>
+
+    <xsl:for-each select="$listOfLanguages/*">
+      <lang value="{@code}">
+        <xsl:if test="position() = 1">
+          <xsl:attribute name="id"
+                         select="'default'"/>
+        </xsl:if>
+      </lang>
+    </xsl:for-each>
   </xsl:variable>
 
   <xsl:template match="/">
@@ -60,6 +71,7 @@
         </metadataIdentifier>
 
         <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceTitle', dct:title, $allLanguages)"/>
+        <xsl:copy-of select="gn-fn-index:add-multilingual-field('resourceAbstract', dct:description, $allLanguages)"/>
 
         <xsl:for-each select="dct:language">
           <mainLanguage>
@@ -67,11 +79,6 @@
           </mainLanguage>
         </xsl:for-each>
 
-        <xsl:for-each select="dct:description">
-          <resourceAbstract>
-            <xsl:value-of select="string(.)"/>
-          </resourceAbstract>
-        </xsl:for-each>
       </doc>
     </xsl:for-each>
   </xsl:template>
