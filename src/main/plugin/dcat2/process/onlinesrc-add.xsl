@@ -23,6 +23,7 @@
   -->
 <xsl:stylesheet xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"
                 exclude-result-prefixes="#all">
@@ -86,7 +87,11 @@
 
           <xsl:if test="$protocol">
             <dct:format>
-              <xsl:value-of select="$protocol"/>
+              <skos:Concept>
+                <skos:prefLabel>
+                  <xsl:value-of select="$protocol"/>
+                </skos:prefLabel>
+              </skos:Concept>
             </dct:format>
           </xsl:if>
           <!--          <dct:license>-->

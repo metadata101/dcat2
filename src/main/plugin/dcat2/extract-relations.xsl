@@ -23,6 +23,7 @@
   -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 version="2.0"
@@ -49,7 +50,7 @@
             </value>
           </title>
           <protocol>
-            <xsl:value-of select="dct:format"/>
+            <xsl:value-of select="dct:format/*/skos:prefLabel"/>
           </protocol>
           <type>thumbnail</type>
         </item>
@@ -74,7 +75,7 @@
             </value>
           </title>
           <protocol>
-            <xsl:value-of select="dct:format"/>
+            <xsl:value-of select="dct:format/*/skos:prefLabel"/>
           </protocol>
           <type>onlinesrc</type>
         </item>
