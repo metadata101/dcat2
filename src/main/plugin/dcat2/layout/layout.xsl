@@ -190,7 +190,7 @@
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="overrideLabel" select="''" required="no"/>
     <xsl:param name="refToDelete" required="no"/>
-
+    <xsl:param name="config" required="no"/>
 
     <xsl:variable name="name" select="name(.)"/>
     <xsl:variable name="ref" select="gn:element/@ref"/>
@@ -275,7 +275,6 @@
           </xsl:call-template>
         </xsl:variable>
 
-
         <!-- If the element exist, use the _X<ref> mode which
               insert the snippet for the element if not use the
               XPATH mode which will create the new element at the
@@ -296,6 +295,7 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+
         <xsl:call-template name="render-element">
           <xsl:with-param name="label" select="$labelConfig"/>
           <xsl:with-param name="value" select="."/>
@@ -305,11 +305,27 @@
           <xsl:with-param name="xpath" select="$xpath"/>
           <!--xsl:with-param name="forceDisplayAttributes" select="gn-fn-dcat2:isForceDisplayAttributes(.)"/-->
           <!--xsl:with-param name="attributesSnippet" select="$attributes"/-->
-          <xsl:with-param name="type" select="gn-fn-metadata:getFieldType($editorConfig, name(), '', $xpath)"/>
+          <xsl:with-param name="type"
+                          select="if ($config and $config/@use != '')
+                              then $config/@use
+                              else gn-fn-metadata:getFieldType($editorConfig, name(), '', $xpath)"/>
+          <xsl:with-param name="directiveAttributes">
+            <xsl:choose>
+              <xsl:when test="$config and $config/@use != ''">
+                <xsl:element name="directive">
+                  <xsl:attribute name="data-directive-name" select="$config/@use"/>
+                  <xsl:copy-of select="$config/directiveAttributes/@*"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:copy-of select="gn-fn-metadata:getFieldDirective($editorConfig, name(), '', $xpath)"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:with-param>
           <xsl:with-param name="name" select="if ($isEditing) then $ref else ''"/>
           <xsl:with-param name="editInfo" select="gn:element"/>
           <xsl:with-param name="parentEditInfo"
-                          select="if ($refToDelete) then $refToDelete else ../gn:element"/>
+                          select="if ($refToDelete) then $refToDelete else ''"/>
           <!--<xsl:with-param name="editInfo" select="if ($refToDelete) then $refToDelete else gn:element"/>
           <xsl:with-param name="parentEditInfo"
                           select="if ($added) then $container/gn:element else element()"/>-->
