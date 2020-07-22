@@ -27,8 +27,7 @@
         xmlns:spdx="http://spdx.org/rdf/terms#"
         xmlns:adms="http://www.w3.org/ns/adms#"
         xmlns:dcat="http://www.w3.org/ns/dcat#"
-        xmlns:foaf="http://xmlns.com/foaf/0.1/"
->
+        xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <field name="dcat:Distribution">
     <suggest name="dct:title"/>
     <suggest name="dct:description"/>

@@ -11,8 +11,11 @@
 
   <fields>
     <for name="dcat:byteSize" use="number"/>
+
     <for name="adms:versionNotes" use="textarea"/>
     <for name="dct:description" use="textarea"/>
+
+    <for name="dct:language/@rdf:resource" use="data-gn-language-picker"/>
   </fields>
 
   <fieldsWithFieldset>
@@ -53,10 +56,10 @@
     <!-- In multilingual mode, define which mode
     the widget should have. If expanded, then one
     field per language is displayed. -->
-    <!--<expanded>-->
-    <!--<name>dct:title</name>-->
-    <!--<name>dct:description</name>-->
-    <!--</expanded>-->
+    <expanded>
+      <name>dct:title</name>
+      <name>dct:description</name>
+    </expanded>
     <exclude>
       <name>dct:identifier</name>
     </exclude>
@@ -78,7 +81,7 @@
   </tableFields-->
 
   <views>
-    <view name="basic" upAndDownControlHidden="false">
+    <view name="basic" upAndDownControlHidden="true">
       <sidePanel>
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
@@ -88,7 +91,7 @@
       </tab>
     </view>
 
-    <view name="advanced" upAndDownControlHidden="true">
+    <view name="advanced">
       <sidePanel>
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>

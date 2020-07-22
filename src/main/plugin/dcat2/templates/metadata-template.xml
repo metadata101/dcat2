@@ -12,7 +12,10 @@
         <vcard:hasEmail rdf:resource=""/>
       </vcard:Organization>
     </dcat:contactPoint>
-    <dcat:keyword xml:lang="en">Keyword</dcat:keyword>
+    <dcat:keyword xml:lang="eng">Water</dcat:keyword>
+    <dcat:keyword xml:lang="fre">Eau</dcat:keyword>
+    <dcat:keyword xml:lang="eng">Management plan</dcat:keyword>
+    <dcat:keyword xml:lang="fre">Plan de gestion</dcat:keyword>
     <dcat:theme/>
     <dct:accessRights>
       <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/PUBLIC">
@@ -28,7 +31,8 @@
       </foaf:Agent>
     </dct:publisher>
     <dct:title xml:lang="en">DCAT Template</dct:title>
-
+    <dct:language rdf:resource="http://id.loc.gov/vocabulary/iso639-2/eng"/>
+    <dct:language rdf:resource="http://id.loc.gov/vocabulary/iso639-2/fre"/>
     <dcat:distribution>
       <dcat:Distribution>
         <dcat:accessService></dcat:accessService>

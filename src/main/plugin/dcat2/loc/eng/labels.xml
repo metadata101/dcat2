@@ -34,12 +34,7 @@
         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
         xmlns:schema="http://schema.org/">
   <element name="xml:lang">
-    <label>taal</label>
-    <helper>
-      <option value="nl">Dutch</option>
-      <option value="fr">French</option>
-      <option value="en">English</option>
-    </helper>
+    <label>Language code</label>
   </element>
   <element name="dcat:Dataset">
     <label>Dataset</label>
@@ -55,29 +50,15 @@
     <description>Tooltip: URI</description>
     <btnLabel>URI</btnLabel>
   </element>
-  <element name="dct:title"
-           context="/rdf:RDF/dcat:Dataset/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
+  <element name="dct:title">
+    <label>Title</label>
+    <description>A name given to the item.</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-           context="/rdf:RDF/dcat:Dataset/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
-  <element name="dct:description"
-           context="/rdf:RDF/dcat:Dataset/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
+  <element name="dct:description">
+    <label>Description</label>
+    <description>A free-text account of the record.</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-           context="/rdf:RDF/dcat:Dataset/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier"
            context="/rdf:RDF/dcat:Dataset/dct:identifier">
@@ -241,13 +222,6 @@
     <description>Tooltip: name</description>
     <btnLabel>name</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:type"
            context="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/dct:type">
     <label>type</label>
@@ -282,13 +256,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
@@ -301,12 +268,6 @@
     <label>keyword/ tag</label>
     <description>Tooltip: keyword/ tag</description>
     <btnLabel>keyword/ tag</btnLabel>
-  </element>
-  <element name="xml:lang"
-           context="/rdf:RDF/dcat:Dataset/dcat:keyword/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dcat:theme"
            context="/rdf:RDF/dcat:Dataset/dcat:theme">
@@ -340,13 +301,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:theme/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -393,26 +347,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:conformsTo/dct:Standard/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/dct:conformsTo/dct:Standard/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:conformsTo/dct:Standard/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="foaf:page"
            context="/rdf:RDF/dcat:Dataset/foaf:page">
@@ -438,13 +378,6 @@
     <label>name</label>
     <description>Tooltip: name</description>
     <btnLabel>name</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/foaf:page/foaf:Document/foaf:name/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:accrualPeriodicity"
 
@@ -480,13 +413,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:accrualPeriodicity/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -535,12 +461,21 @@
     <description>Tooltip: landing page</description>
     <btnLabel>landing page</btnLabel>
   </element>
+
   <element name="dct:language"
            context="/rdf:RDF/dcat:Dataset/dct:language">
-    <label>language</label>
-    <description>Tooltip: language</description>
+    <label>Language</label>
+    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.</description>
     <btnLabel>language</btnLabel>
   </element>
+  <element name="rdf:resource"
+           context="dct:language">
+    <label>Language</label>
+    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.</description>
+    <btnLabel>language</btnLabel>
+  </element>
+
+
   <element name="skos:Concept"
            context="/rdf:RDF/dcat:Dataset/dct:language/skos:Concept">
     <label>language</label>
@@ -567,13 +502,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:language/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -645,13 +573,6 @@
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:provenance/dct:ProvenanceStatement/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
            context="/rdf:RDF/dcat:Dataset/dct:relation/@rdf:resource">
     <label>related resource</label>
@@ -711,13 +632,6 @@
     <label>Geographic description</label>
     <description>Tooltip: Geographic description</description>
     <btnLabel>Geographic description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:spatial/dct:Location/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:temporal"
            context="/rdf:RDF/dcat:Dataset/dct:temporal">
@@ -785,13 +699,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dct:type/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
@@ -805,23 +712,11 @@
     <description>Tooltip: version</description>
     <btnLabel>version</btnLabel>
   </element>
-  <element name="xml:lang"
-           context="/rdf:RDF/dcat:Dataset/owl:versionInfo/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="adms:versionNotes"
            context="/rdf:RDF/dcat:Dataset/adms:versionNotes">
     <label>version notes</label>
     <description>Tooltip: version notes</description>
     <btnLabel>version notes</btnLabel>
-  </element>
-  <element name="xml:lang"
-           context="/rdf:RDF/dcat:Dataset/adms:versionNotes/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dcat:extension"
            context="/rdf:RDF/dcat:Dataset/dcat:extension">
@@ -890,26 +785,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -988,13 +869,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1037,13 +911,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1085,13 +952,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -1156,13 +1016,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1177,26 +1030,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier"
 
@@ -1233,26 +1072,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dcat:byteSize"
 
@@ -1324,13 +1149,6 @@
     <description>Tooltip: name</description>
     <btnLabel>name</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/foaf:page/foaf:Document/foaf:name/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:conformsTo"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo">
@@ -1359,26 +1177,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="adms:status"
 
@@ -1415,13 +1219,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1456,26 +1253,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -1547,13 +1330,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1596,13 +1372,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="rdf:resource"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1644,13 +1413,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
 
@@ -1715,13 +1477,6 @@
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="skos:inScheme"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
@@ -1736,26 +1491,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier"
 
@@ -1792,26 +1533,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="dcat:byteSize"
 
@@ -1883,13 +1610,6 @@
     <description>Tooltip: name</description>
     <btnLabel>name</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/foaf:page/foaf:Document/foaf:name/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:conformsTo"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo">
@@ -1918,26 +1638,12 @@
     <description>Tooltip: title</description>
     <btnLabel>title</btnLabel>
   </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/dct:title/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
   <element name="dct:description"
 
            context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description">
     <label>description</label>
     <description>Tooltip: description</description>
     <btnLabel>description</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="adms:status"
 
@@ -1973,13 +1679,6 @@
     <label>preferred label</label>
     <description>Tooltip: preferred label</description>
     <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="xml:lang"
-
-           context="/rdf:RDF/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept/skos:prefLabel/@xml:lang">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
   </element>
   <element name="skos:inScheme"
 

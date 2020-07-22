@@ -57,6 +57,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
+      <!-- A keyword or tag describing the resource. -->
       <xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="landingPage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="qualifiedRelation" type="dcat:Relationship" minOccurs="0" maxOccurs="unbounded"/>
@@ -68,6 +69,13 @@
       <xs:element ref="dct:identifier" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:isReferencedBy" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+      <!--
+      A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution
+
+      Resources defined by the Library of Congress (ISO 639-1, ISO 639-2) SHOULD be used.
+
+      If a ISO 639-1 (two-letter) code is defined for language, then its corresponding IRI SHOULD be used; if no ISO 639-1 code is defined, then IRI corresponding to the ISO 639-2 (three-letter) code SHOULD be used.
+      -->
       <xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:license" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>

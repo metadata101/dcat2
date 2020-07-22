@@ -208,6 +208,7 @@
     </dcat:Dataset>
   </xsl:template>
 
+
   <!--<xsl:template match="dcat:Dataset/dct:title" priority="10">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
@@ -222,7 +223,6 @@
               foaf:Agent/dct:type|
               dcat:theme|
               dct:accrualPeriodicity|
-              dct:language|
               dcat:Dataset/dct:type|
               dcat:mediaType|
               adms:status|
@@ -239,10 +239,7 @@
             <xsl:if test="$rdfType!=''">
               <rdf:type rdf:resource="{$rdfType}"/>
             </xsl:if>
-            <skos:prefLabel xml:lang="nl"/>
             <skos:prefLabel xml:lang="en"/>
-            <skos:prefLabel xml:lang="fr"/>
-            <skos:prefLabel xml:lang="de"/>
             <skos:inScheme rdf:resource="{$inScheme}"/>
           </skos:Concept>
         </xsl:when>

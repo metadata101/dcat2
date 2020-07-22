@@ -74,7 +74,7 @@
   <xs:element name="creator" type="foaf:Agent"/>
   <xs:element name="type" type="skos:Concept"/>
   <xs:element name="identifier" type="rdf:PlainLiteral"/>
-  <xs:element name="language" type="skos:Concept"/>
+  <xs:element name="language" type="rdf:Resource"/>
   <!-- dct:LicenseDocument -->
   <xs:complexType name="LicenseDocument">
     <xs:sequence>
