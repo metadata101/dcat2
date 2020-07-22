@@ -62,6 +62,7 @@
     </expanded>
     <exclude>
       <name>dct:identifier</name>
+      <name>dct:language</name>
       <name>dct:modified</name>
       <name>dct:issued</name>
       <name>dcat:startDate</name>

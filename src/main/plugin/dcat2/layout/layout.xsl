@@ -206,9 +206,28 @@
       <xsl:variable name="added" select="parent::node()/parent::node()/@gn:addedObj"/>
       <xsl:variable name="container" select="parent::node()/parent::node()"/>
 
-
       <xsl:variable name="theElement"
                     select="."/>
+
+      <xsl:variable name="attributes">
+        <!-- Create form for all existing attribute (not in gn namespace)
+        and all non existing attributes not already present for the
+        current element and its children (eg. @uom in gco:Distance).
+        A list of exception is defined in form-builder.xsl#render-for-field-for-attribute. -->
+        <xsl:apply-templates mode="render-for-field-for-attribute"
+                             select="@*[name() != 'xml:lang']">
+          <xsl:with-param name="ref" select="gn:element/@ref"/>
+          <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates mode="render-for-field-for-attribute"
+                             select="gn:attribute[not(@name = parent::node()/@*/name())
+                                                  and not(@name = 'xml:lang')]">
+          <xsl:with-param name="ref" select="gn:element/@ref"/>
+          <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
+        </xsl:apply-templates>
+      </xsl:variable>
+
+
       <xsl:variable name="excluded"
                     select="gn-fn-dcat2:isNotMultilingualField(., $editorConfig)"/>
       <xsl:variable name="isMultilingualElement"
@@ -359,7 +378,7 @@
                   <xsl:with-param name="widgetParams"/>-->
             <xsl:with-param name="xpath" select="$xpath"/>
             <!--xsl:with-param name="forceDisplayAttributes" select="gn-fn-dcat2:isForceDisplayAttributes(.)"/-->
-            <!--xsl:with-param name="attributesSnippet" select="$attributes"/-->
+            <xsl:with-param name="attributesSnippet" select="$attributes"/>
             <xsl:with-param name="type"
                             select="if ($config and $config/@use != '')
                               then $config/@use
@@ -410,11 +429,11 @@
                                                        (name() = 'spdx:checksumValue' and name(..) = 'spdx:Checksum')"/>-->
           </xsl:call-template>
 
-          <!-- Render attributes as fields and overwrite the normal behavior -->
+          <!-- Render attributes as fields and overwrite the normal behavior
           <xsl:apply-templates mode="render-for-field-for-attribute-dcat2"
                                select="@*|gn:attribute[not(@name = parent::node()/@*/name())]">
             <xsl:with-param name="ref" select="gn:element/@ref"/>
-          </xsl:apply-templates>
+          </xsl:apply-templates>-->
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
