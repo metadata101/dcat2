@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:spdx="http://spdx.org/rdf/terms#"
+        xmlns:adms="http://www.w3.org/ns/adms#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+        xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+        xmlns:foaf="http://xmlns.com/foaf/0.1/"
+        xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
+
+  <fields>
+    <for name="dcat:byteSize" use="number"/>
+    <for name="adms:versionNotes" use="textarea"/>
+    <for name="dct:description" use="textarea"/>
+  </fields>
+
+  <fieldsWithFieldset>
+    <name>dcat:Catalog</name>
+    <name>dcat:Dataset</name>
+    <name>dcat:DataService</name>
+    <name>dcat:contactPoint</name>
+    <name>dct:publisher</name>
+    <name>foaf:Agent</name>
+    <name>vcard:Organization</name>
+    <name>vcard:hasAddress</name>
+    <name>vcard:Address</name>
+    <name>dct:accessRights</name>
+    <name>adms:identifier</name>
+    <name>adms:Identifier</name>
+    <name>dct:provenance</name>
+    <name>dct:ProvenanceStatement</name>
+    <name>dct:spatial</name>
+    <name>dct:temporal</name>
+    <name>dct:PeriodOfTime</name>
+    <name>dcat:distribution</name>
+    <name>dcat:Distribution</name>
+    <name>dct:license</name>
+    <name>dct:LicenseDocument</name>
+    <name>dct:rights</name>
+    <name>dct:RightsStatement</name>
+    <name>spdx:checksum</name>
+    <name>spdx:Checksum</name>
+    <name>foaf:page</name>
+    <name>foaf:Document</name>
+    <name>dct:conformsTo</name>
+    <name>dct:Standard</name>
+    <name>adms:status</name>
+    <!--<name >adms:sample</name>-->
+  </fieldsWithFieldset>
+
+  <multilingualFields>
+    <!-- In multilingual mode, define which mode
+    the widget should have. If expanded, then one
+    field per language is displayed. -->
+    <!--<expanded>-->
+    <!--<name>dct:title</name>-->
+    <!--<name>dct:description</name>-->
+    <!--</expanded>-->
+    <exclude>
+      <name>dct:identifier</name>
+    </exclude>
+  </multilingualFields>
+
+  <!--tableFields>
+    <table for="dct:title">
+      <header>
+        <col label="dct:title"/>
+        <col label="xml:lang"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="."/>
+        <col xpath="@xml:lang"/>
+        <col del="."/>
+      </row>
+    </table>
+  </tableFields-->
+
+  <views>
+    <view name="advanced" displayTooltips="true" upAndDownControlHidden="true">
+      <sidePanel>
+        <directive data-gn-onlinesrc-list="" data-types="source"/>
+        <directive data-gn-validation-report=""/>
+      </sidePanel>
+      <tab id="default">
+        <section xpath="rdf:RDF"/>
+      </tab>
+    </view>
+
+    <view name="xml">
+      <sidePanel>
+        <directive data-gn-validation-report=""/>
+      </sidePanel>
+      <tab id="xml" default="true"/>
+    </view>
+  </views>
+  <batchEditing>
+  </batchEditing>
+</editor>

@@ -1,0 +1,32 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:dct="http://purl.org/dc/terms/"
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:dcat="http://www.w3.org/ns/dcat#"
+         xsi:schemaLocation="http://www.w3.org/ns/dcat# ../schema.xsd">
+  <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/api/records/69705bd3-2e59-415a-8118-7c74a1367379">
+    <dcat:contactPoint>
+      <vcard:Organization>
+        <vcard:hasEmail rdf:resource=""/>
+      </vcard:Organization>
+    </dcat:contactPoint>
+    <dcat:keyword xml:lang="en">Keyword</dcat:keyword>
+    <dcat:theme/>
+    <dct:accessRights>
+      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/PUBLIC">
+        <skos:prefLabel xml:lang="en">public</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      </skos:Concept>
+    </dct:accessRights>
+    <dct:description></dct:description>
+    <dct:identifier>69705bd3-2e59-415a-8118-7c74a1367379</dct:identifier>
+    <dct:publisher>
+      <foaf:Agent>
+        <foaf:name xml:lang="en"/>
+      </foaf:Agent>
+    </dct:publisher>
+    <dct:title xml:lang="en">DCAT Template</dct:title>
+  </dcat:Dataset>
+</rdf:RDF>
