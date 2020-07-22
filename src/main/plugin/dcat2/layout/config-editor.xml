@@ -62,6 +62,10 @@
     </expanded>
     <exclude>
       <name>dct:identifier</name>
+      <name>dct:modified</name>
+      <name>dct:issued</name>
+      <name>dcat:startDate</name>
+      <name>dcat:endDate</name>
     </exclude>
   </multilingualFields>
 

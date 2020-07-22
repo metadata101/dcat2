@@ -60,11 +60,9 @@
     <description>A free-text account of the record.</description>
     <btnLabel>description</btnLabel>
   </element>
-  <element name="dct:identifier"
-           context="/rdf:RDF/dcat:Dataset/dct:identifier">
-    <label>identifier</label>
-    <description>Tooltip: identifier</description>
-    <btnLabel>identifier</btnLabel>
+  <element name="dct:identifier">
+    <label>Identifier</label>
+    <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly is useful.</description>
   </element>
   <element name="dcat:contactPoint"
            context="/rdf:RDF/dcat:Dataset/dcat:contactPoint">
@@ -184,23 +182,17 @@
     <description>Tooltip: telephone number</description>
     <btnLabel>telephone number</btnLabel>
   </element>
-  <element name="dct:issued"
-           context="/rdf:RDF/dcat:Dataset/dct:issued">
-    <label>release date</label>
-    <description>Tooltip: release date</description>
-    <btnLabel>release date</btnLabel>
+  <element name="dct:issued">
+    <label>Publication date</label>
+    <description>Date of formal issuance (e.g., publication) of the item.</description>
   </element>
-  <element name="dct:modified"
-           context="/rdf:RDF/dcat:Dataset/dct:modified">
-    <label>update/ modification date</label>
-    <description>Tooltip: update/ modification date</description>
-    <btnLabel>update/ modification date</btnLabel>
+  <element name="dct:modified">
+    <label>Modification date</label>
+    <description>Most recent date on which the catalog entry was changed, updated or modified.</description>
   </element>
-  <element name="dct:publisher"
-           context="/rdf:RDF/dcat:Dataset/dct:publisher">
-    <label>publisher</label>
-    <description>Tooltip: publisher</description>
-    <btnLabel>publisher</btnLabel>
+  <element name="dct:publisher">
+    <label>Publisher</label>
+    <description>The entity responsible for making the item available.</description>
   </element>
   <element name="foaf:Agent"
            context="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent">
