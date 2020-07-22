@@ -25,6 +25,7 @@
 <gns:schema xmlns:gns="http://geonetwork-opensource.org/schemas/schema-ident"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
             xsi:schemaLocation="http://geonetwork-opensource.org/schemas/schema-ident http://geonetwork-opensource.org/schemas/schema-ident/schema-ident.xsd">
   <gns:name>dcat2</gns:name>
   <gns:id>9785ae4c-dde3-11df-a813-001c2346de4c</gns:id>
@@ -48,6 +49,7 @@
      -->
     <gns:elements type="root">
       <rdf:RDF/>
+      <vcard:Individual />
     </gns:elements>
   </gns:autodetect>
 </gns:schema>

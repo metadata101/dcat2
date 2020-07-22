@@ -23,6 +23,7 @@
   -->
 
 <xsl:stylesheet xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"
 >
@@ -33,76 +34,51 @@
   <xsl:param name="title"/>
 
 
-  <xsl:variable name="isMultilingual" select="count(distinct-values(*//@xml:lang)) > 0"/>
+  <xsl:variable name="allLanguages">
+    <lang id="default" value="eng"/>
+    <!--<xsl:for-each select="$otherLanguages">
+      <lang id="{../../../@id}" value="{.}"/>
+    </xsl:for-each>-->
+  </xsl:variable>
 
   <!-- Subtemplate indexing -->
   <xsl:template match="/">
     <xsl:variable name="root" select="/"/>
-    <xsl:variable name="isoDocLangId">
-      <xsl:call-template name="langId-dcat2"/>
-    </xsl:variable>
 
-    <Documents>
+    <xsl:apply-templates mode="index" select="$root">
+      <xsl:with-param name="isoLangId" select="'eng'"/>
 
-      <xsl:choose>
-        <xsl:when test="$isMultilingual">
-          <xsl:for-each select="distinct-values(distinct-values(*//@xml:lang))">
-            <xsl:variable name="locale" select="string(.)"/>
-            <xsl:variable name="langId">
-              <xsl:call-template name="langId3to2">
-                <xsl:with-param name="langId-3char" select="$isoDocLangId"/>
-              </xsl:call-template>
-            </xsl:variable>
-            <xsl:variable name="isoLangId">
-              <xsl:call-template name="langId2to3">
-                <xsl:with-param name="langId-2char" select="."/>
-              </xsl:call-template>
-            </xsl:variable>
-
-            <Document locale="{$isoLangId}">
-              <Field name="_locale" string="{$isoLangId}" store="true" index="true"/>
-              <Field name="_docLocale" string="{$isoDocLangId}" store="true" index="true"/>
-              <xsl:apply-templates mode="index" select="$root">
-                <xsl:with-param name="locale" select="$locale"/>
-                <xsl:with-param name="isoLangId" select="$isoLangId"/>
-                <xsl:with-param name="langId" select="$langId"></xsl:with-param>
-              </xsl:apply-templates>
-            </Document>
-          </xsl:for-each>
-        </xsl:when>
-        <xsl:otherwise>
-          <Document locale="">
-            <xsl:apply-templates mode="index" select="$root">
-            </xsl:apply-templates>
-          </Document>
-        </xsl:otherwise>
-      </xsl:choose>
-    </Documents>
+    </xsl:apply-templates>
   </xsl:template>
 
   <xsl:template mode="index" match="dct:LicenseDocument">
     <xsl:param name="isoLangId"/>
-    <xsl:param name="langId"/>
-    <xsl:param name="locale"/>
+
     <xsl:variable name="title">
       <xsl:call-template name="index-lang-tag-oneval">
         <xsl:with-param name="tag" select="dct:title"/>
         <xsl:with-param name="langId" select="$isoLangId"/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:if test="$title!=''">
-      <xsl:value-of select="concat($title, ' ')"/>
-    </xsl:if>
-    <Field name="_title"
-           string="{if ($title != '') then $title else dct:identifier}"
-           store="true" index="true"/>
 
-    <xsl:call-template name="subtemplate-common-fields"/>
+    <doc>
+      <resourceTitle><xsl:value-of select="if ($title != '') then $title else dct:identifier" /></resourceTitle>
+    </doc>
   </xsl:template>
 
-  <xsl:template name="subtemplate-common-fields">
-    <Field name="any" string="{normalize-space(string(.))}" store="false" index="true"/>
-    <Field name="_root" string="{name(.)}" store="true" index="true"/>
-  </xsl:template>
+  <xsl:template mode="index" match="vcard:Individual">
+    <xsl:param name="isoLangId"/>
 
+    <xsl:variable name="title">
+      <xsl:call-template name="index-lang-tag-oneval">
+        <xsl:with-param name="tag" select="vcard:fn"/>
+        <xsl:with-param name="langId" select="$isoLangId"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <doc>
+      <resourceTitle><xsl:value-of select="if ($title != '') then $title else dct:identifier" /></resourceTitle>
+    </doc>
+
+  </xsl:template>
 </xsl:stylesheet>
