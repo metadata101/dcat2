@@ -15,7 +15,9 @@
     <for name="adms:versionNotes" use="textarea"/>
     <for name="dct:description" use="textarea"/>
 
-    <for name="dct:language/@rdf:resource" use="data-gn-language-picker"/>
+    <for name="dct:language/@rdf:resource" use="data-gn-language-picker">
+      <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
+    </for>
   </fields>
 
   <fieldsWithFieldset>
