@@ -30,6 +30,7 @@
                 xmlns:prov="http://www.w3.org/ns/prov#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                xmlns:adms="http://www.w3.org/ns/adms#"
                 xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:schema="http://schema.org/"

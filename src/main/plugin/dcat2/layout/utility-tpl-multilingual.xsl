@@ -37,7 +37,12 @@
                required="no"/>
 
     <xsl:variable name="languageCode"
-                  select="replace($languageIri, 'http://id.loc.gov/vocabulary/iso639-1/', '')"/>
+                  select="replace(
+                            replace(
+                              replace($languageIri, 'http://id.loc.gov/vocabulary/iso639-1/', ''),
+                            'http://id.loc.gov/vocabulary/iso639-2/', ''),
+                          'http://publications.europa.eu/resource/authority/language/', '')"/>
+
     <xsl:choose>
       <xsl:when test="string-length($languageCode) = 3">
         <xsl:value-of select="$languageCode"/>
@@ -87,7 +92,12 @@
           </xsl:variable>
 
           <xsl:if test="$languageCode != ''">
-            <lang id="{upper-case($languageCode)}" code="{$languageCode}"/>
+            <lang id="{upper-case($languageCode)}" code="{$languageCode}">
+              <!-- TODO: Review. First language as default -->
+              <xsl:if test="position() = 1">
+                <xsl:attribute name="default" select="''"/>
+              </xsl:if>
+            </lang>
           </xsl:if>
         </xsl:for-each>
       </xsl:when>
@@ -95,7 +105,7 @@
         <xsl:variable name="mainLanguage">
           <xsl:call-template name="get-dcat2-language"/>
         </xsl:variable>
-        <lang id="{upper-case($mainLanguage)}" code="{$mainLanguage}"/>
+        <lang id="{upper-case($mainLanguage)}" code="{$mainLanguage}" default=""/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

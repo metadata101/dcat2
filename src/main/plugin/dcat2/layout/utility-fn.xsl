@@ -38,6 +38,8 @@
                 select="'http://purl.org/adms/'"/>
   <xsl:variable name="thesaurusIdentifierBaseKey"
                 select="'geonetwork.thesaurus.external.theme.'"/>
+  <xsl:variable name="inSchemeIanaBaseUrl"
+                select="' https://www.iana.org/assignments/'"/>
 
   <xsl:function name="gn-fn-dcat2:getInSchemeURIByElementName" as="xs:string">
     <xsl:param name="elementName"/>
@@ -62,12 +64,15 @@
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'file-type')"/>
       </xsl:when>
       <xsl:when test="$elementName = 'dcat:mediaType'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'media-type')"/>
+        <xsl:value-of select="concat($inSchemeIanaBaseUrl,'media-types')"/>
       </xsl:when>
       <xsl:when test="$elementName = 'adms:status'">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'status/1.0')"/>
       </xsl:when>
       <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'dct:LicenseDocument'">
+        <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'licencetype/1.0')"/>
+      </xsl:when>
+      <xsl:when test="$elementName = 'dct:license'">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'licencetype/1.0')"/>
       </xsl:when>
       <xsl:when test="$elementName = 'dct:accessRights'">
@@ -110,6 +115,9 @@
       <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'dct:LicenseDocument'">
         <xsl:value-of select="''"/>
       </xsl:when>
+      <xsl:when test="$elementName = 'dct:license'">
+        <xsl:value-of select="''"/>
+      </xsl:when>
       <xsl:when test="$elementName = 'dct:accessRights'">
         <xsl:value-of select="'http://purl.org/dc/terms/RightsStatement'"/>
       </xsl:when>
@@ -140,7 +148,7 @@
       <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'file-type')">
         <xsl:value-of select="'Formaat thesaurus'"/>
       </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'media-type')">
+      <xsl:when test="$resource = concat($inSchemeIanaBaseUrl,'media-types')">
         <xsl:value-of select="'Mediatype thesaurus'"/>
       </xsl:when>
       <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'status/1.0')">
@@ -176,8 +184,8 @@
       <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'file-type')">
         <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'file-type')"/>
       </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'media-type')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'media-type')"/>
+      <xsl:when test="$resource = concat($inSchemeIanaBaseUrl,'media-types')">
+        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'media-types')"/>
       </xsl:when>
       <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'status/1.0')">
         <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'status')"/>

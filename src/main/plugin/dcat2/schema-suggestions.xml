@@ -27,23 +27,54 @@
         xmlns:spdx="http://spdx.org/rdf/terms#"
         xmlns:adms="http://www.w3.org/ns/adms#"
         xmlns:dcat="http://www.w3.org/ns/dcat#"
+        xmlns:prov="http://www.w3.org/ns/prov#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+  <field name="prov:qualifiedInvalidation">
+    <suggest name="prov:Invalidation"/>
+  </field>
+  <field name="prov:Invalidation">
+    <suggest name="prov:atTime"/>
+    <suggest name="rdfs:comment"/>
+  </field>
+
+  <field name="locn:address">
+    <suggest name="locn:Address"/>
+  </field>
+  <field name="locn:Address">
+    <suggest name="locn:thoroughfare"/>
+    <suggest name="locn:postName"/>
+    <suggest name="locn:postCode"/>
+    <suggest name="locn:adminUnitL1"/>
+  </field>
+
+  <field name="dct:publisher">
+    <suggest name="foaf:Agent"/>
+  </field>
+  <field name="foaf:Agent">
+    <suggest name="foaf:name"/>
+    <suggest name="dct:type"/>
+    <suggest name="foaf:phone"/>
+    <suggest name="locn:address"/>
+  </field>
+
   <field name="dcat:Distribution">
     <suggest name="dct:title"/>
     <suggest name="dct:description"/>
     <suggest name="dcat:accessURL"/>
-    <suggest name="dcat:downloadURL"/>
-    <suggest name="dct:issued"/>
-    <suggest name="dct:modified"/>
+    <!--<suggest name="dcat:downloadURL"/>-->
+    <!--<suggest name="dct:issued"/>-->
+    <!--<suggest name="dct:modified"/>-->
     <suggest name="dct:format"/>
-    <suggest name="dcat:mediaType"/>
+    <!--<suggest name="dcat:mediaType"/>-->
     <suggest name="dct:language"/>
-    <suggest name="dct:license"/>
-    <suggest name="dct:rights"/>
-    <suggest name="dcat:byteSize"/>
-    <suggest name="spdx:checksum"/>
-    <suggest name="foaf:page"/>
-    <suggest name="dct:conformsTo"/>
-    <suggest name="adms:status"/>
+    <!--<suggest name="dct:license"/>-->
+    <!--<suggest name="dct:rights"/>-->
+    <!--<suggest name="dcat:byteSize"/>-->
+    <!--<suggest name="spdx:checksum"/>-->
+    <!--<suggest name="foaf:page"/>-->
+    <!--<suggest name="dct:conformsTo"/>-->
+    <!--<suggest name="adms:status"/>-->
   </field>
 </fields>

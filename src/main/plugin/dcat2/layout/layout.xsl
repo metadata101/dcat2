@@ -27,17 +27,21 @@
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:adms="http://www.w3.org/ns/adms#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                xmlns:locn="http://www.w3.org/ns/locn#"
                 xmlns:owl="http://www.w3.org/2002/07/owl#"
+                xmlns:prov="http://www.w3.org/ns/prov#"
                 xmlns:schema="http://schema.org/"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
                 xmlns:gn-fn-dcat2="http://geonetwork-opensource.org/xsl/functions/profiles/dcat2"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:saxon="http://saxon.sf.net/"
                 version="2.0"
                 extension-element-prefixes="saxon"
@@ -75,7 +79,7 @@
     </xsl:variable>
 
     <xsl:variable name="flatModeException"
-                  select="gn-fn-metadata:isFieldFlatModeException($viewConfig, $name, $xpath) or gn-fn-metadata:isFieldFlatModeException($viewConfig, concat(name(..), '/', $name), $xpath)"/>
+                  select="gn-fn-metadata:isFieldFlatModeException($viewConfig, $name, name(..)) or gn-fn-metadata:isFieldFlatModeException($viewConfig, concat(name(..), '/', $name), name(..))"/>
 
     <!-- TODO: this should be common to all schemas -->
     <xsl:if test="$isEditing and
@@ -98,6 +102,7 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
+
 
   <xsl:template mode="mode-dcat2" priority="200"
                 match="*[name() = $editorConfig/editor/fieldsWithFieldset/name]">
@@ -175,10 +180,31 @@
   </xsl:template>
 
 
+  <!-- dct:language is populated in rdf:resource attribute directly -->
+  <xsl:template mode="mode-dcat2"
+                match="dct:language[@rdf:resource]
+                       |vcard:hasEmail[@rdf:resource]
+                       |foaf:phone[@rdf:resource]
+                       |foaf:mbox[@rdf:resource]"
+                priority="3000">
+    <xsl:message>Language</xsl:message>
+
+    <xsl:variable name="theElement"
+                  select="."/>
+
+    <xsl:apply-templates mode="render-for-field-for-attribute"
+                         select="@rdf:resource">
+      <xsl:with-param name="ref" select="gn:element/@ref"/>
+      <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
+    </xsl:apply-templates>
+
+  </xsl:template>
+
+
   <!-- the other elements in DC. -->
   <xsl:template mode="mode-dcat2"
                 priority="100"
-                match="dc:*|dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*">
+                match="dc:*|dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*|locn:*|prov:*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="overrideLabel" select="''" required="no"/>
@@ -187,9 +213,25 @@
 
     <!-- Skip translations. update-fixed-info takes care of having
     at least one element define in the main language. -->
-    <xsl:if test="not(@xml:lang) or @xml:lang = $metadataLanguage">
+
+
+    <!-- Unify language code to use 3 letter code -->
+    <xsl:variable name="elementLang">
+      <xsl:choose>
+        <xsl:when test="string-length(@xml:lang) = 3">
+          <xsl:value-of select="@xml:lang"/>
+        </xsl:when>
+        <xsl:when test="string-length(@xml:lang) = 2">
+          <xsl:value-of select="java:threeCharLangCode(@xml:lang)"/>
+        </xsl:when>
+        <xsl:otherwise></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:if test="not(@xml:lang) or $elementLang = $metadataLanguage">
       <xsl:variable name="name" select="name(.)"/>
       <xsl:variable name="ref" select="gn:element/@ref"/>
+
       <xsl:variable name="labelConfig" as="node()">
         <xsl:choose>
           <xsl:when test="name()='dcat:accessURL' or name()='dcat:downloadURL'">
@@ -202,9 +244,13 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <xsl:variable name="helper" select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>
-      <xsl:variable name="added" select="parent::node()/parent::node()/@gn:addedObj"/>
-      <xsl:variable name="container" select="parent::node()/parent::node()"/>
+
+      <xsl:variable name="helper"
+                    select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>
+      <xsl:variable name="added"
+                    select="parent::node()/parent::node()/@gn:addedObj"/>
+      <xsl:variable name="container"
+                    select="parent::node()/parent::node()"/>
 
       <xsl:variable name="theElement"
                     select="."/>
@@ -272,11 +318,19 @@
               <xsl:variable name="currentLanguageId" select="@id"/>
               <xsl:variable name="translation"
                             select="$translations[@xml:lang = $code]"/>
-              <value ref="lang_{@code}_{(if (@code = $metadataLanguage) then $ref else $translation/gn:element/@ref)}"
+
+              <!-- TODO: non existing element ? lang_{@code}_
+              Should not happen. Update fixed info create empty element
+              if required for all languages. -->
+              <xsl:variable name="refForExistingElement"
+                            select="if (@code = $metadataLanguage)
+                                    then $ref
+                                    else $translation/gn:element/@ref"/>
+              <value ref="{$refForExistingElement}"
                      lang="{upper-case(@code)}">
                 <xsl:value-of select="if (@code = $metadataLanguage)
                                       then $theElement/text()
-                                      else $translations/text()"/>
+                                      else $translation/text()"/>
               </value>
             </xsl:for-each>
           </values>
@@ -464,10 +518,47 @@
                 priority="101"/>
 
 
+  <xsl:template mode="mode-dcat2" match="dct:issued|dct:modified|dcat:startDate|dcat:endDate" priority="2000">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+    <xsl:param name="refToDelete" required="no"/>
+    <xsl:param name="editInfo" required="no"/>
+    <xsl:param name="parentEditInfo" required="no"/>
 
-  <xsl:template mode="render-for-field-for-attribute-dcat2" match="@*" priority="100">
+    <xsl:variable name="isRequired" as="xs:boolean">
+      <xsl:choose>
+        <xsl:when
+          test="($parentEditInfo and $parentEditInfo/@min = 1 and $parentEditInfo/@max = 1) or
+            (not($parentEditInfo) and $editInfo and $editInfo/@min = 1 and $editInfo/@max = 1)">
+          <xsl:value-of select="true()"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="false()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+    <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', $xpath)"/>
+
+
+    <div data-gn-date-picker="{.}"
+         data-label="{$labelConfig/label}"
+         data-element-name="{name()}"
+         data-element-ref="{concat('_X', gn:element/@ref)}"
+         data-required="{$isRequired}"
+         data-tag-name="{name()}"
+         data-hide-time="{if ($viewConfig/@hideTimeInCalendar = 'true') then 'true' else 'false'}">
+    </div>
+  </xsl:template>
+
+
+  <xsl:template mode="render-for-field-for-attribute-dcat2"
+                match="@*"
+                priority="100">
     <xsl:variable name="attributeName" select="name(.)"/>
     <xsl:variable name="ref" select="concat(../gn:element/@ref, '_', replace($attributeName, ':', 'COLON'))"/>
+
     <xsl:variable name="attribute" as="node()">
       <gn:attribute>
         <xsl:attribute name="ref" select="$ref"/>
@@ -476,17 +567,26 @@
         <xsl:copy-of select="../gn:attribute[@name = local-name()]/@*"/>
       </gn:attribute>
     </xsl:variable>
+
     <xsl:variable name="labelConfig"
                   select="gn-fn-metadata:getLabel($schema, $attributeName, $labels, name(..), '', if (name(.)='xml:lang') then '' else gn-fn-metadata:getXPath(.))"/>
-    <xsl:variable name="helper" select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>
-    <xsl:variable name="added" select="parent::node()/parent::node()/@gn:addedObj"/>
 
-    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
+    <xsl:variable name="helper"
+                  select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>
+    <xsl:variable name="added"
+                  select="parent::node()/parent::node()/@gn:addedObj"/>
+
+    <xsl:variable name="xpath"
+                  select="gn-fn-metadata:getXPath(.)"/>
+    <xsl:variable name="isDisabled"
+                  select="$xpath = '/dcat:Dataset/@rdf:about'"/>
+
     <xsl:call-template name="render-element">
       <xsl:with-param name="label" select="$labelConfig"/>
       <xsl:with-param name="value" select="."/>
       <xsl:with-param name="cls" select="local-name()"/>
       <xsl:with-param name="xpath" select="$xpath"/>
+      <xsl:with-param name="isDisabled" select="$isDisabled"/>
       <xsl:with-param name="type" select="gn-fn-metadata:getFieldType($editorConfig, $attributeName, '', $xpath)"/>
       <xsl:with-param name="name" select="$ref"/>
       <xsl:with-param name="editInfo" select="$attribute"/>

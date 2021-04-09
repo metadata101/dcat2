@@ -32,7 +32,7 @@
   </xsl:template>
 
   <xsl:template match="rdf:RDF/*/@rdf:about">
-    <xsl:value-of select="concat(java:getSettingValue('nodeUrl'),
+    <xsl:value-of select="concat(java:getSettingValue('nodeUrl'), 'api/records/',
                                  /root/env/uuid)"/>
   </xsl:template>
 

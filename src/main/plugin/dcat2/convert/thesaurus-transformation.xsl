@@ -22,7 +22,8 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:adms="http://www.w3.org/ns/adms#"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:adms="http://www.w3.org/ns/adms#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -32,118 +33,65 @@
                 version="2.0"
                 exclude-result-prefixes="#all">
 
-
-  <!-- A set of templates use to convert thesaurus concept to ISO19139 fragments. -->
-
-
   <xsl:include href="../process/process-utility.xsl"/>
-
 
   <!-- Surround the concept with parent based on  related parent xml element
     If no keyword is provided, only thesaurus section is adaded.
     -->
   <xsl:template name="to-dcat2-concept">
-    <xsl:variable name="listOfLanguage" select="tokenize(/root/request/lang, ',')"/>
+    <xsl:variable name="listOfLanguage"
+                  select="tokenize(/root/request/lang, ',')"/>
+
     <xsl:apply-templates mode="to-dcat2-concept" select=".">
       <xsl:with-param name="listOfLanguage" select="$listOfLanguage"/>
     </xsl:apply-templates>
   </xsl:template>
 
   <!-- Surround the skos:Concept xml element with a parent xml element on the thesaurus key -->
-  <xsl:template mode="to-dcat2-concept" match="*[not(/root/request/skipdescriptivekeywords)]">
+  <xsl:template mode="to-dcat2-concept"
+                match="*[not(/root/request/skipdescriptivekeywords)]">
     <xsl:param name="listOfLanguage"/>
-    <xsl:variable name="concept">
-      <xsl:call-template name="to-md-concept">
-        <xsl:with-param name="listOfLanguage" select="$listOfLanguage"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="thesaurusKey"
-                  select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
-    <xsl:choose>
-      <xsl:when test="ends-with($thesaurusKey,'publisher-type')">
-        <dct:type>
-          <xsl:copy-of select="$concept"/>
-        </dct:type>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'data-theme')">
-        <dcat:theme>
-          <xsl:copy-of select="$concept"/>
-        </dcat:theme>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'frequency')">
-        <dct:accrualPeriodicity>
-          <xsl:copy-of select="$concept"/>
-        </dct:accrualPeriodicity>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'language')">
-        <dct:language>
-          <xsl:copy-of select="$concept"/>
-        </dct:language>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'resource-type')">
-        <dct:type>
-          <xsl:copy-of select="$concept"/>
-        </dct:type>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'file-type')">
-        <dct:format>
-          <xsl:copy-of select="$concept"/>
-        </dct:format>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'media-type')">
-        <dcat:mediaType>
-          <xsl:copy-of select="$concept"/>
-        </dcat:mediaType>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'status')">
-        <adms:status>
-          <xsl:copy-of select="$concept"/>
-        </adms:status>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey,'licence-type')">
-        <dct:type>
-          <xsl:copy-of select="$concept"/>
-        </dct:type>
-      </xsl:when>
-      <xsl:when test="ends-with($thesaurusKey, 'access-right')">
-        <dct:accessRights>
-          <xsl:copy-of select="$concept"/>
-        </dct:accessRights>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:message
-          select="concat('No concept added for a field value of thesaurus ', $thesaurusKey, '. Verify thesaurus-transformation.xsl.')"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-  <!-- Add inScheme xml element based on the thesaurus key -->
-  <xsl:template name="to-md-concept">
-    <xsl:param name="listOfLanguage"/>
+    <xsl:param name="wrapper"
+               select="if (/root/request/wrapper)
+                       then /root/request/wrapper
+                       else 'dcat:keyword'"/>
 
     <!-- Get thesaurus ID from keyword or from request parameter if no keyword found. -->
     <xsl:variable name="currentThesaurus"
                   select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
-    <!-- Get  -->
-    <xsl:variable name="inSchemeURI" select="gn-fn-dcat2:getInSchemeURIByThesaurusId($currentThesaurus)"/>
+    <xsl:variable name="keywordThesaurus"
+                  select="if ($currentThesaurus = 'external.none.allThesaurus')
+                          then replace(./uri, 'http://org.fao.geonet.thesaurus.all/([^@]+)@@@.+', '$1')
+                          else $currentThesaurus"/>
+    <xsl:variable name="inSchemeURI"
+                  select="gn-fn-dcat2:getInSchemeURIByThesaurusId($keywordThesaurus)"/>
+
     <!-- Loop on all keyword from the same thesaurus -->
-    <xsl:for-each select="//keyword[thesaurus/key = $currentThesaurus]">
-      <skos:Concept>
-        <xsl:attribute name="rdf:about">
-          <xsl:value-of select="uri"/>
-        </xsl:attribute>
-        <xsl:variable name="keyword" select="."/>
-        <xsl:for-each select="$listOfLanguage">
-          <xsl:variable name="lang" select="."/>
-          <xsl:if test="$lang!=''">
-            <skos:prefLabel>
-              <xsl:attribute name="xml:lang" select="lower-case(util:twoCharLangCode($lang))"/>
-              <xsl:value-of select="$keyword/values/value[@language = $lang]/text()"/>
-            </skos:prefLabel>
-          </xsl:if>
+    <xsl:variable name="response">
+      <gn_replace_all>
+        <xsl:for-each select="//keyword">
+          <xsl:element name="{$wrapper}">
+            <!-- TODO: Add mode to encode using @rdf:resource ?-->
+            <skos:Concept>
+              <xsl:attribute name="rdf:about">
+                <xsl:value-of select="substring-after(uri, '@@@')"/>
+              </xsl:attribute>
+              <xsl:variable name="keyword" select="."/>
+              <xsl:for-each select="$listOfLanguage">
+                <xsl:variable name="lang" select="."/>
+                <xsl:if test="$lang!=''">
+                  <skos:prefLabel>
+                    <xsl:attribute name="xml:lang" select="$lang"/>
+                    <xsl:value-of select="$keyword/values/value[@language = $lang]/text()"/>
+                  </skos:prefLabel>
+                </xsl:if>
+              </xsl:for-each>
+              <skos:inScheme rdf:resource="{$inSchemeURI}"/>
+            </skos:Concept>
+          </xsl:element>
         </xsl:for-each>
-        <skos:inScheme rdf:resource="{$inSchemeURI}"/>
-      </skos:Concept>
-    </xsl:for-each>
+      </gn_replace_all>
+    </xsl:variable>
+    <xsl:copy-of select="$response"/>
   </xsl:template>
 </xsl:stylesheet>

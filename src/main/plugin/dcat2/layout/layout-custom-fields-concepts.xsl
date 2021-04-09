@@ -6,6 +6,8 @@
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                xmlns:prov="http://www.w3.org/ns/prov#"
+                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
@@ -18,7 +20,7 @@
   Template to prepare data-gn-keyword component
    for xml elements based on a thesaurus -->
   <xsl:template mode="mode-dcat2" priority="2000"
-                match="foaf:Agent/dct:type[not($isFlatMode)]|dcat:theme|dct:accrualPeriodicity|dcat:Dataset/dct:type|dct:format|dcat:mediaType|adms:status|dct:LicenseDocument/dct:type|dct:accessRights">
+                match="foaf:Agent/dct:type[not($isFlatMode)]|dcat:theme|dct:accrualPeriodicity|dcat:Dataset/dct:type|dct:format|dcat:mediaType|adms:status|dct:LicenseDocument/dct:type|dct:accessRights|prov:Invalidation/rdfs:comment">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -59,6 +61,11 @@
                   select="if ($thesaurusList/thesaurus[@key=substring-after($thesaurusIdentifier, 'geonetwork.thesaurus.')])
                           then $thesaurusList/thesaurus[@key=substring-after($thesaurusIdentifier, 'geonetwork.thesaurus.')]
                           else $listOfThesaurus/thesaurus[title=$thesaurusTitle]"/>
+
+    <!--<xsl:message>thesaurusIdentifier: <xsl:value-of select="$thesaurusIdentifier" /></xsl:message>
+    <xsl:message>thesaurusTitle: <xsl:value-of select="$thesaurusTitle" /></xsl:message>
+    <xsl:message>thesaurusConfig: <xsl:copy-of select="$thesaurusConfig" /></xsl:message>-->
+
     <xsl:choose>
       <xsl:when test="$thesaurusConfig/@fieldset = 'false'">
         <!--         <xsl:apply-templates mode="mode-dcat2" select="*">
@@ -152,6 +159,7 @@
                       if (count(skos:prefLabel[@xml:lang=lower-case(xslutil:twoCharLangCode($lang))]) = 1)
                         then $lang
                         else $metadataLanguage"/>
+
             <!-- if gui lang eng > #EN -->
             <xsl:variable name="prefLabelLangId" select="lower-case(xslutil:twoCharLangCode($guiLangId))"/>
             <!--
@@ -160,6 +168,8 @@
             -->
             <xsl:variable name="keywords"
                           select="string-join(replace(skos:prefLabel[@xml:lang=$prefLabelLangId], ',', ',,'), ',')"/>
+
+
 
             <!-- Define the list of transformation mode available. -->
             <xsl:variable name="transformations"

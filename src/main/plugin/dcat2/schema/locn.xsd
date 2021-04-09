@@ -11,6 +11,23 @@
   </xs:annotation>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" schemaLocation="rdf.xsd"/>
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element name="Address">
+        <xs:complexType>
+          <xs:sequence>
+            <!-- mandatory properties-->
+            <xs:element name="thoroughfare" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="postName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="postCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="adminUnitL1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          </xs:sequence>
+          <xs:attribute ref="rdf:about"/>
+          <xs:attribute ref="rdf:nodeID"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <!-- individual elements-->
   <xs:element name="geometry" type="rdf:TypedLiteral"/>
 </xs:schema>

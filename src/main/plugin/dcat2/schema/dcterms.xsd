@@ -131,8 +131,8 @@
         <xs:complexType>
           <xs:sequence>
             <!-- optional properties for dct:PeriodOfTime-->
-            <xs:element ref="dcat:startDate" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="dcat:endDate" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="schema:startDate" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="schema:endDate" minOccurs="0" maxOccurs="1"/>
           </xs:sequence>
           <xs:attribute ref="rdf:about"/>
           <xs:attribute ref="rdf:nodeID"/>

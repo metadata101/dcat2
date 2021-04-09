@@ -45,7 +45,7 @@
             <xs:element name="street-address" type="xs:string" maxOccurs="1"/>
             <xs:element name="locality" type="xs:string" maxOccurs="1"/>
             <xs:element name="postal-code" type="xs:string" maxOccurs="1"/>
-            <xs:element name="country-name" type="xs:string" maxOccurs="1"/>
+            <xs:element name="country-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
           </xs:sequence>
           <xs:attribute ref="rdf:about"/>
           <xs:attribute ref="rdf:nodeID"/>

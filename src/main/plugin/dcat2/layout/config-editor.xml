@@ -18,6 +18,11 @@
     <for name="dct:language/@rdf:resource" use="data-gn-language-picker">
       <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
     </for>
+
+
+    <!--<for name="foaf:name" xpath="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name"  use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.publisher" />
+    </for>-->
   </fields>
 
   <fieldsWithFieldset>
@@ -52,6 +57,10 @@
     <name>dct:Standard</name>
     <name>adms:status</name>
     <!--<name >adms:sample</name>-->
+    <name>foaf:Organization</name>
+    <name>locn:address</name>
+    <name>locn:Address</name>
+    <name>prov:Invalidation</name>
   </fieldsWithFieldset>
 
   <multilingualFields>
@@ -67,8 +76,10 @@
       <name>dct:language</name>
       <name>dct:modified</name>
       <name>dct:issued</name>
+      <name>prov:atTime</name>
       <name>dcat:startDate</name>
       <name>dcat:endDate</name>
+      <name>vcard:hasEmail</name>
     </exclude>
   </multilingualFields>
 
@@ -88,14 +99,25 @@
   </tableFields-->
 
   <views>
-    <view name="basic" upAndDownControlHidden="true">
+    <view name="basic"
+          class="gn-label-above-input gn-indent-colored"
+          upAndDownControlHidden="true"
+          hideTimeInCalendar="true"
+          displayTooltips="true">
       <sidePanel>
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
+
       <tab id="default" default="true"  mode="flat">
         <section xpath="rdf:RDF"/>
       </tab>
+
+      <thesaurusList>
+        <thesaurus key="external.none.allThesaurus"
+                   fieldset="false"
+                   transformations="to-dcat2-concept"/>
+      </thesaurusList>
     </view>
 
     <view name="advanced">

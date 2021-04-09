@@ -56,19 +56,32 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- A keyword or tag describing the resource. -->
+      <xs:element ref="dct:identifier" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:type" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
+
       <xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="landingPage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="qualifiedRelation" type="dcat:Relationship" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="theme" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+
+      <xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:creator" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:publisher" minOccurs="0" maxOccurs="1"/>
+
+      <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
+
       <xs:element ref="dct:accessRights" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:creator" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:identifier" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:license" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="dct:rights" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="odrl:hasPolicy" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="prov:qualifiedAttribution" minOccurs="0" maxOccurs="unbounded"/>
+
+      <xs:element ref="dct:relation" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="qualifiedRelation" type="dcat:Relationship" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:isReferencedBy" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="landingPage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <!--
       A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution
 
@@ -77,15 +90,6 @@
       If a ISO 639-1 (two-letter) code is defined for language, then its corresponding IRI SHOULD be used; if no ISO 639-1 code is defined, then IRI corresponding to the ISO 639-2 (three-letter) code SHOULD be used.
       -->
       <xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:license" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="dct:publisher" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="dct:relation" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:rights" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:type" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="odrl:hasPolicy" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="prov:qualifiedAttribution" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="rdf:about"/>
   </xs:complexType>
@@ -150,7 +154,7 @@
 
   <xs:complexType name="dataset">
     <xs:sequence>
-      <xs:element ref="Dataset"/>
+      <xs:element ref="dcat:Dataset"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -181,7 +185,7 @@
 
   <xs:complexType name="service">
     <xs:sequence>
-      <xs:element ref="DataService"/>
+      <xs:element ref="dcat:DataService"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -216,30 +220,30 @@
       <xs:element name="Distribution" minOccurs="1" maxOccurs="1">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="accessService" type="dcat:DataServiceType" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="accessURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="byteSize" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="compressFormat" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="downloadURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <!--
-            This property SHOULD be used when the media type of the distribution is defined in IANA [IANA-MEDIA-TYPES], otherwise dct:format MAY be used with different values.
-            -->
-            <xs:element name="mediaType" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="packageFormat" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="spatialResolutionInMeters" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="temporalResolution" type="xs:duration" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element ref="dct:accessRights" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="dct:title" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
 
-            <!-- The file format, physical medium, or dimensions of the resource. -->
+            <xs:element name="accessService" type="dcat:DataServiceType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="accessURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="downloadURL" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+
             <xs:element ref="dct:format" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="mediaType" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="packageFormat" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="byteSize" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="compressFormat" minOccurs="1" maxOccurs="unbounded"/>
+
+            <xs:element name="spatialResolutionInMeters" type="xs:decimal" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="temporalResolution" type="xs:duration" minOccurs="1" maxOccurs="unbounded"/>
+
+            <xs:element ref="dct:accessRights" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element ref="dct:license" minOccurs="1" maxOccurs="1"/>
-            <xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="dct:rights" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="dct:title" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="odrl:hasPolicy" minOccurs="0" maxOccurs="1"/>
+
+            <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="dct:modified" minOccurs="0" maxOccurs="1"/>
           </xs:sequence>
           <xs:attribute ref="rdf:about"/>
           <xs:attribute ref="rdf:nodeID"/>
