@@ -51,6 +51,17 @@
   <xsl:include href="layout/utility-fn.xsl"/>
   <xsl:include href="layout/utility-tpl-multilingual.xsl"/>
 
+  <!--
+    URL prefix for the identifier.
+
+    Default is:
+    <dcat:Dataset rdf:about="https://opendata.vlaanderen.be/geonetwork/srv/api/records/9fde14b3-4654-44f5-970e-be0a986cf4eb">
+      <dct:identifier>9fde14b3-4654-44f5-970e-be0a986cf4eb</dct:identifier>
+
+  -->
+  <xsl:variable name="uuidUrlPrefix"
+                select="java:getSettingValue('nodeUrl'), 'api/records/'"/>
+
   <xsl:variable name="serviceUrl"
                 select="/root/env/siteURL"/>
 
@@ -239,7 +250,7 @@
   <xsl:template name="dcat-build-identifier">
     <!-- If a local record, use API landing page -->
     <xsl:variable name="rdfAbout"
-                  select="concat(java:getSettingValue('nodeUrl'), 'api/records/',
+                  select="concat($uuidUrlPrefix,
                                    /root/env/uuid)"/>
     <xsl:attribute name="rdf:about" select="$rdfAbout"/>
     <dct:identifier>
