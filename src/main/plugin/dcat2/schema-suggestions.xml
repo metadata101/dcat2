@@ -26,8 +26,10 @@
 <fields xmlns:dct="http://purl.org/dc/terms/"
         xmlns:spdx="http://spdx.org/rdf/terms#"
         xmlns:adms="http://www.w3.org/ns/adms#"
+        xmlns:locn="http://www.w3.org/ns/locn#"
         xmlns:dcat="http://www.w3.org/ns/dcat#"
         xmlns:prov="http://www.w3.org/ns/prov#"
+        xmlns:schema="http://schema.org/"
         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
         xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
@@ -37,6 +39,21 @@
   <field name="prov:Invalidation">
     <suggest name="prov:atTime"/>
     <suggest name="rdfs:comment"/>
+  </field>
+
+  <field name="dct:spatial">
+    <suggest name="dct:Location"/>
+  </field>
+  <field name="dct:Location">
+    <suggest name="locn:geometry"/>
+  </field>
+
+  <field name="dct:temporal">
+    <suggest name="dct:PeriodOfTime"/>
+  </field>
+  <field name="dct:PeriodOfTime">
+    <suggest name="schema:startDate"/>
+    <suggest name="schema:endDate"/>
   </field>
 
   <field name="locn:address">
@@ -50,6 +67,9 @@
   </field>
 
   <field name="dct:publisher">
+    <suggest name="foaf:Agent"/>
+  </field>
+  <field name="dct:creator">
     <suggest name="foaf:Agent"/>
   </field>
   <field name="foaf:Agent">

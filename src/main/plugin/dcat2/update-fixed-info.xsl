@@ -60,7 +60,7 @@
 
   -->
   <xsl:variable name="uuidUrlPrefix"
-                select="java:getSettingValue('nodeUrl'), 'api/records/'"/>
+                select="concat(java:getSettingValue('nodeUrl'), 'api/records/')"/>
 
   <xsl:variable name="serviceUrl"
                 select="/root/env/siteURL"/>
@@ -280,14 +280,24 @@
       <xsl:apply-templates select="@*[not(name(.) = 'rdf:about')]"/>
       <xsl:call-template name="dcat-build-identifier"/>
 
+      <!-- Fixed order of elements. -->
       <xsl:apply-templates select="dct:title"/>
       <xsl:apply-templates select="dct:description"/>
+
+      <xsl:apply-templates select="dcat:theme"/>
+      <xsl:apply-templates select="dcat:keyword"/>
+      <xsl:apply-templates select="dct:type"/>
+
+      <xsl:apply-templates select="dct:creator"/>
+      <xsl:apply-templates select="dct:publisher"/>
       <xsl:apply-templates select="dcat:contactPoint"/>
+
       <xsl:apply-templates select="dct:issued"/>
       <xsl:apply-templates select="dct:modified"/>
-      <xsl:apply-templates select="dct:publisher"/>
-      <xsl:apply-templates select="dcat:keyword"/>
-      <xsl:apply-templates select="dcat:theme"/>
+
+      <xsl:apply-templates select="dct:spatial"/>
+      <xsl:apply-templates select="dct:temporal"/>
+
       <xsl:apply-templates select="dct:accessRights"/>
       <xsl:apply-templates select="dct:conformsTo"/>
       <xsl:apply-templates select="foaf:page"/>
@@ -301,9 +311,6 @@
       <xsl:apply-templates select="dct:provenance"/>
       <xsl:apply-templates select="dct:relation"/>
       <xsl:apply-templates select="dct:source"/>
-      <xsl:apply-templates select="dct:spatial"/>
-      <xsl:apply-templates select="dct:temporal"/>
-      <xsl:apply-templates select="dct:type"/>
       <xsl:apply-templates select="owl:versionInfo"/>
       <xsl:apply-templates select="adms:versionNotes"/>
       <xsl:apply-templates select="dcat:extension"/>
@@ -317,7 +324,6 @@
   <!-- Fill empty element and update existing with resourceType -->
   <xsl:template match="
               foaf:Agent/dct:type|
-              dcat:theme|
               dct:accrualPeriodicity|
               dcat:Dataset/dct:type|
               dcat:mediaType|
@@ -391,15 +397,22 @@
     </xsl:copy>
   </xsl:template>
 
+
+  <!-- Convert DC extent to GML and WKT -->
   <xsl:template match="dct:Location" priority="10">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
+      <!-- Store id in rdf:about -->
+      <xsl:if test="not(@rdf:about)">
+        <xsl:attribute name="rdf:about"/>
+      </xsl:if>
+
       <xsl:variable name="coverage">
         <xsl:choose>
-          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')])>0">
+          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')]) > 0">
             <xsl:value-of select="locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')][1]"/>
           </xsl:when>
-          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#gmlLiteral')])>0">
+          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#gmlLiteral')]) > 0">
             <xsl:value-of select="locn:geometry[ends-with(@rdf:datatype,'#gmlLiteral')][1]"/>
           </xsl:when>
           <xsl:otherwise>
@@ -407,11 +420,12 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
+
       <xsl:variable name="n" select="substring-after($coverage,'North ')"/>
-      <xsl:if test="string-length($n)=0">
+      <xsl:if test="string-length($n) = 0">
         <xsl:copy-of select="node()"/>
       </xsl:if>
-      <xsl:if test="string-length($n)>0">
+      <xsl:if test="string-length($n) > 0">
         <xsl:variable name="north" select="substring-before($n,',')"/>
         <xsl:variable name="s" select="substring-after($coverage,'South ')"/>
         <xsl:variable name="south" select="substring-before($s,',')"/>
@@ -422,6 +436,7 @@
 		                                      then substring-before($w,'. ') else $w"/>
         <xsl:variable name="place" select="substring-after($coverage,'. ')"/>
         <xsl:variable name="isValid" select="number($west) and number($east) and number($south) and number($north)"/>
+
         <xsl:if test="$isValid">
           <xsl:variable name="wktLiteral"
                         select="concat('POLYGON ((',$west,' ',$south,',',$west,' ',$north,',',$east,' ',$north,',', $east,' ', $south,',', $west,' ',$south,'))')"/>
@@ -436,6 +451,7 @@
             <xsl:value-of select="$gmlLiteral"/>
           </xsl:element>
         </xsl:if>
+
         <xsl:if test="not($isValid)">
           <xsl:element name="locn:geometry">
             <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#wktLiteral</xsl:attribute>
@@ -444,7 +460,9 @@
             <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#gmlLiteral</xsl:attribute>
           </xsl:element>
         </xsl:if>
+
         <xsl:apply-templates select="node()[not(name(.) = 'locn:geometry')]"/>
+        <!-- TODO: Store <skos:prefLabel xml:lang="nl">Vlaams Gewest</skos:prefLabel> ?-->
       </xsl:if>
     </xsl:copy>
   </xsl:template>
@@ -485,6 +503,17 @@
     <spdx:algorithm rdf:resource="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"/>
   </xsl:template>
 
-  <!-- Remove empty elements. -->
-  <xsl:template match="*[count(@*) = 0 and count(*) = 0]"/>
+  <!-- foaf:Document always have a rdf about attribute to set the URL. -->
+  <xsl:template match="foaf:Document[not(@rdf:about)]">
+    <xsl:copy>
+      <xsl:attribute name="rdf:about"/>
+      <xsl:copy-of select="@*|*"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <!-- Remove some elements which are empty.
+   TODO: Issue related to keyword picker ? -->
+  <xsl:template match="dcat:keyword[count(@*) = 0 and count(*) = 0]
+                       |dcat:theme[count(@*) = 0 and count(*) = 0]
+                       |dct:type[count(@*) = 0 and count(*) = 0]"/>
 </xsl:stylesheet>

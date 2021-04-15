@@ -180,40 +180,49 @@
   </xsl:template>
 
 
-  <!-- dct:language is populated in rdf:resource attribute directly -->
+  <!-- Some elements are only using a rdf:resource or rdf:about attribute.
+   Everything else in is ignored. -->
   <xsl:template mode="mode-dcat2"
                 match="dct:language[@rdf:resource]
+                       |dcat:landingPage[foaf:Document/@rdf:about]
                        |vcard:hasEmail[@rdf:resource]
+                       |vcard:hasURL[@rdf:resource]
                        |foaf:phone[@rdf:resource]
                        |foaf:mbox[@rdf:resource]"
                 priority="3000">
-    <xsl:message>Language</xsl:message>
-
     <xsl:variable name="theElement"
-                  select="."/>
+                  select="if(foaf:Document) then foaf:Document else ."/>
 
+    <!-- TODO: Style - Label above field class not applied -->
     <xsl:apply-templates mode="render-for-field-for-attribute"
-                         select="@rdf:resource">
-      <xsl:with-param name="ref" select="gn:element/@ref"/>
+                         select="$theElement/@rdf:resource
+                                 |$theElement/@rdf:about">
+      <xsl:with-param name="ref" select="$theElement/gn:element/@ref"/>
       <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
     </xsl:apply-templates>
 
   </xsl:template>
 
 
-  <!-- the other elements in DC. -->
+  <!-- the other elements in DC.
+   TODO: We have to process here only element with no child
+   Adding a [not(skos:*)] for now but can be something more generic ?
+   -->
   <xsl:template mode="mode-dcat2"
                 priority="100"
-                match="dc:*|dct:*|dcat:*|vcard:*|foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*|locn:*|prov:*">
+                match="dc:*
+                       |dct:*[not(skos:*) and not(locn:*) and not(foaf:*)]
+                       |dcat:*[not(skos:*) and not(foaf:*)]
+                       |vcard:*
+                       |foaf:*|spdx:*|adms:*|owl:*|schema:*|skos:*|locn:*|prov:*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="overrideLabel" select="''" required="no"/>
     <xsl:param name="refToDelete" required="no"/>
     <xsl:param name="config" required="no"/>
-
     <!-- Skip translations. update-fixed-info takes care of having
     at least one element define in the main language. -->
-
+<xsl:message>=<xsl:value-of select="name(.)"/> </xsl:message>
 
     <!-- Unify language code to use 3 letter code -->
     <xsl:variable name="elementLang">
@@ -260,7 +269,7 @@
         and all non existing attributes not already present for the
         current element and its children (eg. @uom in gco:Distance).
         A list of exception is defined in form-builder.xsl#render-for-field-for-attribute. -->
-        <xsl:apply-templates mode="render-for-field-for-attribute"
+        <xsl:apply-templates mode="render-for-field-for-attribute-dcat2"
                              select="@*[name() != 'xml:lang']">
           <xsl:with-param name="ref" select="gn:element/@ref"/>
           <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
@@ -338,16 +347,6 @@
       </xsl:variable>
 
 
-      <!-- Render rdf:about attribute as field for dcat:Dataset -->
-      <xsl:if test="not($isFlatMode)
-                    and name(..)='dcat:Dataset' and ../@rdf:about
-                    and name() = 'dct:title'
-                    and count(preceding-sibling::*[name() = 'dct:title']) = 0">
-        <xsl:apply-templates mode="render-for-field-for-attribute-dcat2"
-                             select="../@rdf:about">
-          <xsl:with-param name="ref" select="../gn:element/@ref"/>
-        </xsl:apply-templates>
-      </xsl:if>
 
       <!-- Add view and edit template-->
       <xsl:variable name="contextXpath" select="gn-fn-metadata:getXPath(.)"/>
@@ -518,7 +517,7 @@
                 priority="101"/>
 
 
-  <xsl:template mode="mode-dcat2" match="dct:issued|dct:modified|dcat:startDate|dcat:endDate" priority="2000">
+  <xsl:template mode="mode-dcat2" match="dct:issued|dct:modified|schema:startDate|schema:endDate" priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="refToDelete" required="no"/>
@@ -594,14 +593,19 @@
     </xsl:call-template>
   </xsl:template>
 
+
+  <!-- In flat mode, hide most of the non existing attributes -->
   <xsl:template mode="render-for-field-for-attribute-dcat2"
-                match="gn:attribute[@name = ('rdf:nodeID') or (not(@name = ('ref', 'parent', 'id', 'uuid', 'type', 'uuidref',
-    'xlink:show', 'xlink:actuate', 'xlink:arcrole', 'xlink:role', 'xlink:title', 'xlink:href')) and $isFlatMode)]"
+                match="gn:attribute[not(@name = (
+                        'ref', 'parent', 'id', 'uuid', 'type', 'uuidref',
+    'xlink:show', 'xlink:actuate', 'xlink:arcrole', 'xlink:role', 'xlink:title', 'xlink:href')) and $isFlatMode]
+                      |gn:attribute[@name = ('resource', 'nodeID', 'about') and $isFlatMode]"
                 priority="101"/>
 
-  <xsl:template mode="render-for-field-for-attribute-dcat2"
-                match="gn:attribute[not(@name = ('ref', 'parent', 'id', 'uuid', 'type', 'uuidref',
-    'xlink:show', 'xlink:actuate', 'xlink:arcrole', 'xlink:role', 'xlink:title', 'xlink:href')) and not($isFlatMode)]"
+  <!--<xsl:template mode="render-for-field-for-attribute-dcat2"
+                match="gn:attribute[not(@name = (
+                      'ref', 'parent', 'id', 'uuid', 'type', 'uuidref',
+                      'xlink:show', 'xlink:actuate', 'xlink:arcrole', 'xlink:role', 'xlink:title', 'xlink:href')) and not($isFlatMode)]"
                 priority="100">
     <xsl:param name="ref"/>
     <xsl:param name="insertRef" select="''"/>
@@ -618,5 +622,5 @@
         </button>
       </div>
     </xsl:if>
-  </xsl:template>
+  </xsl:template>-->
 </xsl:stylesheet>

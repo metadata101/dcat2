@@ -37,33 +37,61 @@
                 version="2.0"
                 exclude-result-prefixes="#all">
 
+  <xsl:variable name="dcatKeywordConfig">
+    <element name="dcat:theme">
+      <thesaurus>external.theme.eu.europa.data-theme</thesaurus>
+      <xpath>./*/dcat:theme</xpath>
+      <max></max>
+      <labelKey>dcat.addThemes</labelKey>
+    </element>
+    <element name="dct:type">
+      <thesaurus>external.theme.dcat-type</thesaurus>
+      <xpath>./*/dct:type</xpath>
+      <max>1</max>
+      <labelKey>dcat.addType</labelKey>
+    </element>
+    <element name="dcat:keyword">
+      <thesaurus>external.none.allThesaurus</thesaurus>
+      <xpath>./*/dcat:keyword</xpath>
+      <max></max>
+      <labelKey>dcat.addTags</labelKey>
+    </element>
+  </xsl:variable>
+
+  <!-- Theme can only be set by thesaurus eu.europa.data-theme.
+
+  Catch all elements first.
+  On gn:child, build the keyword picker directive using XPath mode.
+
+  TODO: Get thesaurus from config (if not thesaurus, render as text ?)
+  TODO: How to deal with value not in the thesaurus ?
+  -->
   <xsl:template mode="mode-dcat2" priority="4000"
-                match="dcat:keyword"/>
-
+                match="*[name() = $dcatKeywordConfig//@name]"/>
   <xsl:template mode="mode-dcat2" priority="4000"
-                match="gn:child[@name = 'keyword']">
-    <xsl:param name="schema" select="$schema" required="no"/>
-    <xsl:param name="labels" select="$labels" required="no"/>
-    <xsl:param name="overrideLabel" select="''" required="no"/>
-
-    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
-    <xsl:variable name="isoType" select="''"/>
-    <xsl:variable name="thesaurusTitleEl"
-                  select="''"/>
-
-    <xsl:call-template name="addAllThesaurus">
-      <xsl:with-param name="ref"
-                      select="concat('_P', ../gn:element/@ref, '_',
-                                replace('dcat:keyword', ':', 'COLON'))"/>
-      <xsl:with-param name="transformation" select="'to-dcat2-concept'"/>
-      <xsl:with-param name="xpath" select="'./*/dcat:keyword'"/>
-      <xsl:with-param name="keywordList"
-                      select="string-join(
-                          if ($lang and ../dcat:keyword//skos:prefLabel[@xml:lang = $lang])
+                match="gn:child[concat(@prefix, ':', @name) = $dcatKeywordConfig//@name]">
+    <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
+    <xsl:variable name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+    <div
+      data-gn-keyword-selector="tagsinput"
+      data-metadata-id=""
+      data-element-ref="{concat('_P', ../gn:element/@ref, '_',
+                                replace($config/@name, ':', 'COLON'))}"
+      data-element-xpath="./*/{$config/@name}"
+      data-wrapper="{$config/@name}"
+      data-thesaurus-title="{{{{'{$config/labelKey}' | translate}}}}"
+      data-thesaurus-key="{$config/thesaurus}"
+      data-keywords="{string-join(
+                          if ($lang and ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang])
                           then
-                          ../dcat:keyword//skos:prefLabel[@xml:lang = $lang]/replace(text(), ',', ',,')
-                          else ../dcat:keyword//skos:prefLabel[not(@xml:lang)]/replace(text(), ',', ',,'), ',')"/>
-    </xsl:call-template>
-
+                          ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang]/replace(text(), ',', ',,')
+                          else ../*[name() = $config/@name]//skos:prefLabel[not(@xml:lang)]/replace(text(), ',', ',,'), ',')}"
+      data-transformations="to-dcat2-concept"
+      data-current-transformation="to-dcat2-concept"
+      data-max-tags="{$config/max}"
+      data-lang="{$metadataOtherLanguagesAsJson}"
+      data-textgroup-only="false"
+      class="">
+    </div>
   </xsl:template>
 </xsl:stylesheet>

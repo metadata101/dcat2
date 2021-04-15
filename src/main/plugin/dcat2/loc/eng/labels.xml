@@ -64,16 +64,16 @@
   </element>
   <element name="dct:identifier">
     <label>Identifier</label>
-    <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly is useful.</description>
+    <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly
+      is useful.
+    </description>
   </element>
   <element name="dcat:contactPoint">
     <label>Contact point</label>
     <description>Relevant contact information for the cataloged resource.</description>
   </element>
-  <element name="vcard:Organization"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization">
-    <label>contact organisation</label>
+  <element name="vcard:Organization">
+    <label>Organisation</label>
     <description>Tooltip: contact organisation</description>
     <btnLabel>contact organisation</btnLabel>
   </element>
@@ -84,66 +84,49 @@
     <description>Tooltip: URI</description>
     <btnLabel>URI</btnLabel>
   </element>
-  <element name="vcard:fn"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:fn">
-    <label>contact name</label>
+  <element name="vcard:fn">
+    <label>Contact name</label>
     <description>Tooltip: contact name</description>
     <btnLabel>contact name</btnLabel>
   </element>
-  <element name="vcard:organization-name"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:organization-name">
-    <label>organisation name</label>
+  <element name="vcard:organization-name">
+    <label>Organisation</label>
     <description>Tooltip: organisation name</description>
     <btnLabel>organisation name</btnLabel>
   </element>
-  <element name="vcard:hasAddress"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress">
-    <label>address</label>
+  <element name="vcard:hasAddress">
+    <label>Address</label>
     <description>Tooltip: address</description>
     <btnLabel>address</btnLabel>
   </element>
-  <element name="vcard:Address"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address">
-    <label>address</label>
+  <element name="vcard:Address">
+    <label>Address</label>
     <description>Tooltip: address</description>
     <btnLabel>address</btnLabel>
   </element>
   <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address/@rdf:about">
+           context="vcard:Address">
     <label>URI</label>
     <description>Tooltip: URI</description>
     <btnLabel>URI</btnLabel>
   </element>
-  <element name="vcard:street-address"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address/vcard:street-address">
-    <label>street</label>
+  <element name="vcard:street-address">
+    <label>Street</label>
     <description>Tooltip: street</description>
     <btnLabel>street</btnLabel>
   </element>
-  <element name="vcard:locality"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address/vcard:locality">
-    <label>locality</label>
+  <element name="vcard:locality">
+    <label>Locality</label>
     <description>Tooltip: locality</description>
     <btnLabel>locality</btnLabel>
   </element>
-  <element name="vcard:postal-code"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address/vcard:postal-code">
-    <label>postal code</label>
+  <element name="vcard:postal-code">
+    <label>Postal code</label>
     <description>Tooltip: postal code</description>
     <btnLabel>postal code</btnLabel>
   </element>
-  <element name="vcard:country-name"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasAddress/vcard:Address/vcard:country-name">
-    <label>country</label>
+  <element name="vcard:country-name">
+    <label>Country</label>
     <description>Tooltip: country</description>
     <btnLabel>country</btnLabel>
   </element>
@@ -156,22 +139,13 @@
   </element>
   <element name="rdf:resource"
 
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasURL/@rdf:resource">
-    <label>website</label>
-    <description>Tooltip: website</description>
-    <btnLabel>website</btnLabel>
+           context="vcard:hasURL">
+    <label>Website</label>
+    <description></description>
+    <btnLabel>URLmail</btnLabel>
   </element>
-  <element name="vcard:hasURL"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasURL">
-    <label>website</label>
-    <description>Tooltip: website</description>
-    <btnLabel>website</btnLabel>
-  </element>
-  <element name="vcard:hasTelephone"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/vcard:hasTelephone">
-    <label>telephone number</label>
+  <element name="vcard:hasTelephone">
+    <label>Phone number</label>
     <description>Tooltip: telephone number</description>
     <btnLabel>telephone number</btnLabel>
   </element>
@@ -187,9 +161,8 @@
     <label>Publisher</label>
     <description>The entity responsible for making the item available.</description>
   </element>
-  <element name="foaf:Agent"
-           context="/dcat:Dataset/dct:publisher/foaf:Agent">
-    <label>organisation</label>
+  <element name="foaf:Agent">
+    <label>Organisation</label>
     <description>Tooltip: organisation</description>
     <btnLabel>organisation</btnLabel>
   </element>
@@ -200,16 +173,26 @@
     <description>Tooltip: URI</description>
     <btnLabel>URI</btnLabel>
   </element>
-  <element name="foaf:name"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name">
-    <label>name</label>
+  <element name="foaf:name">
+    <label>Name</label>
     <description>Tooltip: name</description>
     <btnLabel>name</btnLabel>
   </element>
   <element name="dct:type"
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type">
-    <label>type</label>
+           context="foaf:Agent">
+    <label>Type</label>
+    <description>Tooltip: type</description>
+    <btnLabel>type</btnLabel>
+  </element>
+  <element name="rdf:resource"
+           context="foaf:mbox">
+    <label>E-mail</label>
+    <description>Tooltip: type</description>
+    <btnLabel>type</btnLabel>
+  </element>
+  <element name="rdf:resource"
+           context="foaf:phone">
+    <label>Phone number</label>
     <description>Tooltip: type</description>
     <btnLabel>type</btnLabel>
   </element>
@@ -434,29 +417,32 @@
     </description>
     <btnLabel>Is a version of</btnLabel>
   </element>
-  <element name="rdf:resource"
-           context="/dcat:Dataset/dcat:landingPage/@rdf:resource">
-    <label>landing page</label>
-    <description>Tooltip: landing page</description>
-    <btnLabel>landing page</btnLabel>
+  <element name="rdf:about"
+           context="foaf:Document">
+    <label>Landing page</label>
+    <description></description>
+    <btnLabel></btnLabel>
   </element>
-  <element name="dcat:landingPage"
-           context="/dcat:Dataset/dcat:landingPage">
-    <label>landing page</label>
-    <description>Tooltip: landing page</description>
-    <btnLabel>landing page</btnLabel>
+  <element name="dcat:landingPage">
+    <label>Landing page</label>
+    <description>A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.</description>
+    <btnLabel></btnLabel>
   </element>
 
   <element name="dct:language"
            context="/dcat:Dataset/dct:language">
     <label>Language</label>
-    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.</description>
+    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a
+      cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.
+    </description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
            context="dct:language">
     <label>Language</label>
-    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.</description>
+    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a
+      cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.
+    </description>
     <btnLabel>language</btnLabel>
   </element>
 
@@ -572,6 +558,12 @@
     </description>
     <btnLabel>Related dataset</btnLabel>
   </element>
+  <element name="dct:spatial">
+    <label>Geographic extent</label>
+  </element>
+  <element name="dct:temporal">
+    <label>Temporal extent</label>
+  </element>
   <element name="rdf:resource"
            context="/dcat:Dataset/dct:source/@rdf:resource">
     <label>source</label>
@@ -587,8 +579,8 @@
   </element>
   <element name="dct:spatial"
            context="/dcat:Dataset/dct:spatial">
-    <label>spatial / geographic extent</label>
-    <description>Tooltip: spatial / geographic extent</description>
+    <label>Geographic extent</label>
+    <description>The geographical area covered by the dataset.</description>
     <btnLabel>spatial / geographic extent</btnLabel>
   </element>
   <element name="dct:Location"
@@ -624,31 +616,24 @@
     <description>Temporal characteristics of the resource.</description>
     <btnLabel>Temporal Coverage</btnLabel>
   </element>
-  <element name="dct:PeriodOfTime"
-
-           context="/dcat:Dataset/dct:temporal/dct:PeriodOfTime">
-    <label>period of time</label>
+  <element name="dct:PeriodOfTime">
+    <label>Period of time</label>
     <description>Tooltip: period of time</description>
     <btnLabel>period of time</btnLabel>
   </element>
   <element name="rdf:about"
-
            context="/dcat:Dataset/dct:temporal/dct:PeriodOfTime/@rdf:about">
     <label>URI</label>
     <description>Tooltip: URI</description>
     <btnLabel>URI</btnLabel>
   </element>
-  <element name="schema:startDate"
-
-           context="/dcat:Dataset/dct:temporal/dct:PeriodOfTime/schema:startDate">
-    <label>start date/time</label>
+  <element name="schema:startDate">
+    <label>Start date/time</label>
     <description>Tooltip: start date/time</description>
     <btnLabel>start date/time</btnLabel>
   </element>
-  <element name="schema:endDate"
-
-           context="/dcat:Dataset/dct:temporal/dct:PeriodOfTime/schema:endDate">
-    <label>end date/time</label>
+  <element name="schema:endDate">
+    <label>End date/time</label>
     <description>Tooltip: end date/time</description>
     <btnLabel>end date/time</btnLabel>
   </element>

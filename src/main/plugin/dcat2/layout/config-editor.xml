@@ -19,6 +19,12 @@
       <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
     </for>
 
+    <!--
+    TODO: We can't use that. See layout-custom-fields-keywords.xsl to add a snippet skos:Concept
+    <for name="dct:type"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.dcat-type"/>
+    </for>-->
 
     <!--<for name="foaf:name" xpath="/rdf:RDF/dcat:Dataset/dct:publisher/foaf:Agent/foaf:name"  use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.publisher" />
@@ -52,7 +58,6 @@
     <name>spdx:checksum</name>
     <name>spdx:Checksum</name>
     <name>foaf:page</name>
-    <name>foaf:Document</name>
     <name>dct:conformsTo</name>
     <name>dct:Standard</name>
     <name>adms:status</name>
@@ -110,8 +115,52 @@
       </sidePanel>
 
       <tab id="default" default="true"  mode="flat">
-        <section xpath="rdf:RDF"/>
+        <!-- TODO: One page layout, with sections ? or tabs ?-->
+        <section>
+          <field xpath="rdf:RDF/*/dct:title"/>
+          <field xpath="rdf:RDF/*/dct:description"/>
+
+          <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:type" or="type" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/*/dct:issued" or="issued" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:modified" or="modified" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/*/dct:accessRight" or="accessRights" in="rdf:RDF/*"/>
+        </section>
+
+        <section>
+          <!-- TODO: Connect to directory -->
+          <field xpath="rdf:RDF/*/dct:creator" or="creator" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:publisher" or="publisher" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:contactPoint" or="contactPoint" in="rdf:RDF/*"/>
+        </section>
+
+        <!--<section>
+          <field xpath="rdf:RDF/*/dcat:landingPage"/>
+        </section>-->
       </tab>
+
+      <flatModeExceptions>
+        <for name="dcat:theme"/>
+        <for name="dcat:keyword"/>
+        <for name="dcat:contactPoint"/>
+        <for name="dct:spatial"/>
+        <for name="dct:temporal"/>
+        <for name="dct:issued"/>
+        <for name="dct:modified"/>
+        <for name="dct:creator"/>
+        <for name="dct:publisher"/>
+        <for name="vcard:fn"/>
+        <for name="vcard:organization-name"/>
+        <for name="vcard:hasEmail"/>
+        <for name="vcard:hasURL"/>
+        <for name="vcard:hasTelephone"/>
+      </flatModeExceptions>
 
       <thesaurusList>
         <thesaurus key="external.none.allThesaurus"

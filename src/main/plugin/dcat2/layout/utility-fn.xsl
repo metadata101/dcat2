@@ -289,26 +289,25 @@
     </xsl:choose>
   </xsl:function>
 
-  <xsl:function name="gn-fn-dcat2:getBboxCoordinates" as="xs:string">
+  <xsl:function name="gn-fn-dcat2:getBboxCoordinates" as="xs:string?">
     <xsl:param name="geometryElement" as="node()"/>
     <xsl:variable name="bbox">
       <xsl:choose>
-        <xsl:when test="ends-with($geometryElement/@rdf:datatype,'#wktLiteral')">
-          <!--          <xsl:value-of select="java2:wktGeomToBbox(saxon:serialize($geometryElement,'default-serialize-mode'))"/>-->
+        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#wktLiteral')">
+            <xsl:value-of select="java:wktGeomToBbox(
+            saxon:serialize($geometryElement,'default-serialize-mode'))"/>
         </xsl:when>
-        <xsl:when test="ends-with($geometryElement/@rdf:datatype,'#gmlLiteral')">
-          <!--          <xsl:value-of select="java:geomToBbox(saxon:serialize($geometryElement,'default-serialize-mode'))"/>-->
+        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#gmlLiteral')">
+            <xsl:value-of select="java:geomToBbox(saxon:serialize($geometryElement,'default-serialize-mode'))"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
+
     <xsl:choose>
-      <xsl:when test="string-length($bbox)>0">
+      <xsl:when test="string-length($bbox) > 0">
         <xsl:value-of select="$bbox"/>
       </xsl:when>
       <xsl:otherwise>
-        <!-- Initialize with Flanders bbox when locn:geometry contains invalid geometry -->
-        <xsl:value-of
-          select="'2.53|50.67|5.92|51.51|Vlaams Gewest|http://mir.geopunt.be/cl/Geopunt/VlaamseAdminRegios/Vlaanderen'"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
