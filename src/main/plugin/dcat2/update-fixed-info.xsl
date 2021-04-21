@@ -107,36 +107,56 @@
   </xsl:template>
 
 
-  <!-- All node with only text may be multilingual -->
-  <xsl:template match="*[@xml:lang]" priority="100">
+  <!-- Multilingual support -->
+  <xsl:variable name="multilingualElements"
+                select="('dct:title', 'dct:description')"/>
+
+  <!-- Ignore element not in main language (they are handled in dcat2-translations-builder. -->
+  <xsl:template match="*[name() = $multilingualElements
+                         and $isMultilingual
+                         and @xml:lang != $mainLanguage]"/>
+
+  <!-- Expand element which may not contain xml:lang attribute
+  eg. when clicking + -->
+  <xsl:template match="*[name() = $multilingualElements
+                         and $isMultilingual
+                         and not(@xml:lang)]">
+    <xsl:variable name="name"
+                  select="name()"/>
+    <xsl:variable name="value"
+                  select="."/>
+    <xsl:for-each select="$locales/lang/@code">
+      <xsl:element name="{$name}">
+        <xsl:attribute name="xml:lang"
+                       select="current()"/>
+        <xsl:value-of select="if (current() = $mainLanguage)
+                              then $value else ''"/>
+      </xsl:element>
+    </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template match="*[name() = $multilingualElements
+                         and $isMultilingual
+                         and @xml:lang = $mainLanguage]"
+                priority="100">
+    <!-- Then we copy translations of following siblings
+    or create empty elements. -->
+    <xsl:variable name="name"
+                  select="name(.)"/>
+
+    <xsl:variable name="excluded"
+                  select="gn-fn-dcat2:isNotMultilingualField(., $editorConfig)"/>
+    <xsl:variable name="isMultilingualElement"
+                  select="$isMultilingual and $excluded = false()"/>
+
     <xsl:choose>
-      <xsl:when test="@xml:lang = $mainLanguage">
-        <!-- Then we copy translations of following siblings
-        or create empty elements. -->
-
-        <xsl:variable name="name"
-                      select="name(.)"/>
-
-        <xsl:variable name="excluded"
-                      select="gn-fn-dcat2:isNotMultilingualField(., $editorConfig)"/>
-        <xsl:variable name="isMultilingualElement"
-                      select="$isMultilingual and $excluded = false()"/>
-
-        <xsl:choose>
-          <xsl:when test="$isMultilingualElement">
-            <xsl:call-template name="dcat2-translations-builder"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:copy>
-              <xsl:apply-templates select="@*|node()"/>
-            </xsl:copy>
-          </xsl:otherwise>
-        </xsl:choose>
-
+      <xsl:when test="$isMultilingualElement">
+        <xsl:call-template name="dcat2-translations-builder"/>
       </xsl:when>
       <xsl:otherwise>
-        <!-- Ignore. ie. you can't have an element which does
-         not provide translations for the main language. -->
+        <xsl:copy>
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

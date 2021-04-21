@@ -82,7 +82,8 @@
   <!-- Get the list of other languages -->
   <xsl:template name="get-dcat2-other-languages">
     <xsl:choose>
-      <xsl:when test="count($metadata/descendant::node()/*[@xml:lang != '']) > 1">
+      <xsl:when test="count($metadata/descendant::node()/*[@xml:lang != '']) > 1
+                      or count($metadata/*/dct:language) > 1">
         <xsl:for-each select="$metadata/*/dct:language/@rdf:resource">
           <xsl:variable name="languageCode">
             <xsl:call-template name="get-dcat2-language">
