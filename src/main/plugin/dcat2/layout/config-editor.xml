@@ -22,6 +22,16 @@
       <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
     </for>
 
+    <for name="dct:creator" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="true"
+        data-template-type="contact"
+        data-insert-modes="text,xlink"
+        data-default-role="creator"
+        data-transformation="contact-from-iso19139-to-foaf-agent"/>
+    </for>
     <!--
     TODO: We can't use that. See layout-custom-fields-keywords.xsl to add a snippet skos:Concept
     <for name="dct:type"

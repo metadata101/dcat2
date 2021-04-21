@@ -37,6 +37,7 @@
                 xmlns:owl="http://www.w3.org/2002/07/owl#"
                 xmlns:prov="http://www.w3.org/ns/prov#"
                 xmlns:schema="http://schema.org/"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
@@ -468,7 +469,15 @@
                             (not(gn:element/@down) and not(gn:element/@up)))"/>
             <!--          <xsl:with-param name="isForceLabel" select="true()"/>-->
             <xsl:with-param name="isDisabled"
-                            select="name(.)='dct:identifier' and count(preceding-sibling::*[name(.) = 'dct:identifier'])=0 and name(..)='dcat:Dataset'"/>
+                            select="(name(.) = 'dct:identifier'
+                                    and count(preceding-sibling::*[name(.) = 'dct:identifier']) = 0
+                                    and name(..) = 'dcat:Dataset')
+                                    or
+                                    count($metadata//*[
+                                      gn:element/@ref = $theElement/gn:element/@ref]
+                                      /ancestor-or-self::node()[
+                                        contains(@xlink:href, 'api/registries/entries')])
+                                        > 0"/>
             <!-- Boolean that allow to show the mandatory "*" in black instead of red
             <xsl:with-param name="subRequired" select="(name() = 'vcard:street-address' and name(..) = 'vcard:Address') or
                                                        (name() = 'vcard:locality' and name(..) = 'vcard:Address') or
