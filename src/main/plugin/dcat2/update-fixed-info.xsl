@@ -34,7 +34,7 @@
                 xmlns:owl="http://www.w3.org/2002/07/owl#"
                 xmlns:schema="http://schema.org/"
                 xmlns:locn="http://www.w3.org/ns/locn#"
-                xmlns:gml="http://www.opengis.net/gml"
+                xmlns:gml="http://www.opengis.net/gml/3.2"
                 xmlns:gn-fn-dcat2="http://geonetwork-opensource.org/xsl/functions/profiles/dcat2"
                 xmlns:saxon="http://saxon.sf.net/"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
@@ -274,6 +274,31 @@
     </xsl:if>
 
   </xsl:template>
+
+
+  <xsl:template name="add-namespaces">
+    <xsl:namespace name="rdf" select="'http://www.w3.org/1999/02/22-rdf-syntax-ns#'"/>
+    <xsl:namespace name="rdfs" select="'http://www.w3.org/2000/01/rdf-schema#'"/>
+    <xsl:namespace name="dct" select="'http://purl.org/dc/terms/'"/>
+    <xsl:namespace name="dcat" select="'http://www.w3.org/ns/dcat#'"/>
+    <xsl:namespace name="skos" select="'http://www.w3.org/2004/02/skos/core#'"/>
+    <xsl:namespace name="spdx" select="'http://spdx.org/rdf/terms#'"/>
+    <xsl:namespace name="adms" select="'http://www.w3.org/ns/adms#'"/>
+    <xsl:namespace name="prov" select="'http://www.w3.org/ns/prov#'"/>
+    <xsl:namespace name="foaf" select="'http://xmlns.com/foaf/0.1/'"/>
+    <xsl:namespace name="owl" select="'http://www.w3.org/2002/07/owl#'"/>
+    <xsl:namespace name="schema" select="'http://schema.org/'"/>
+    <xsl:namespace name="locn" select="'http://www.w3.org/ns/locn#'"/>
+    <xsl:namespace name="gml" select="'http://www.opengis.net/gml/3.2'"/>
+  </xsl:template>
+
+  <xsl:template match="rdf:RDF" priority="10">
+    <xsl:copy>
+      <xsl:call-template name="add-namespaces"/>
+      <xsl:apply-templates select="@*|*"/>
+    </xsl:copy>
+  </xsl:template>
+
 
   <xsl:template match="dcat:Dataset" priority="10">
     <dcat:Dataset>
