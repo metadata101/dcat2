@@ -222,7 +222,6 @@
     <xsl:param name="config" required="no"/>
     <!-- Skip translations. update-fixed-info takes care of having
     at least one element define in the main language. -->
-<xsl:message>=<xsl:value-of select="name(.)"/> </xsl:message>
 
     <!-- Unify language code to use 3 letter code -->
     <xsl:variable name="elementLang">

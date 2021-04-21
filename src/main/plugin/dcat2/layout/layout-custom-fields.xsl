@@ -39,6 +39,61 @@
 
   <xsl:include href="layout-custom-fields-keywords.xsl"/>
 
+  <!-- Experiment using gn-bounding-polygon
+  Issues:
+  * Lack of spatial thesaurus helper
+  * Editor error on save
+  {"message":"IllegalAddException",
+   "code":"unsatisfied_request_parameter",
+    "description":"The namespace xmlns=\"\" could not be added as a namespace
+    to \"Polygon\": The namespace prefix \"\" collides with the element namespace prefix"}
+
+  -->
+  <!--&lt;!&ndash; WKT geom is ignored &ndash;&gt;
+  <xsl:template mode="mode-dcat2"
+                match="dct:spatial/dct:Location/locn:geometry[ends-with(./@rdf:datatype,'#wktLiteral')]"
+                priority="2000"/>
+
+  &lt;!&ndash; GML geom is used &ndash;&gt;
+  <xsl:template mode="mode-dcat2"
+                match="dct:spatial/dct:Location/locn:geometry[ends-with(./@rdf:datatype,'#gmlLiteral')]"
+                priority="2000">
+
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+    <xsl:param name="refToDelete" required="no"/>
+
+    <xsl:variable name="xpath"
+                  select="gn-fn-metadata:getXPath(.)"/>
+    <xsl:variable name="labelConfig"
+                  select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', $xpath)"/>
+
+    <xsl:call-template name="render-boxed-element">
+      <xsl:with-param name="label" select="$labelConfig/label"/>
+      <xsl:with-param name="editInfo" select="$refToDelete"/>
+      <xsl:with-param name="cls" select="local-name()"/>
+      <xsl:with-param name="subTreeSnippet">
+        <xsl:variable name="geometry">
+          <xsl:value-of select="."/>
+        </xsl:variable>
+
+        <xsl:variable name="identifier"
+                      select="concat('_X', ./gn:element/@ref, '_replace')"/>
+        <xsl:variable name="readonly" select="false()"/>
+
+        <br />
+        <gn-bounding-polygon polygon-xml="{$geometry}"
+                             identifier="{$identifier}"
+                             geomwrapper="${{geom}}"
+                             read-only="{$readonly}">
+        </gn-bounding-polygon>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>-->
+
+
+
+
   <xsl:template mode="mode-dcat2"
                 match="dct:spatial"
                 priority="2000">
@@ -57,18 +112,20 @@
       <xsl:with-param name="cls" select="local-name()"/>
       <xsl:with-param name="subTreeSnippet">
 
-
+        <!-- Update fixed info always create a locn:geometry. -->
         <xsl:variable name="geometry" as="node()?">
+          <xsl:variable name="gmlGeom"
+                        select="dct:Location/locn:geometry[
+                                ends-with(@rdf:datatype, '#gmlLiteral')]"/>
+          <xsl:variable name="wktGeom"
+                        select="dct:Location/locn:geometry[
+                                ends-with(@rdf:datatype, '#wktLiteral')]"/>
           <xsl:choose>
-            <xsl:when test="count(dct:Location/locn:geometry[
-                                ends-with(@rdf:datatype, '#wktLiteral')]) > 0">
-              <xsl:copy-of select="dct:Location/locn:geometry[
-                                      ends-with(@rdf:datatype, '#wktLiteral')][1]"/>
+            <xsl:when test="count($gmlGeom) > 0">
+              <xsl:copy-of select="$gmlGeom[1]"/>
             </xsl:when>
-            <xsl:when test="count(dct:Location/locn:geometry[
-                              ends-with(./dct:Location/@rdf:datatype,'#gmlLiteral')]) > 0">
-              <xsl:copy-of select="dct:Location/locn:geometry[
-                                      ends-with(@rdf:datatype, '#gmlLiteral')][1]"/>
+            <xsl:when test="count($wktGeom) > 0">
+              <xsl:copy-of select="$wktGeom[1]"/>
             </xsl:when>
             <xsl:when test="dct:Location and dct:Location/locn:geometry[not(@rdf:datatype)]">
               <xsl:copy-of select="./dct:Location/locn:geometry[not(@rdf:datatype)]"/>
@@ -76,13 +133,15 @@
           </xsl:choose>
         </xsl:variable>
 
-        <xsl:variable name="cleanedGeometry" as="node()">
+        <xsl:variable name="cleanedGeometry" as="node()?">
           <xsl:apply-templates select="$geometry" mode="gn-element-cleaner"/>
         </xsl:variable>
 
-        <xsl:variable name="bbox" select="gn-fn-dcat2:getBboxCoordinates($cleanedGeometry)"/>
+        <xsl:variable name="bbox"
+                      select="gn-fn-dcat2:getBboxCoordinates($cleanedGeometry)"/>
 
-        <xsl:variable name="bboxCoordinates" select="tokenize(replace($bbox, ',', '.'), '\|')"/>
+        <xsl:variable name="bboxCoordinates"
+                      select="tokenize(replace($bbox, ',', '.'), '\|')"/>
 
         <!--<xsl:if test="count($bboxCoordinates) > 4">
           <div class="alert alert-danger">

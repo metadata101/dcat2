@@ -409,11 +409,11 @@
 
       <xsl:variable name="coverage">
         <xsl:choose>
-          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')]) > 0">
-            <xsl:value-of select="locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')][1]"/>
-          </xsl:when>
           <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#gmlLiteral')]) > 0">
             <xsl:value-of select="locn:geometry[ends-with(@rdf:datatype,'#gmlLiteral')][1]"/>
+          </xsl:when>
+          <xsl:when test="count(locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')]) > 0">
+            <xsl:value-of select="locn:geometry[ends-with(@rdf:datatype,'#wktLiteral')][1]"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="locn:geometry[1]"/>
@@ -437,29 +437,31 @@
         <xsl:variable name="place" select="substring-after($coverage,'. ')"/>
         <xsl:variable name="isValid" select="number($west) and number($east) and number($south) and number($north)"/>
 
-        <xsl:if test="$isValid">
-          <xsl:variable name="wktLiteral"
-                        select="concat('POLYGON ((',$west,' ',$south,',',$west,' ',$north,',',$east,' ',$north,',', $east,' ', $south,',', $west,' ',$south,'))')"/>
-          <xsl:variable name="gmlLiteral"
-                        select="concat('&lt;gml:Polygon&gt;&lt;gml:exterior&gt;&lt;gml:LinearRing&gt;&lt;gml:posList&gt;',$south,' ',$west,' ',$north,' ', $west, ' ', $north, ' ', $east, ' ', $south, ' ', $east,' ', $south, ' ', $west, '&lt;/gml:posList&gt;&lt;/gml:LinearRing&gt;&lt;/gml:exterior&gt;&lt;/gml:Polygon&gt;')"/>
-          <xsl:element name="locn:geometry">
-            <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#wktLiteral</xsl:attribute>
-            <xsl:value-of select="$wktLiteral"/>
-          </xsl:element>
-          <xsl:element name="locn:geometry">
-            <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#gmlLiteral</xsl:attribute>
-            <xsl:value-of select="$gmlLiteral"/>
-          </xsl:element>
-        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="$isValid">
+            <xsl:variable name="wktLiteral"
+                          select="concat('POLYGON ((',$west,' ',$south,',',$west,' ',$north,',',$east,' ',$north,',', $east,' ', $south,',', $west,' ',$south,'))')"/>
+            <xsl:variable name="gmlLiteral"
+                          select="concat('&lt;gml:Polygon xmlns:gml=&quot;http://www.opengis.net/gml/3.2&quot;&gt;&lt;gml:exterior&gt;&lt;gml:LinearRing&gt;&lt;gml:posList&gt;',$south,' ',$west,' ',$north,' ', $west, ' ', $north, ' ', $east, ' ', $south, ' ', $east,' ', $south, ' ', $west, '&lt;/gml:posList&gt;&lt;/gml:LinearRing&gt;&lt;/gml:exterior&gt;&lt;/gml:Polygon&gt;')"/>
+            <xsl:element name="locn:geometry">
+              <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#wktLiteral</xsl:attribute>
+              <xsl:value-of select="$wktLiteral"/>
+            </xsl:element>
+            <xsl:element name="locn:geometry">
+              <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#gmlLiteral</xsl:attribute>
+              <xsl:value-of select="$gmlLiteral"/>
+            </xsl:element>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:element name="locn:geometry">
+              <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#wktLiteral</xsl:attribute>
+            </xsl:element>
+            <xsl:element name="locn:geometry">
+              <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#gmlLiteral</xsl:attribute>
+            </xsl:element>
+          </xsl:otherwise>
+        </xsl:choose>
 
-        <xsl:if test="not($isValid)">
-          <xsl:element name="locn:geometry">
-            <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#wktLiteral</xsl:attribute>
-          </xsl:element>
-          <xsl:element name="locn:geometry">
-            <xsl:attribute name="rdf:datatype">http://www.opengis.net/ont/geosparql#gmlLiteral</xsl:attribute>
-          </xsl:element>
-        </xsl:if>
 
         <xsl:apply-templates select="node()[not(name(.) = 'locn:geometry')]"/>
         <!-- TODO: Store <skos:prefLabel xml:lang="nl">Vlaams Gewest</skos:prefLabel> ?-->

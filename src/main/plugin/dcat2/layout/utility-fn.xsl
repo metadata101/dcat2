@@ -24,6 +24,7 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:gml="http://www.opengis.net/gml/3.2"
                 xmlns:gn-fn-dcat2="http://geonetwork-opensource.org/xsl/functions/profiles/dcat2"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
@@ -290,15 +291,16 @@
   </xsl:function>
 
   <xsl:function name="gn-fn-dcat2:getBboxCoordinates" as="xs:string?">
-    <xsl:param name="geometryElement" as="node()"/>
+    <xsl:param name="geometryElement" as="node()?"/>
+
     <xsl:variable name="bbox">
       <xsl:choose>
-        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#wktLiteral')">
-            <xsl:value-of select="java:wktGeomToBbox(
-            saxon:serialize($geometryElement,'default-serialize-mode'))"/>
+        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#gmlLiteral')
+                        and normalize-space($geometryElement) != ''">
+          <xsl:value-of select="java:geomToBbox(string($geometryElement/text()))"/>
         </xsl:when>
-        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#gmlLiteral')">
-            <xsl:value-of select="java:geomToBbox(saxon:serialize($geometryElement,'default-serialize-mode'))"/>
+        <xsl:when test="ends-with($geometryElement/@rdf:datatype, '#wktLiteral')">
+          <xsl:value-of select="java:wktGeomToBbox(string($geometryElement/text()))"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
