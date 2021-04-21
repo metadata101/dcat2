@@ -29,6 +29,13 @@
                 version="2.0"
                 exclude-result-prefixes="#all">
 
+  <xsl:template mode="get-dcat2-localized-string"
+                match="dct:title|dct:description">
+    <value lang="{if (@xml:lang) then @xml:lang else $lang}">
+      <xsl:value-of select="."/>
+    </value>
+  </xsl:template>
+
   <xsl:template mode="relation"
                 match="metadata/rdf:RDF/dcat:*">
     <thumbnails>
@@ -45,10 +52,13 @@
             </value>
           </url>
           <title>
-            <value lang="{$lang}">
-              <xsl:value-of select="dct:description"/>
-            </value>
+            <xsl:apply-templates mode="get-dcat2-localized-string"
+                                 select="dct:title"/>
           </title>
+          <description>
+            <xsl:apply-templates mode="get-dcat2-localized-string"
+                                 select="dct:description"/>
+          </description>
           <protocol>
             <xsl:value-of select="dct:format/*/skos:prefLabel"/>
           </protocol>
@@ -70,10 +80,13 @@
             </value>
           </url>
           <title>
-            <value lang="{$lang}">
-              <xsl:value-of select="dct:description"/>
-            </value>
+            <xsl:apply-templates mode="get-dcat2-localized-string"
+                                 select="dct:title"/>
           </title>
+          <description>
+            <xsl:apply-templates mode="get-dcat2-localized-string"
+                                 select="dct:description"/>
+          </description>
           <protocol>
             <xsl:value-of select="dct:format/*/skos:prefLabel"/>
           </protocol>

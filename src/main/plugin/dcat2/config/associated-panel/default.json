@@ -21,6 +21,7 @@
             "hidden": true,
             "isMultilingual": false
           },
+          "name": {},
           "desc": {},
           "function": {
             "value": "overview",
@@ -47,6 +48,7 @@
             "hidden": true,
             "isMultilingual": false
           },
+          "name": {},
           "desc": {},
           "function": {
             "value": "information",
@@ -73,6 +75,7 @@
             "hidden": true,
             "isMultilingual": false
           },
+          "name": {},
           "desc": {},
           "function": {
             "value": "download",
