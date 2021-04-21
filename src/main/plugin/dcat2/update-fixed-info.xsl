@@ -315,6 +315,8 @@
       <xsl:apply-templates select="adms:versionNotes"/>
       <xsl:apply-templates select="dcat:extension"/>
       <xsl:apply-templates select="dcat:distribution"/>
+      <xsl:apply-templates select="dcat:spatialResolutionInMeters"/>
+      <xsl:apply-templates select="dcat:temporalResolution"/>
       <xsl:apply-templates select="adms:sample"/>
       <xsl:apply-templates select="prov:qualifiedInvalidation"/>
       <xsl:apply-templates select="locn:address"/>

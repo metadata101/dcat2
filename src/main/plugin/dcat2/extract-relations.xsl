@@ -32,7 +32,7 @@
   <xsl:template mode="relation"
                 match="metadata/rdf:RDF/dcat:*">
     <thumbnails>
-      <xsl:for-each select=".//dcat:Distribution[dct:format = 'WWW:OVERVIEW']">
+      <xsl:for-each select=".//dcat:Distribution[dct:format/*/skos:prefLabel = 'WWW:OVERVIEW']">
         <xsl:variable name="url"
                       select="dcat:accessURL|dcat:downloadURL"/>
         <item>

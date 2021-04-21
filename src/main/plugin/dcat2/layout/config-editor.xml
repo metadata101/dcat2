@@ -15,6 +15,9 @@
     <for name="adms:versionNotes" use="textarea"/>
     <for name="dct:description" use="textarea"/>
 
+    <for name="dcat:spatialResolutionInMeters" use="number"/>
+    <for name="dcat:temporalResolution" use="data-gn-field-duration-div"/>
+
     <for name="dct:language/@rdf:resource" use="data-gn-language-picker">
       <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
     </for>
@@ -85,6 +88,8 @@
       <name>dcat:startDate</name>
       <name>dcat:endDate</name>
       <name>vcard:hasEmail</name>
+      <name>dcat:spatialResolutionInMeters</name>
+      <name>dcat:temporalResolution</name>
     </exclude>
   </multilingualFields>
 
@@ -128,7 +133,9 @@
           <field xpath="rdf:RDF/*/dct:modified" or="modified" in="rdf:RDF/*"/>
 
           <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
 
           <field xpath="rdf:RDF/*/dct:accessRight" or="accessRights" in="rdf:RDF/*"/>
         </section>
