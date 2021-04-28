@@ -46,6 +46,7 @@
 
   <fieldsWithFieldset>
     <name>dcat:Catalog</name>
+    <name>dcat:CatalogRecord</name>
     <name>dcat:Dataset</name>
     <name>dcat:DataService</name>
     <name>dcat:contactPoint</name>
@@ -151,10 +152,16 @@
         </section>
 
         <section>
-          <!-- TODO: Connect to directory -->
           <field xpath="rdf:RDF/*/dct:creator" or="creator" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dct:publisher" or="publisher" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:contactPoint" or="contactPoint" in="rdf:RDF/*"/>
+        </section>
+
+        <section name="metadata.section">
+          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:identifier"/>
+          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:issued"/>
+          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:modified"/>
+          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:conformsTo"/>
         </section>
 
         <!--<section>

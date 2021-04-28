@@ -94,7 +94,6 @@
 
           <xsl:if test="$languageCode != ''">
             <lang id="{upper-case($languageCode)}" code="{$languageCode}">
-              <!-- TODO: Review. First language as default -->
               <xsl:if test="position() = 1">
                 <xsl:attribute name="default" select="''"/>
               </xsl:if>

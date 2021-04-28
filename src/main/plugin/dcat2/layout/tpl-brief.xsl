@@ -69,7 +69,6 @@
       <!-- FIXME
       <image>IMAGE</image>
       -->
-      <!-- TODO : ows:BoundingBox -->
       <xsl:variable name="coverage" select="dct:spatial"/>
       <xsl:variable name="n" select="substring-after($coverage,'North ')"/>
       <xsl:variable name="north" select="substring-before($n,',')"/>

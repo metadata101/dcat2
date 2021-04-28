@@ -211,7 +211,7 @@
       <xsl:for-each select="dct:identifier">
         <xsl:variable name="previousIdentifierSiblingsCount"
                       select="count(preceding-sibling::*[name(.) = 'dct:identifier'])"/>
-        <xsl:if test="$previousIdentifierSiblingsCount>0">
+        <xsl:if test="$previousIdentifierSiblingsCount > 0">
           <xsl:apply-templates select="."/>
         </xsl:if>
       </xsl:for-each>
@@ -244,10 +244,21 @@
   </xsl:template>
 
 
+  <xsl:template match="dcat:CatalogRecord" priority="10">
+    <xsl:copy>
+      <xsl:apply-templates select="@*[not(name(.) = 'rdf:about')]"/>
+      <xsl:call-template name="dcat-build-identifier"/>
+      <dct:issued><xsl:value-of select="/root/env/createDate"/></dct:issued>
+      <dct:modified><xsl:value-of select="/root/env/changeDate"/></dct:modified>
+
+      <xsl:apply-templates select="*[not(name() = ('dct:identifier', 'dct:issued', 'dct:modified'))]"/>
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template match="dcat:Dataset" priority="10">
     <dcat:Dataset>
       <xsl:apply-templates select="@*[not(name(.) = 'rdf:about')]"/>
-      <xsl:call-template name="dcat-build-identifier"/>
+<!--      <xsl:call-template name="dcat-build-identifier"/>-->
 
       <!-- Fixed order of elements. -->
       <xsl:apply-templates select="dct:title"/>

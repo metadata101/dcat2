@@ -469,9 +469,8 @@
                             (not(gn:element/@down) and not(gn:element/@up)))"/>
             <!--          <xsl:with-param name="isForceLabel" select="true()"/>-->
             <xsl:with-param name="isDisabled"
-                            select="(name(.) = 'dct:identifier'
-                                    and count(preceding-sibling::*[name(.) = 'dct:identifier']) = 0
-                                    and name(..) = 'dcat:Dataset')
+                            select="(name(.) = ('dct:identifier', 'dct:issued', 'dct:modified')
+                                    and name(..) = 'dcat:CatalogRecord')
                                     or
                                     count($metadata//*[
                                       gn:element/@ref = $theElement/gn:element/@ref]
@@ -525,7 +524,12 @@
                 priority="101"/>
 
 
-  <xsl:template mode="mode-dcat2" match="dct:issued|dct:modified|schema:startDate|schema:endDate" priority="2000">
+  <xsl:template mode="mode-dcat2"
+                match="dcat:Dataset/dct:issued
+                      |dcat:Dataset/dct:modified
+                      |dcat:DataService/dct:issued
+                      |dcat:DataService/dct:modified
+                      |schema:startDate|schema:endDate" priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="refToDelete" required="no"/>

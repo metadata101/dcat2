@@ -58,7 +58,7 @@
     <xs:sequence>
       <xs:element ref="dct:identifier" minOccurs="1" maxOccurs="1"/>
       <xs:element ref="dct:title" minOccurs="1" maxOccurs="unbounded"/>
-      <xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
 
       <xs:element name="theme" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
@@ -66,7 +66,7 @@
       <xs:element ref="dct:type" minOccurs="0" maxOccurs="unbounded"/>
 
       <xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="dct:creator" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:creator" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="dct:publisher" minOccurs="0" maxOccurs="1"/>
 
       <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
@@ -74,7 +74,7 @@
 
       <xs:element name="landingPage" type="foaf:Document" minOccurs="0" maxOccurs="unbounded"/>
 
-      <xs:element ref="dct:accessRights" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:accessRights" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:license" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="dct:rights" minOccurs="0" maxOccurs="unbounded"/>
@@ -113,13 +113,14 @@
       <xs:extension base="dcat:DatasetType">
         <xs:sequence>
           <xs:element name="catalog" type="dcat:catalog" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="record" type="dcat:CatalogRecord" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="record" type="dcat:catalogRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="dataset" type="dcat:dataset" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="service" type="dcat:service" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="themeTaxonomy" type="skos:ConceptScheme" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="dct:hasPart" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="foaf:homepage" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
+        <xs:attribute ref="rdf:about"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -130,9 +131,15 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="CatalogRecord" type="dcat:CatalogRecord"/>
+  <xs:complexType name="catalogRecord">
+    <xs:sequence>
+      <xs:element ref="dcat:CatalogRecord"/>
+    </xs:sequence>
+  </xs:complexType>
 
-  <xs:complexType name="CatalogRecord">
+  <xs:element name="CatalogRecord" type="dcat:CatalogRecordType"/>
+
+  <xs:complexType name="CatalogRecordType">
     <xs:annotation>
       <xs:documentation>
         dcat:CatalogRecord represents a metadata item in the catalog, primarily concerning the registration information,
@@ -140,19 +147,14 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="CatalogRecord" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="dct:description" minOccurs="0"/>
-            <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="dct:modified" minOccurs="1" maxOccurs="1"/>
-            <xs:element ref="dct:title" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="foaf:primaryTopic" minOccurs="1" maxOccurs="1"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="dct:description" minOccurs="0"/>
+      <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="dct:modified" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="dct:title" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="foaf:primaryTopic" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
+    <xs:attribute ref="rdf:about"/>
   </xs:complexType>
 
   <xs:complexType name="dataset">
@@ -176,7 +178,7 @@
         <xs:sequence>
           <xs:element name="distribution" type="dcat:Distribution" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="spatialResolutionInMeters" type="xs:decimal" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="temporalResolution" type="xs:duration" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="temporalResolution" type="xs:duration" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="dct:accrualPeriodicity" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="dct:spatial" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="dct:temporal" minOccurs="0" maxOccurs="unbounded"/>

@@ -108,6 +108,7 @@
   <xs:complexType name="CatalogRoot">
     <xs:choice>
       <xs:element ref="dcat:Catalog"/>
+      <xs:element ref="dcat:CatalogRecord"/>
       <xs:element ref="dcat:Dataset"/>
       <xs:element ref="dcat:DataService"/>
     </xs:choice>
