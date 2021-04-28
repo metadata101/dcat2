@@ -28,6 +28,10 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+  <!-- copies in thesauri -->
+  <bean id="dcat.startup"
+        class="org.fao.geonet.schema.dcat2.init.SchemaInitializerThesauri" />
+
   <bean id="dcat2SchemaPlugin"
         class="org.fao.geonet.schema.dcat2.DCAT2SchemaPlugin">
     <property name="xpathTitle">

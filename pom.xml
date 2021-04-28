@@ -18,10 +18,21 @@
       <artifactId>gn-schema-core</artifactId>
       <version>${project.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.geonetwork-opensource</groupId>
+      <artifactId>gn-core</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
     <resources>
+      <resource>
+        <directory>src/main/config/codelist/external/thesauri/theme</directory>
+        <targetPath>thesaurus/theme</targetPath>
+      </resource>
       <resource>
         <directory>src/main/config/translations</directory>
         <targetPath>META-INF/catalog/locales</targetPath>
@@ -30,6 +41,7 @@
         <directory>src/main/resources</directory>
       </resource>
     </resources>
+
 
     <testResources>
       <testResource>
