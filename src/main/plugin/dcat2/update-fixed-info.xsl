@@ -191,7 +191,7 @@
   </xsl:template>
 
 
-  <xsl:template name="dcat-build-identifier">
+  <xsl:template name="dcat2-build-identifier">
     <!-- If a local record, use API landing page -->
     <xsl:variable name="rdfAbout"
                   select="concat($uuidUrlPrefix,
@@ -239,21 +239,28 @@
   <xsl:template match="rdf:RDF" priority="10">
     <xsl:copy>
       <xsl:call-template name="add-namespaces"/>
-      <xsl:apply-templates select="@*|*"/>
+      <xsl:apply-templates select="@*"/>
+
+      <xsl:call-template name="dcat2-build-catalogrecord"/>
+
+      <xsl:apply-templates select="dcat:Dataset|dcat:DataService"/>
     </xsl:copy>
   </xsl:template>
 
+  <!-- Create CatalogRecord if missing -->
+  <xsl:template name="dcat2-build-catalogrecord">
+      <dcat:CatalogRecord>
+        <xsl:apply-templates select="dcat:CatalogRecord/@*[not(name(.) = 'rdf:about')]"/>
+        <xsl:call-template name="dcat2-build-identifier"/>
 
-  <xsl:template match="dcat:CatalogRecord" priority="10">
-    <xsl:copy>
-      <xsl:apply-templates select="@*[not(name(.) = 'rdf:about')]"/>
-      <xsl:call-template name="dcat-build-identifier"/>
-      <dct:issued><xsl:value-of select="/root/env/createDate"/></dct:issued>
-      <dct:modified><xsl:value-of select="/root/env/changeDate"/></dct:modified>
+        <dct:issued><xsl:value-of select="/root/env/createDate"/></dct:issued>
+        <dct:modified><xsl:value-of select="/root/env/changeDate"/></dct:modified>
 
-      <xsl:apply-templates select="*[not(name() = ('dct:identifier', 'dct:issued', 'dct:modified'))]"/>
-    </xsl:copy>
+        <xsl:apply-templates select="dcat:CatalogRecord/*[not(name() = ('dct:identifier', 'dct:issued', 'dct:modified'))]"/>
+      </dcat:CatalogRecord>
   </xsl:template>
+
+
 
   <xsl:template match="dcat:Dataset" priority="10">
     <dcat:Dataset>
