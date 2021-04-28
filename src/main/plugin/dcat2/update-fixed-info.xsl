@@ -262,14 +262,17 @@
 
 
 
-  <xsl:template match="dcat:Dataset" priority="10">
-    <dcat:Dataset>
+  <xsl:template match="dcat:Dataset|dcat:DataService" priority="10">
+    <xsl:copy>
       <xsl:apply-templates select="@*[not(name(.) = 'rdf:about')]"/>
 <!--      <xsl:call-template name="dcat-build-identifier"/>-->
 
       <!-- Fixed order of elements. -->
       <xsl:apply-templates select="dct:title"/>
       <xsl:apply-templates select="dct:description"/>
+      <xsl:apply-templates select="dcat:endpointDescription"/>
+      <xsl:apply-templates select="dcat:endpointURL"/>
+      <xsl:apply-templates select="dcat:servesDataset"/>
 
       <xsl:apply-templates select="dcat:theme"/>
       <xsl:apply-templates select="dcat:keyword"/>
@@ -307,7 +310,7 @@
       <xsl:apply-templates select="adms:sample"/>
       <xsl:apply-templates select="prov:qualifiedInvalidation"/>
       <xsl:apply-templates select="locn:address"/>
-    </dcat:Dataset>
+    </xsl:copy>
   </xsl:template>
 
   <!-- Fill empty element and update existing with resourceType -->
@@ -325,7 +328,8 @@
       <xsl:variable name="inScheme" select="gn-fn-dcat2:getInSchemeURIByElementName(name(.),name(..))"/>
       <xsl:variable name="rdfType" select="gn-fn-dcat2:getRdfTypeByElementName(name(.),name(..))"/>
       <xsl:choose>
-        <xsl:when test="count(*)=0 or count(skos:Concept/*[name(.)='skos:prefLabel'])=0">
+        <xsl:when test="count(*) = 0
+                        or count(skos:Concept/*[name(.)='skos:prefLabel']) = 0">
           <skos:Concept>
             <xsl:if test="$rdfType!=''">
               <rdf:type rdf:resource="{$rdfType}"/>

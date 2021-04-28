@@ -4,12 +4,10 @@
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:dct="http://purl.org/dc/terms/"
          xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
-         xmlns:dcat="http://www.w3.org/ns/dcat#"
-         xsi:schemaLocation="http://www.w3.org/ns/dcat# ../schema.xsd">
-  <dcat:CatalogRecord rdf:about="http://localhost:8080/geonetwork/srv/api/records/69705bd3-2e59-415a-8118-7c74a1367379">
-    <dct:modified></dct:modified>
-  </dcat:CatalogRecord>
-  <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/api/records/69705bd3-2e59-415a-8118-7c74a1367379">
+         xmlns:dcat="http://www.w3.org/ns/dcat#">
+  <dcat:Dataset>
+    <dct:title>Dataset (in DCAT2)</dct:title>
+    <dct:description></dct:description>
     <dcat:contactPoint>
       <vcard:Organization>
         <vcard:hasEmail rdf:resource=""/>
@@ -26,8 +24,6 @@
         <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
       </skos:Concept>
     </dct:accessRights>
-    <dct:description></dct:description>
-    <dct:identifier>69705bd3-2e59-415a-8118-7c74a1367379</dct:identifier>
     <dct:publisher>
       <foaf:Agent>
         <foaf:name xml:lang="en"/>

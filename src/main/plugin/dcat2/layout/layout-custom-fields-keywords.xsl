@@ -40,19 +40,19 @@
   <xsl:variable name="dcatKeywordConfig">
     <element name="dcat:theme">
       <thesaurus>external.theme.eu.europa.data-theme</thesaurus>
-      <xpath>./dcat:Dataset/dcat:theme</xpath>
+      <xpath>/dcat:theme</xpath>
       <max></max>
       <labelKey>dcat.addThemes</labelKey>
     </element>
     <element name="dct:type">
       <thesaurus>external.theme.dcat-type</thesaurus>
-      <xpath>./dcat:Dataset/dct:type</xpath>
+      <xpath>/dct:type</xpath>
       <max>1</max>
       <labelKey>dcat.addType</labelKey>
     </element>
     <element name="dcat:keyword">
       <thesaurus>external.none.allThesaurus</thesaurus>
-      <xpath>./dcat:Dataset/dcat:keyword</xpath>
+      <xpath>/dcat:keyword</xpath>
       <max></max>
       <labelKey>dcat.addTags</labelKey>
     </element>
@@ -77,7 +77,8 @@
       data-metadata-id=""
       data-element-ref="{concat('_P', ../gn:element/@ref, '_',
                                 replace($config/@name, ':', 'COLON'))}"
-      data-element-xpath="{$config/xpath}"
+      data-element-xpath="{concat(
+        if ($isDcatService) then './dcat:DataService' else './dcat:Dataset', $config/xpath)}"
       data-wrapper="{$config/@name}"
       data-thesaurus-title="{{{{'{$config/labelKey}' | translate}}}}"
       data-thesaurus-key="{$config/thesaurus}"

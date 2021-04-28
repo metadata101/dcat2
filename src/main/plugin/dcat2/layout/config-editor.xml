@@ -135,6 +135,8 @@
         <section>
           <field xpath="rdf:RDF/*/dct:title"/>
           <field xpath="rdf:RDF/*/dct:description"/>
+          <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
+          <field xpath="rdf:RDF/*/dcat:endpointURL"/>
 
           <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>

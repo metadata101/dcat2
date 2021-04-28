@@ -53,6 +53,9 @@
   <xsl:include href="layout-custom-fields.xsl"/>
   <xsl:include href="layout-custom-tpl.xsl"/>
 
+  <xsl:variable name="isDcatService"
+                select="count($metadata/dcat:DataService) > 0"/>
+
   <!-- Ignore all gn element -->
   <xsl:template mode="mode-dcat2"
                 match="gn:*|@gn:*|@*"
@@ -65,7 +68,6 @@
   <xsl:template mode="mode-dcat2" match="gn:child" priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
-
 
     <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
     <xsl:variable name="xpath">
@@ -469,7 +471,7 @@
                             (not(gn:element/@down) and not(gn:element/@up)))"/>
             <!--          <xsl:with-param name="isForceLabel" select="true()"/>-->
             <xsl:with-param name="isDisabled"
-                            select="(name(.) = ('dct:identifier', 'dct:issued', 'dct:modified')
+                            select="(name(.) = ('dct:identifier')
                                     and name(..) = 'dcat:CatalogRecord')
                                     or
                                     count($metadata//*[
