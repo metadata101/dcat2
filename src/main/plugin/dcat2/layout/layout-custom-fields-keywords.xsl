@@ -56,6 +56,30 @@
       <max></max>
       <labelKey>dcat.addTags</labelKey>
     </element>
+    <element name="dct:format">
+      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
+      <xpath>//dcat:Distribution/dct:format</xpath>
+      <max>1</max>
+      <labelKey>dcat.addFormat</labelKey>
+    </element>
+    <element name="dcat:packageFormat">
+      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
+      <xpath>//dcat:Distribution/dcat:packageFormat</xpath>
+      <max>1</max>
+      <labelKey>dcat.addPackageFormat</labelKey>
+    </element>
+    <element name="dcat:compressFormat">
+      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
+      <xpath>//dcat:Distribution/dcat:compressFormat</xpath>
+      <max>1</max>
+      <labelKey>dcat.addCompressFormat</labelKey>
+    </element>
+    <element name="dcat:mediaType">
+      <thesaurus>external.theme.org.iana.media-type</thesaurus>
+      <xpath>//dcat:Distribution/dcat:mediaType</xpath>
+      <max>1</max>
+      <labelKey>dcat.addMediaType</labelKey>
+    </element>
   </xsl:variable>
 
   <!-- Theme can only be set by thesaurus eu.europa.data-theme.

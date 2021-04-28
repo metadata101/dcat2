@@ -32,12 +32,13 @@
     <xsl:param name="key"/>
     <xsl:variable name="inSchemeAuthorityBaseUrl" select="'http://publications.europa.eu/resource/authority/'"/>
     <xsl:variable name="inSchemeAdmsBaseUrl" select="'http://purl.org/adms/'"/>
+    <xsl:variable name="inSchemeIanaBaseUrl" select="'https://www.iana.org/assignments/'"/>
     <xsl:variable name="keyPrefix" select="'external.theme.'"/>
     <xsl:choose>
       <xsl:when test="$key = concat($keyPrefix,'publisher-type')">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'publishertype/1.0')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix,'data-theme')">
+      <xsl:when test="$key = concat($keyPrefix,'eu.europa.data-theme')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'data-theme')"/>
       </xsl:when>
       <xsl:when test="$key = concat($keyPrefix,'frequency')">
@@ -49,11 +50,11 @@
       <xsl:when test="$key = concat($keyPrefix,'resource-type')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'resource-type')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix,'file-type')">
+      <xsl:when test="$key = concat($keyPrefix,'eu.europa.file-type')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'file-type')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix,'media-type')">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'media-type')"/>
+      <xsl:when test="$key = concat($keyPrefix,'org.iana.media-type')">
+        <xsl:value-of select="concat($inSchemeIanaBaseUrl,'media-type')"/>
       </xsl:when>
       <xsl:when test="$key = concat($keyPrefix,'status')">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'status/1.0')"/>
