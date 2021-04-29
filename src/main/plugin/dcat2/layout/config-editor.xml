@@ -145,6 +145,11 @@
           <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
           <field xpath="rdf:RDF/*/dcat:endpointURL"/>
 
+
+          <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:type" or="type" in="rdf:RDF/*"/>
+
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:issued" or="issued" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:modified" or="modified" in="rdf:RDF/*"/>
 
