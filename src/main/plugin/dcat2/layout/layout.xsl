@@ -97,6 +97,7 @@
         <!-- TODO: add xpath and isoType to get label ? -->
         <xsl:with-param name="label" select="$labelConfig/label"/>
         <xsl:with-param name="btnLabel" select="if($name != 'dct:license') then $labelConfig/btnLabel else ''"/>
+        <xsl:with-param name="btnClass" select="if ($labelConfig/btnClass) then $labelConfig/btnClass else ''"/>
         <xsl:with-param name="directive" select="$directive"/>
         <xsl:with-param name="childEditInfo" select="."/>
         <xsl:with-param name="parentEditInfo" select="../gn:element"/>
@@ -414,6 +415,7 @@
             <xsl:with-param name="name" select="$labelConfig/label"/>
             <!--xsl:with-param name="name" select="$strings/*[name() = $name]" /-->
             <xsl:with-param name="btnLabel" select="$labelConfig/btnLabel"/>
+            <xsl:with-param name="btnClass" select="if ($labelConfig/btnClass) then $labelConfig/btnClass else ''"/>
             <xsl:with-param name="id" select="$id"/>
             <xsl:with-param name="isExisting" select="true()"/>
             <xsl:with-param name="template" select="$templateCombinedWithNode"/>
