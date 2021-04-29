@@ -106,7 +106,7 @@
   </xs:complexType>
   <!-- CatalogRoot -->
   <xs:complexType name="CatalogRoot">
-    <xs:choice>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="dcat:Catalog"/>
       <xs:element ref="dcat:CatalogRecord"/>
       <xs:element ref="dcat:Dataset"/>

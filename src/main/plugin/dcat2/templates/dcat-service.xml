@@ -5,7 +5,7 @@
   <dcat:DataService>
     <dct:identifier></dct:identifier>
     <dct:title>Data service (in DCAT2)</dct:title>
-    <dcat:endpointURL>https://</dcat:endpointURL>
     <dct:description></dct:description>
+    <dcat:endpointURL>https://</dcat:endpointURL>
   </dcat:DataService>
 </rdf:RDF>

@@ -56,13 +56,12 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref="dct:identifier" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="dct:identifier" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:title" minOccurs="1" maxOccurs="unbounded"/>
       <xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
 
       <xs:element name="theme" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
-
       <xs:element ref="dct:type" minOccurs="0" maxOccurs="unbounded"/>
 
       <xs:element name="contactPoint" type="vcard:Organization" minOccurs="0" maxOccurs="unbounded"/>
