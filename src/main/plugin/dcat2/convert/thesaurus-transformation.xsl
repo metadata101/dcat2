@@ -74,18 +74,29 @@
             <!-- TODO: Add mode to encode using @rdf:resource ?-->
             <skos:Concept>
               <xsl:attribute name="rdf:about">
-                <xsl:value-of select="substring-after(uri, '@@@')"/>
+                <xsl:value-of select="if (contains(uri, '@@@'))
+                                      then substring-after(uri, '@@@')
+                                      else uri"/>
               </xsl:attribute>
               <xsl:variable name="keyword" select="."/>
-              <xsl:for-each select="$listOfLanguage">
-                <xsl:variable name="lang" select="."/>
-                <xsl:if test="$lang!=''">
+              <xsl:choose>
+                <xsl:when test="count($listOfLanguage) > 0">
+                  <xsl:for-each select="$listOfLanguage">
+                    <xsl:variable name="lang" select="."/>
+                    <xsl:if test="$lang!=''">
+                      <skos:prefLabel>
+                        <xsl:attribute name="xml:lang" select="$lang"/>
+                        <xsl:value-of select="$keyword/values/value[@language = $lang]/text()"/>
+                      </skos:prefLabel>
+                    </xsl:if>
+                  </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
                   <skos:prefLabel>
-                    <xsl:attribute name="xml:lang" select="$lang"/>
-                    <xsl:value-of select="$keyword/values/value[@language = $lang]/text()"/>
+                    <xsl:value-of select="$keyword/value/text()"/>
                   </skos:prefLabel>
-                </xsl:if>
-              </xsl:for-each>
+                </xsl:otherwise>
+              </xsl:choose>
               <skos:inScheme rdf:resource="{$inSchemeURI}"/>
             </skos:Concept>
           </xsl:element>
