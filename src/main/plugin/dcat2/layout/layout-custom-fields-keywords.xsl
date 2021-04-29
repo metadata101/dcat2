@@ -90,19 +90,38 @@
   TODO: Get thesaurus from config (if not thesaurus, render as text ?)
   TODO: How to deal with value not in the thesaurus ?
   -->
-  <xsl:template mode="mode-dcat2" priority="4000"
-                match="*[name() = $dcatKeywordConfig//@name]"/>
+  <xsl:template mode="mode-dcat2" priority="4000" match="*[name() = $dcatKeywordConfig//@name]">
+    <xsl:variable name="name" select="name()"/>
+    <xsl:variable name="hasGnChild" select="count(../gn:child[concat(@prefix, ':', @name) = $name]) > 0"/>
+
+    <xsl:if test="not($hasGnChild)">
+      <xsl:variable name="isFirst" select="count(preceding-sibling::*[name() = $name]) &lt; 1"/>
+      <xsl:if test="$isFirst">
+        <xsl:call-template name="thesaurus-picker-list">
+          <xsl:with-param name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+          <xsl:with-param name="ref" select="../gn:element/@ref"/>
+        </xsl:call-template>
+      </xsl:if>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template mode="mode-dcat2" priority="4000"
                 match="gn:child[concat(@prefix, ':', @name) = $dcatKeywordConfig//@name]">
     <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
-    <xsl:variable name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+    <xsl:call-template name="thesaurus-picker-list">
+      <xsl:with-param name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+      <xsl:with-param name="ref" select="../gn:element/@ref"/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template name="thesaurus-picker-list">
+    <xsl:param name="config" as="node()"/>
+    <xsl:param name="ref" as="xs:string"/>
     <div
       data-gn-keyword-selector="tagsinput"
       data-metadata-id=""
-      data-element-ref="{concat('_P', ../gn:element/@ref, '_',
-                                replace($config/@name, ':', 'COLON'))}"
-      data-element-xpath="{concat(
-        if ($isDcatService) then './dcat:DataService' else './dcat:Dataset', $config/xpath)}"
+      data-element-ref="{concat('_P', $ref, '_', replace($config/@name, ':', 'COLON'))}"
+      data-element-xpath="{concat(if ($isDcatService) then './dcat:DataService' else './dcat:Dataset', $config/xpath)}"
       data-wrapper="{$config/@name}"
       data-thesaurus-title="{{{{'{$config/labelKey}' | translate}}}}"
       data-thesaurus-key="{$config/thesaurus}"
@@ -119,4 +138,5 @@
       class="">
     </div>
   </xsl:template>
+
 </xsl:stylesheet>
