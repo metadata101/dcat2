@@ -68,6 +68,11 @@
   <element name="dct:title">
     <label>Title</label>
     <description>A name given to the item.</description>
+    <help><![CDATA[
+    <ul>
+    <li><a href="https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/#Property:record_title">W3C recommendations</a></li>
+    </ul>
+    ]]></help>
   </element>
   <element name="dct:description">
     <label>Description</label>
@@ -77,6 +82,7 @@
     <label>Identifier</label>
     <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly
       is useful.
+
     </description>
   </element>
   <element name="dcat:contactPoint">
