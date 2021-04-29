@@ -33,61 +33,11 @@
                 extension-element-prefixes="saxon"
                 exclude-result-prefixes="#all">
 
-  <xsl:variable name="inSchemeAuthorityBaseUrl"
-                select="'http://publications.europa.eu/resource/authority/'"/>
-  <xsl:variable name="inSchemeAdmsBaseUrl"
-                select="'http://purl.org/adms/'"/>
-  <xsl:variable name="thesaurusIdentifierBaseKey"
-                select="'geonetwork.thesaurus.external.theme.'"/>
-  <xsl:variable name="inSchemeIanaBaseUrl"
-                select="' https://www.iana.org/assignments/'"/>
-
-  <xsl:function name="gn-fn-dcat2:getInSchemeURIByElementName" as="xs:string">
-    <xsl:param name="elementName"/>
-    <xsl:param name="parentElementName"/>
-    <xsl:choose>
-      <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'foaf:Agent'">
-        <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'publishertype/1.0')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dcat:theme'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'data-theme')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:accrualPeriodicity'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'frequency')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:language'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'language')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'dcat:Dataset'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'resource-type')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:format'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'file-type')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dcat:mediaType'">
-        <xsl:value-of select="concat($inSchemeIanaBaseUrl,'media-types')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'adms:status'">
-        <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'status/1.0')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'dct:LicenseDocument'">
-        <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'licencetype/1.0')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:license'">
-        <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'licencetype/1.0')"/>
-      </xsl:when>
-      <xsl:when test="$elementName = 'dct:accessRights'">
-        <xsl:value-of select="concat($inSchemeAuthorityBaseUrl, 'access-right')"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="''"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:function>
-
+  <!-- Function to get the rdf:type URI based on the element name -->
   <xsl:function name="gn-fn-dcat2:getRdfTypeByElementName" as="xs:string">
-    <xsl:param name="elementName"/>
-    <xsl:param name="parentElementName"/>
+    <xsl:param name="elementName" as="xs:string"/>
+    <xsl:param name="parentElementName" as="xs:string"/>
+
     <xsl:choose>
       <xsl:when test="$elementName = 'dct:type' and $parentElementName = 'foaf:Agent'">
         <xsl:value-of select="''"/>
@@ -107,8 +57,8 @@
       <xsl:when test="$elementName = 'dct:format'">
         <xsl:value-of select="'http://purl.org/dc/terms/MediaTypeOrExtent'"/>
       </xsl:when>
-      <xsl:when test="$elementName = 'dcat:mediaType'">
-        <xsl:value-of select="'http://purl.org/dc/terms/MediaTypeOrExtent'"/>
+      <xsl:when test="$elementName = ('dcat:mediaType', 'dcat:packageFormat', 'dcat:compressFormat')">
+        <xsl:value-of select="'http://purl.org/dc/terms/MediaType'"/>
       </xsl:when>
       <xsl:when test="$elementName = 'adms:status'">
         <xsl:value-of select="''"/>
@@ -123,82 +73,6 @@
         <xsl:value-of select="'http://purl.org/dc/terms/RightsStatement'"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="''"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:function>
-
-  <xsl:function name="gn-fn-dcat2:getThesaurusTitle" as="xs:string">
-    <xsl:param name="resource"/>
-    <xsl:choose>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'publishertype/1.0')">
-        <xsl:value-of select="'Publisher type thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'data-theme')">
-        <xsl:value-of select="'Thema thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'frequency')">
-        <xsl:value-of select="'Updatefrequentie thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'language')">
-        <xsl:value-of select="'Taal thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'resource-type')">
-        <xsl:value-of select="'Type thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'file-type')">
-        <xsl:value-of select="'Formaat thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeIanaBaseUrl,'media-types')">
-        <xsl:value-of select="'Mediatype thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'status/1.0')">
-        <xsl:value-of select="'Status thesaurus'"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'licencetype/1.0')">
-        <xsl:value-of select="'Licence thesaurus'"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="'Untitled thesaurus'"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:function>
-
-  <xsl:function name="gn-fn-dcat2:getThesaurusIdentifier" as="xs:string">
-    <xsl:param name="resource"/>
-    <xsl:choose>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'publishertype/1.0')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'publisher-type')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'data-theme')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'data-theme')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'frequency')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'frequency')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'language')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'language')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'resource-type')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'resource-type')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'file-type')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'file-type')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeIanaBaseUrl,'media-types')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'media-types')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'status/1.0')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'status')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAdmsBaseUrl,'licencetype/1.0')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'licence-type')"/>
-      </xsl:when>
-      <xsl:when test="$resource = concat($inSchemeAuthorityBaseUrl,'access-right')">
-        <xsl:value-of select="concat($thesaurusIdentifierBaseKey,'access-right')"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:message select="concat('No thesaurus identifier found for the inScheme URI ', $resource)"/>
         <xsl:value-of select="''"/>
       </xsl:otherwise>
     </xsl:choose>
