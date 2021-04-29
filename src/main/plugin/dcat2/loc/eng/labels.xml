@@ -86,18 +86,24 @@
   </element>
   <element name="dct:language">
     <label>Language</label>
+    <description>A language of the item. This refers to the natural language used for textual metadata (i.e. titles,
+      descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset
+      distribution
+    </description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
            context="dct:language">
     <label>Record language</label>
-    <description></description>
+    <description>A language of the item. This refers to the natural language used for textual metadata (i.e. titles,
+      descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset
+      distribution
+    </description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier">
     <label>Identifier</label>
-    <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly
-      is useful.
+    <description>A unique identifier of the item.
     </description>
     <btnLabel>identifier</btnLabel>
   </element>
@@ -105,9 +111,24 @@
     <label>Publication date</label>
     <description>Date of formal issuance (e.g., publication) of the item.</description>
   </element>
+  <element name="dct:issued"
+           context="/dcat:CatalogRecord/dct:issued">
+    <label>Publication date</label>
+    <description>Date of formal issuance (e.g., publication) of the record in the catalog.</description>
+    <help><![CDATA[
+    <ul>
+    <li><a href="https://www.w3.org/TR/vocab-dcat-2/#Property:record_listing_date">W3C recommendations</a></li>
+    </ul>
+    ]]></help>
+  </element>
   <element name="dct:modified">
     <label>Modification date</label>
-    <description>Most recent date on which the catalog entry was changed, updated or modified.</description>
+    <description>Most recent date on which the element was changed, updated or modified.</description>
+  </element>
+  <element name="dct:modified"
+           context="/dcat:CatalogRecord/dct:modified">
+    <label>Modification date</label>
+    <description>Most recent date on which the catalog record was changed, updated or modified.</description>
   </element>
   <element name="dct:title">
     <label>Title</label>
@@ -134,7 +155,7 @@
     <description> An organization is a single entity, and might represent a business or government, a department or
       division within a business or government, a club, an association, or the like.
     </description>
-    <btnLabel>contact organization</btnLabel>
+    <btnLabel>organization</btnLabel>
   </element>
   <element name="vcard:fn">
     <label>Contact name</label>
@@ -195,26 +216,26 @@
   </element>
   <element name="dct:issued"
            context="/dcat:Dataset/dct:issued">
-    <label>Publication date</label>
+    <label>Release date</label>
     <description>Date of formal issuance (e.g., publication) of the resource.</description>
     <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    The value of this property indicates a change to the actual item, not a change to the catalog record.
-    An absent value <i>MAY</i> indicate that the item has never changed after its initial publication, or that the
-    date of last modification is not known, or that the item is continuously updated.
-    </i></p>
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_release_date">
+           W3C recommendations </a>
+    </li>
+    </ul>
     ]]></help>
   </element>
   <element name="dct:modified"
            context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:modified">
-    <label>update/modification date</label>
+    <label>Update/modification date</label>
     <description>Most recent date on which the resource was changed, updated or modified.</description>
     <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    The value of this property indicates a change to the actual item, not a change to the catalog record.
-    An absent value <i>MAY</i> indicate that the item has never changed after its initial publication, or that the
-    date of last modification is not known, or that the item is continuously updated.
-    </i></p>
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_update_date">
+           W3C recommendations </a>
+    </li>
+    </ul>
     ]]></help>
   </element>
   <element name="dcat:landingPage">
@@ -228,21 +249,23 @@
     <label>Access Rights</label>
     <description>Information about who can access the resource or an indication of its security status.</description>
     <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
-    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
-    </i></p>
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_access_rights">
+           W3C recommendations </a>
+    </li>
+    </ul>
     ]]></help>
-    <btnLabel>Access Rights</btnLabel>
+    <btnLabel>access rights</btnLabel>
   </element>
   <element name="dct:license">
     <label>License</label>
     <description>A legal document under which the resource is made available.</description>
     <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
-    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
-    </i></p>
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_license">
+           W3C recommendations </a>
+    </li>
+    </ul>
     ]]></help>
   </element>
   <element name="dct:LicenseDocument">
@@ -251,31 +274,22 @@
   </element>
   <element name="dct:rights">
     <label>Rights</label>
-    <description>Tooltip: rights</description>
+    <description>Information about rights held in and over the distribution.</description>
     <btnLabel>rights</btnLabel>
   </element>
   <element name="dct:RightsStatement">
     <label>Rights statement</label>
     <description>A rights statement that concerns how the distribution is accessed.</description>
-    <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
-    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
-    </i></p>
-    ]]></help>
   </element>
   <element name="odrl:hasPolicy">
     <label>Policy</label>
     <description>An ODRL conformant policy expressing the rights associated with the resource.</description>
     <help for="reference"><![CDATA[
-    <p><i>Usage note:
-    Information about rights expressed as an <abbr title="Open Digital Rights Language">ODRL</abbr> policy
-    <a href="https://www.w3.org/TR/vocab-dcat-2/#bib-odrl-model" title="ODRL Information Model 2.2">ODRL-MODEL</a>
-    using the <abbr title="Open Digital Rights Language">ODRL</abbr> vocabulary
-    <a href="#bib-odrl-vocab" title="ODRL Vocabulary &amp; Expression 2.2">ODRL-VOCAB</a>
-    <em>MAY</em> be provided for the resource. See also guidance at
-    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
-    </i></p>
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_has_policy">
+           W3C recommendations </a>
+    </li>
+    </ul>
     ]]></help>
   </element>
   <element name="prov:qualifiedAttribution">
@@ -464,13 +478,13 @@
     <label>Data Service</label>
     <description>A collection of operations that provides access to one or more datasets or data processing functions.
     </description>
-    <btnLabel>dataset</btnLabel>
+    <btnLabel>data service</btnLabel>
   </element>
   <element name="dcat:endpointURL">
     <label>Endpoint URL</label>
     <description>The root location or primary endpoint of the service (a Web-resolvable IRI).
     </description>
-    <btnLabel>dataset</btnLabel>
+    <btnLabel>URL</btnLabel>
   </element>
   <element name="dcat:endpointDescription">
     <label>Endpoint description</label>
