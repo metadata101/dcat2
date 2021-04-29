@@ -128,36 +128,6 @@
       <sidePanel>
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
-      </sidePanel>
-
-      <tab id="default" default="true"  mode="flat">
-        <!-- TODO: One page layout, with sections ? or tabs ?-->
-        <section>
-          <field xpath="rdf:RDF/*/dct:title"/>
-          <field xpath="rdf:RDF/*/dct:description"/>
-          <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
-          <field xpath="rdf:RDF/*/dcat:endpointURL"/>
-
-          <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:type" or="type" in="rdf:RDF/*"/>
-
-          <field xpath="rdf:RDF/*/dct:issued" or="issued" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:modified" or="modified" in="rdf:RDF/*"/>
-
-          <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
-
-          <field xpath="rdf:RDF/*/dct:accessRight" or="accessRights" in="rdf:RDF/*"/>
-        </section>
-
-        <section>
-          <field xpath="rdf:RDF/*/dct:creator" or="creator" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:publisher" or="publisher" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dcat:contactPoint" or="contactPoint" in="rdf:RDF/*"/>
-        </section>
 
         <section name="metadata.section">
           <field xpath="rdf:RDF/dcat:CatalogRecord/dct:identifier"/>
@@ -165,6 +135,33 @@
           <field xpath="rdf:RDF/dcat:CatalogRecord/dct:modified"/>
           <field xpath="rdf:RDF/dcat:CatalogRecord/dct:conformsTo"/>
         </section>
+      </sidePanel>
+
+      <tab id="default" default="true"  mode="flat">
+        <!-- TODO: One page layout, with sections ? or tabs ?-->
+        <section>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:title"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:description"/>
+          <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
+          <field xpath="rdf:RDF/*/dcat:endpointURL"/>
+
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:issued" or="issued" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:modified" or="modified" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dct:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:accessRight" or="accessRights" in="rdf:RDF/*"/>
+        </section>
+
+        <section>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:creator" or="creator" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:publisher" or="publisher" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dcat:contactPoint" or="contactPoint" in="rdf:RDF/*"/>
+        </section>
+
 
         <!--<section>
           <field xpath="rdf:RDF/*/dcat:landingPage"/>

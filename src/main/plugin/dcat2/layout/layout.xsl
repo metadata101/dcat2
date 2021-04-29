@@ -531,7 +531,8 @@
                       |dcat:Dataset/dct:modified
                       |dcat:DataService/dct:issued
                       |dcat:DataService/dct:modified
-                      |schema:startDate|schema:endDate" priority="2000">
+                      |schema:startDate|schema:endDate"
+                priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
     <xsl:param name="refToDelete" required="no"/>
