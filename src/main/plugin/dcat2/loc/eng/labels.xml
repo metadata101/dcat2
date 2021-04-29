@@ -46,6 +46,35 @@
       <option value="30">30 m</option>
       <option value="100">100 m</option>
     </helper>
+    <btnLabel>spatial resolution</btnLabel>
+  </element>
+  <element name="dcat:CatalogRecord">
+    <label>Catalog Record</label>
+    <description>Catalog-related information</description>
+  </element>
+  <element name="rdf:about">
+    <label>URI</label>
+    <description></description>
+  </element>
+  <element name="rdf:about"
+           context="/dcat:CatalogRecord/@rdf:about">
+    <label>Record URI</label>
+    <description>Landing page of the record</description>
+  </element>
+  <element name="dct:conformsTo">
+    <label>Conforms to</label>
+    <description>An established standard to which the described resource conforms.</description>
+  </element>
+  <element name="dct:Standard">
+    <label>Standard</label>
+    <description>An established standard to which the described resource conforms.
+      This property SHOULD be used to indicate the model, schema, ontology, view or profile that the catalog
+      record metadata conforms to.
+    </description>
+  </element>
+  <element name="foaf:primaryTopic">
+    <label>Primary Topic</label>
+    <description>The dcat:Resource (dataset or service) described in the record.</description>
   </element>
   <element name="dcat:Dataset">
     <label>Dataset</label>
@@ -55,116 +84,22 @@
     </description>
     <btnLabel>dataset</btnLabel>
   </element>
+  <element name="dct:language">
+    <label>Language</label>
+    <btnLabel>language</btnLabel>
+  </element>
   <element name="rdf:resource"
            context="dct:language">
     <label>Record language</label>
     <description></description>
-  </element>
-  <element name="rdf:about"
-           context="/dcat:Dataset/@rdf:about">
-    <label>Record URI</label>
-    <description>Landing page of the record</description>
-  </element>
-  <element name="dct:title">
-    <label>Title</label>
-    <description>A name given to the item.</description>
-    <help><![CDATA[
-    <ul>
-    <li><a href="https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/#Property:record_title">W3C recommendations</a></li>
-    </ul>
-    ]]></help>
-  </element>
-  <element name="dct:description">
-    <label>Description</label>
-    <description>A free-text account of the record.</description>
+    <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier">
     <label>Identifier</label>
     <description>The identifier might be used as part of the URI of the item, but still having it represented explicitly
       is useful.
-
     </description>
-  </element>
-  <element name="dcat:contactPoint">
-    <label>Contact point</label>
-    <description>Relevant contact information for the cataloged resource.</description>
-  </element>
-  <element name="vcard:Organization">
-    <label>Organisation</label>
-    <description>Tooltip: contact organisation</description>
-    <btnLabel>contact organisation</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:contactPoint/vcard:Organization/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="vcard:fn">
-    <label>Contact name</label>
-    <description>Tooltip: contact name</description>
-    <btnLabel>contact name</btnLabel>
-  </element>
-  <element name="vcard:organization-name">
-    <label>Organisation</label>
-    <description>Tooltip: organisation name</description>
-    <btnLabel>organisation name</btnLabel>
-  </element>
-  <element name="vcard:hasAddress">
-    <label>Address</label>
-    <description>Tooltip: address</description>
-    <btnLabel>address</btnLabel>
-  </element>
-  <element name="vcard:Address">
-    <label>Address</label>
-    <description>Tooltip: address</description>
-    <btnLabel>address</btnLabel>
-  </element>
-  <element name="rdf:about"
-           context="vcard:Address">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="vcard:street-address">
-    <label>Street</label>
-    <description>Tooltip: street</description>
-    <btnLabel>street</btnLabel>
-  </element>
-  <element name="vcard:locality">
-    <label>Locality</label>
-    <description>Tooltip: locality</description>
-    <btnLabel>locality</btnLabel>
-  </element>
-  <element name="vcard:postal-code">
-    <label>Postal code</label>
-    <description>Tooltip: postal code</description>
-    <btnLabel>postal code</btnLabel>
-  </element>
-  <element name="vcard:country-name">
-    <label>Country</label>
-    <description>Tooltip: country</description>
-    <btnLabel>country</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="vcard:hasEmail">
-    <label>E-mail</label>
-    <description>eg. mailto:contact@organization.org</description>
-    <btnLabel>e-mail</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="vcard:hasURL">
-    <label>Website</label>
-    <description></description>
-    <btnLabel>URLmail</btnLabel>
-  </element>
-  <element name="vcard:hasTelephone">
-    <label>Phone number</label>
-    <description>Tooltip: telephone number</description>
-    <btnLabel>telephone number</btnLabel>
+    <btnLabel>identifier</btnLabel>
   </element>
   <element name="dct:issued">
     <label>Publication date</label>
@@ -174,1504 +109,386 @@
     <label>Modification date</label>
     <description>Most recent date on which the catalog entry was changed, updated or modified.</description>
   </element>
+  <element name="dct:title">
+    <label>Title</label>
+    <description>A name given to the item.</description>
+    <help><![CDATA[
+    <ul>
+    <li><a href="https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/#Property:record_title">W3C recommendations</a></li>
+    </ul>
+    ]]></help>
+    <btnLabel>title</btnLabel>
+  </element>
+  <element name="dct:description">
+    <label>Description</label>
+    <description>A free-text account of the record.</description>
+    <btnLabel>description</btnLabel>
+  </element>
+  <element name="dcat:contactPoint">
+    <label>Point of contact</label>
+    <description>Contact information for the cataloged resource.</description>
+    <btnLabel>point of contact</btnLabel>
+  </element>
+  <element name="vcard:Organization">
+    <label>Organization</label>
+    <description> An organization is a single entity, and might represent a business or government, a department or
+      division within a business or government, a club, an association, or the like.
+    </description>
+    <btnLabel>contact organization</btnLabel>
+  </element>
+  <element name="vcard:fn">
+    <label>Contact name</label>
+    <description></description>
+    <btnLabel>contact name</btnLabel>
+  </element>
+  <element name="vcard:organization-name">
+    <label>Organization name</label>
+    <description></description>
+    <!-- REMOVE ? Possible duplicate with vcard:fn -->
+  </element>
+  <element name="vcard:hasAddress">
+    <label>Address</label>
+    <description>Postal address</description>
+  </element>
+  <element name="vcard:Address">
+    <label>Address</label>
+    <description>Postal address</description>
+    <btnLabel>address</btnLabel>
+  </element>
+  <element name="vcard:street-address">
+    <label>Street</label>
+    <description>Street name and number</description>
+    <btnLabel>street</btnLabel>
+  </element>
+  <element name="vcard:locality">
+    <label>Locality</label>
+    <description>City/Municipality</description>
+    <btnLabel>locality</btnLabel>
+  </element>
+  <element name="vcard:postal-code">
+    <label>Postal code</label>
+    <description>Zip code</description>
+    <btnLabel>postal code</btnLabel>
+  </element>
+  <element name="vcard:country-name">
+    <label>Country</label>
+    <btnLabel>country</btnLabel>
+  </element>
+  <element name="vcard:hasURL">
+    <label>Website</label>
+    <description>Website URL</description>
+    <btnLabel>URL</btnLabel>
+  </element>
+  <element name="vcard:hasTelephone">
+    <label>Phone number</label>
+    <description>Phone number, with country indicator</description>
+    <btnLabel>phone number</btnLabel>
+  </element>
+
+  <element name="dct:creator">
+    <label>Creator</label>
+    <description>The entity responsible for producing the resource.</description>
+  </element>
   <element name="dct:publisher">
     <label>Publisher</label>
     <description>The entity responsible for making the item available.</description>
   </element>
-  <element name="foaf:Agent">
-    <label>Organisation</label>
-    <description>Tooltip: organisation</description>
-    <btnLabel>organisation</btnLabel>
+  <element name="dct:issued"
+           context="/dcat:Dataset/dct:issued">
+    <label>Publication date</label>
+    <description>Date of formal issuance (e.g., publication) of the resource.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    The value of this property indicates a change to the actual item, not a change to the catalog record.
+    An absent value <i>MAY</i> indicate that the item has never changed after its initial publication, or that the
+    date of last modification is not known, or that the item is continuously updated.
+    </i></p>
+    ]]></help>
   </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="foaf:name">
-    <label>Name</label>
-    <description>Tooltip: name</description>
-    <btnLabel>name</btnLabel>
-  </element>
-  <element name="dct:type"
-           context="foaf:Agent">
-    <label>Type</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="rdf:resource"
-           context="foaf:mbox">
-    <label>E-mail</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="rdf:resource"
-           context="foaf:phone">
-    <label>Phone number</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept">
-    <label>type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:publisher/foaf:Agent/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dcat:keyword"
-           context="/dcat:Dataset/dcat:keyword">
-    <label>keyword/ tag</label>
-    <description>Tooltip: keyword/ tag</description>
-    <btnLabel>keyword/ tag</btnLabel>
-  </element>
-  <element name="dcat:theme"
-           context="/dcat:Dataset/dcat:theme">
-    <label>theme/ category</label>
-    <description>Tooltip: theme/ category</description>
-    <btnLabel>theme/ category</btnLabel>
-  </element>
-  <element name="skos:Concept"
-           context="/dcat:Dataset/dcat:theme/skos:Concept">
-    <label>theme/ category</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:theme/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:theme/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:theme/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:theme/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:accessRights"
-           context="/dcat:Dataset/dct:accessRights">
-    <label>Access Rights</label>
-    <description>Information about who can access the resource or an indication of its security status.</description>
-    <btnLabel>Access Rights</btnLabel>
-  </element>
-  <element name="skos:Concept"
-           context="/dcat:Dataset/dct:accessRights/skos:Concept">
-    <label>access rights</label>
-    <description>Tooltip: access rights</description>
-    <btnLabel>access rights</btnLabel>
-  </element>
-  <element name="dct:conformsTo"
-           context="/dcat:Dataset/dct:conformsTo">
-    <label>Conforms To</label>
-    <description>An established standard to which the described resource conforms.</description>
-    <btnLabel>Conforms To</btnLabel>
-  </element>
-  <element name="dct:Standard"
-           context="/dcat:Dataset/dct:conformsTo/dct:Standard">
-    <label>standard</label>
-    <description>Tooltip: standard</description>
-    <btnLabel>standard</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:conformsTo/dct:Standard/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/dct:conformsTo/dct:Standard/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dct:conformsTo/dct:Standard/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="foaf:page"
-           context="/dcat:Dataset/foaf:page">
-    <label>documentation</label>
-    <description>Tooltip: documentation</description>
-    <btnLabel>documentation</btnLabel>
-  </element>
-  <element name="foaf:Document"
-           context="/dcat:Dataset/foaf:page/foaf:Document">
-    <label>document</label>
-    <description>Tooltip: document</description>
-    <btnLabel>document</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/foaf:page/foaf:Document/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="foaf:name"
-           context="/dcat:Dataset/foaf:page/foaf:Document/foaf:name">
-    <label>name</label>
-    <description>Tooltip: name</description>
-    <btnLabel>name</btnLabel>
-  </element>
-  <element name="dct:accrualPeriodicity"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity">
-    <label>frequency</label>
-    <description>The frequency with which items are added to a collection.</description>
-    <btnLabel>frequency</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity/skos:Concept">
-    <label>frequency</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:accrualPeriodicity/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="rdf:resource"
-           context="/dcat:Dataset/dct:hasVersion/@rdf:resource">
-    <label>has version</label>
-    <description>Tooltip: has version</description>
-    <btnLabel>has version</btnLabel>
-  </element>
-  <element name="dct:hasVersion"
-           context="/dcat:Dataset/dct:hasVersion">
-    <label>Has as version</label>
-    <description>Complete with a reference (title, identifier, ...) to a dataset that is a version or an edition of your
-      dataset.
-    </description>
-    <btnLabel>Has as version</btnLabel>
-  </element>
-  <element name="rdf:resource"
-           context="/dcat:Dataset/dct:isVersionOf/@rdf:resource">
-    <label>Is Version Of</label>
-    <description>A related resource of which the described resource is a version, edition, or adaptation.</description>
-    <btnLabel>Is Version Of</btnLabel>
-  </element>
-  <element name="dct:isVersionOf"
-           context="/dcat:Dataset/dct:isVersionOf">
-    <label>Is a version of</label>
-    <description>Complete with a reference (title, identifier, ...) to a dataset of which your dataset is a version or
-      an edition.
-    </description>
-    <btnLabel>Is a version of</btnLabel>
-  </element>
-  <element name="rdf:about"
-           context="foaf:Document">
-    <label>Landing page</label>
-    <description></description>
-    <btnLabel></btnLabel>
+  <element name="dct:modified"
+           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:modified">
+    <label>update/modification date</label>
+    <description>Most recent date on which the resource was changed, updated or modified.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    The value of this property indicates a change to the actual item, not a change to the catalog record.
+    An absent value <i>MAY</i> indicate that the item has never changed after its initial publication, or that the
+    date of last modification is not known, or that the item is continuously updated.
+    </i></p>
+    ]]></help>
   </element>
   <element name="dcat:landingPage">
     <label>Landing page</label>
-    <description>A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.</description>
+    <description>A Web page that can be navigated to in a Web browser to gain access to the catalog,
+      a dataset, its distributions and/or additional information.
+    </description>
     <btnLabel></btnLabel>
   </element>
-
-  <element name="dct:language"
-           context="/dcat:Dataset/dct:language">
-    <label>Language</label>
-    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a
-      cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.
+  <element name="dct:accessRights">
+    <label>Access Rights</label>
+    <description>Information about who can access the resource or an indication of its security status.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
+    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
+    </i></p>
+    ]]></help>
+    <btnLabel>Access Rights</btnLabel>
+  </element>
+  <element name="dct:license">
+    <label>License</label>
+    <description>A legal document under which the resource is made available.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
+    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
+    </i></p>
+    ]]></help>
+  </element>
+  <element name="dct:LicenseDocument">
+    <label>License document</label>
+    <description>A legal document giving official permission to do something with a resource.</description>
+  </element>
+  <element name="dct:rights">
+    <label>Rights</label>
+    <description>Tooltip: rights</description>
+    <btnLabel>rights</btnLabel>
+  </element>
+  <element name="dct:RightsStatement">
+    <label>Rights statement</label>
+    <description>A rights statement that concerns how the distribution is accessed.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    Information about licenses and rights <i>MAY</i> be provided for the Resource. See also guidance at
+    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
+    </i></p>
+    ]]></help>
+  </element>
+  <element name="odrl:hasPolicy">
+    <label>Policy</label>
+    <description>An ODRL conformant policy expressing the rights associated with the resource.</description>
+    <help for="reference"><![CDATA[
+    <p><i>Usage note:
+    Information about rights expressed as an <abbr title="Open Digital Rights Language">ODRL</abbr> policy
+    <a href="https://www.w3.org/TR/vocab-dcat-2/#bib-odrl-model" title="ODRL Information Model 2.2">ODRL-MODEL</a>
+    using the <abbr title="Open Digital Rights Language">ODRL</abbr> vocabulary
+    <a href="#bib-odrl-vocab" title="ODRL Vocabulary &amp; Expression 2.2">ODRL-VOCAB</a>
+    <em>MAY</em> be provided for the resource. See also guidance at
+    <a href="https://www.w3.org/TR/vocab-dcat-2/#license-rights">§ 8. License and rights statements</a>.
+    </i></p>
+    ]]></help>
+  </element>
+  <element name="prov:qualifiedAttribution">
+    <label>Qualified attribution</label>
+    <description>Link to an Agent having some form of responsibility for the resource</description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_qualified_attribution">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>qualified attribution</btnLabel>
+  </element>
+  <element name="dct:relation">
+    <label>Relation</label>
+    <description>A related resource. Recommended practice is to identify the related resource by means of a URI. If this is not possible
+      or feasible, a string conforming to a formal identification system may be provided.</description>
+    <btnLabel>relation</btnLabel>
+  </element>
+  <element name="dcat:qualifiedRelation">
+    <label>Qualified relation</label>
+    <description>Link to a description of a relationship with another resource</description>
+    <btnLabel>qualified relation</btnLabel>
+  </element>
+  <element name="dct:isReferencedBy">
+    <label>Referenced by</label>
+    <description>A related resource, such as a publication, that references, cites, or otherwise points to the
+      cataloged resource.
     </description>
-    <btnLabel>language</btnLabel>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_is_referenced_by">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>ref. by</btnLabel>
   </element>
-  <element name="rdf:resource"
-           context="dct:language">
-    <label>Language</label>
-    <description>This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a
-      cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution.
+  <element name="dcat:distribution">
+    <label>Distribution</label>
+    <description>An available distribution of the dataset.
     </description>
-    <btnLabel>language</btnLabel>
+    <btnLabel>distribution</btnLabel>
   </element>
-
-
-  <element name="skos:Concept"
-           context="/dcat:Dataset/dct:language/skos:Concept">
-    <label>language</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:language/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:language/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dct:language/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:language/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="adms:identifier"
-           context="/dcat:Dataset/adms:identifier">
-    <label>other identifier</label>
-    <description>Tooltip: other identifier</description>
-    <btnLabel>other identifier</btnLabel>
-  </element>
-  <element name="adms:Identifier"
-
-           context="/dcat:Dataset/adms:identifier/adms:Identifier">
-    <label>other identifier</label>
-    <description>Tooltip: other identifier</description>
-    <btnLabel>other identifier</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:identifier/adms:Identifier/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="skos:notation"
-
-           context="/dcat:Dataset/adms:identifier/adms:Identifier/skos:notation">
-    <label>notation</label>
-    <description>Tooltip: notation</description>
-    <btnLabel>notation</btnLabel>
-  </element>
-  <element name="rdf:datatype"
-
-           context="/dcat:Dataset/adms:identifier/adms:Identifier/skos:notation/@rdf:datatype">
-    <label>Type</label>
-    <description>Tooltip: Type</description>
-    <btnLabel>Type</btnLabel>
-  </element>
-  <element name="dct:provenance"
-           context="/dcat:Dataset/dct:provenance">
-    <label>provenance</label>
-    <description>A statement of any changes in ownership and custody of the resource since itscreation that are
-      significant for its authenticity, integrity andinterpretation.
+  <element name="dcat:Distribution">
+    <label>Distribution</label>
+    <description>A specific representation of a dataset. A dataset might be available in multiple serializations
+      that may differ in various ways, including natural language, media-type or format, schematic organization,
+      temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
     </description>
-    <btnLabel>provenance</btnLabel>
   </element>
-  <element name="dct:ProvenanceStatement"
-
-           context="/dcat:Dataset/dct:provenance/dct:ProvenanceStatement">
-    <label>provenance statement</label>
-    <description>Tooltip: provenance statement</description>
-    <btnLabel>provenance statement</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:provenance/dct:ProvenanceStatement/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dct:provenance/dct:ProvenanceStatement/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="rdf:resource"
-           context="/dcat:Dataset/dct:relation/@rdf:resource">
-    <label>related resource</label>
-    <description>Tooltip: related resource</description>
-    <btnLabel>related resource</btnLabel>
-  </element>
-  <element name="dct:relation"
-           context="/dcat:Dataset/dct:relation">
-    <label>Related dataset</label>
-    <description>Complete with a reference (title, identifier, ..) to a related dataset or related source of your
-      dataset.
+  <element name="dcat:accessService">
+    <label>Access service</label>
+    <description>A data service that gives access to the distribution of the dataset
     </description>
-    <btnLabel>Related dataset</btnLabel>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_access_service">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+  </element>
+  <element name="dcat:mediaType">
+    <label>Media type</label>
+    <description>The media type of the distribution as defined by IANA.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_media_type">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+  </element>
+  <element name="dcat:packageFormat">
+    <label>Package format</label>
+    <description>The package format of the distribution in which one or more data files are grouped together, e.g. to
+      enable a set of related files to be downloaded together.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_packaging_format">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+  </element>
+  <element name="dcat:byteSize">
+    <label>Byte size</label>
+    <description>The size of a distribution in bytes.
+    </description>
+  </element>
+  <element name="dcat:compressFormat">
+    <label>Compression format</label>
+    <description>The compression format of the distribution in which the data is contained in a compressed form, e.g.
+      to reduce the size of the downloadable file.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_compression_format">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+  </element>
+  <element name="dcat:temporalResolution">
+    <label>Temporal resolution</label>
+    <description>Minimum time period resolvable in the dataset.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_temporal_resolution">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>temporal resolution</btnLabel>
+  </element>
+  <element name="dct:accrualPeriodicity">
+    <label>Accrual periodicity</label>
+    <description>The frequency at which dataset is published.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_frequency">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
   </element>
   <element name="dct:spatial">
-    <label>Geographic extent</label>
+    <label>Spatial extent</label>
+    <description>The geographical area covered by the dataset.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_spatial">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>spatial extent</btnLabel>
   </element>
   <element name="dct:temporal">
     <label>Temporal extent</label>
-  </element>
-  <element name="rdf:resource"
-           context="/dcat:Dataset/dct:source/@rdf:resource">
-    <label>source</label>
-    <description>Tooltip: source</description>
-    <btnLabel>source</btnLabel>
-  </element>
-  <element name="dct:source"
-           context="/dcat:Dataset/dct:source">
-    <label>Source dataset</label>
-    <description>Complete with a reference (title, identifier, ...) to the dataset from which your dataset is derived.
+    <description>The temporal period that the dataset covers.
     </description>
-    <btnLabel>Source dataset</btnLabel>
-  </element>
-  <element name="dct:spatial"
-           context="/dcat:Dataset/dct:spatial">
-    <label>Geographic extent</label>
-    <description>The geographical area covered by the dataset.</description>
-    <btnLabel>spatial / geographic extent</btnLabel>
-  </element>
-  <element name="dct:Location"
-           context="/dcat:Dataset/dct:spatial/dct:Location">
-    <label>location</label>
-    <description>Tooltip: location</description>
-    <btnLabel>location</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dct:spatial/dct:Location/@rdf:about">
-    <label>Geographic identifier</label>
-    <description>Tooltip: Geographic identifier</description>
-    <btnLabel>Geographic identifier</btnLabel>
-  </element>
-  <element name="locn:geometry"
-
-           context="/dcat:Dataset/dct:spatial/dct:Location/locn:geometry">
-    <label>geometry</label>
-    <description>Tooltip: geometry</description>
-    <btnLabel>geometry</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dct:spatial/dct:Location/skos:prefLabel">
-    <label>Geographic description</label>
-    <description>Tooltip: Geographic description</description>
-    <btnLabel>Geographic description</btnLabel>
-  </element>
-  <element name="dct:temporal"
-           context="/dcat:Dataset/dct:temporal">
-    <label>Temporal Coverage</label>
-    <description>Temporal characteristics of the resource.</description>
-    <btnLabel>Temporal Coverage</btnLabel>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_temporal">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>temporal extent</btnLabel>
   </element>
   <element name="dct:PeriodOfTime">
     <label>Period of time</label>
-    <description>Tooltip: period of time</description>
-    <btnLabel>period of time</btnLabel>
-  </element>
-  <element name="rdf:about"
-           context="/dcat:Dataset/dct:temporal/dct:PeriodOfTime/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
+    <description>The covered period of time
+    </description>
   </element>
   <element name="schema:startDate">
-    <label>Start date/time</label>
-    <description>Tooltip: start date/time</description>
-    <btnLabel>start date/time</btnLabel>
+    <label>Start</label>
   </element>
   <element name="schema:endDate">
-    <label>End date/time</label>
-    <description>Tooltip: end date/time</description>
-    <btnLabel>end date/time</btnLabel>
-  </element>
-  <element name="dct:type"
-           context="/dcat:Dataset/dct:type">
-    <label>type</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-           context="/dcat:Dataset/dct:type/skos:Concept">
-    <label>type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-           context="/dcat:Dataset/dct:type/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:type/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dct:type/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="owl:versionInfo"
-           context="/dcat:Dataset/owl:versionInfo">
-    <label>version</label>
-    <description>Tooltip: version</description>
-    <btnLabel>version</btnLabel>
-  </element>
-  <element name="adms:versionNotes"
-           context="/dcat:Dataset/adms:versionNotes">
-    <label>version notes</label>
-    <description>Tooltip: version notes</description>
-    <btnLabel>version notes</btnLabel>
-  </element>
-  <element name="dcat:extension"
-           context="/dcat:Dataset/dcat:extension">
-    <label>extended fields</label>
-    <description>Tooltip: extended fields</description>
-    <btnLabel>extended fields</btnLabel>
-  </element>
-  <element name="rdf:Statement"
-           context="/dcat:Dataset/dcat:extension/rdf:Statement">
-    <label>statement</label>
-    <description>Tooltip: statement</description>
-    <btnLabel>statement</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:extension/rdf:Statement/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:extension/rdf:Statement/rdf:subject/@rdf:resource">
-    <label>subject</label>
-    <description>Tooltip: subject</description>
-    <btnLabel>subject</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:extension/rdf:Statement/rdf:predicate/@rdf:resource">
-    <label>predicate</label>
-    <description>Tooltip: predicate</description>
-    <btnLabel>predicate</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:extension/rdf:Statement/rdf:object/@rdf:resource">
-    <label>object</label>
-    <description>Tooltip: object</description>
-    <btnLabel>object</btnLabel>
-  </element>
-  <element name="dcat:distribution"
-           context="/dcat:Dataset/dcat:distribution">
-    <label>dataset distribution</label>
-    <description>Tooltip: dataset distribution</description>
-    <btnLabel>dataset distribution</btnLabel>
-  </element>
-  <element name="dcat:Distribution"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution">
-    <label>dataset distribution</label>
-    <description>Tooltip: dataset distribution</description>
-    <btnLabel>dataset distribution</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:accessURL/@rdf:resource">
-    <label>access URL</label>
-    <description>Tooltip: access URL</description>
-    <btnLabel>access URL</btnLabel>
-  </element>
-  <element name="dcat:accessURL"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:accessURL">
-    <label>access URL</label>
-    <description>Tooltip: access URL</description>
-    <btnLabel>access URL</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:downloadURL/@rdf:resource">
-    <label>download URL</label>
-    <description>Tooltip: download URL</description>
-    <btnLabel>download URL</btnLabel>
-  </element>
-  <element name="dcat:downloadURL"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:downloadURL">
-    <label>download URL</label>
-    <description>Tooltip: download URL</description>
-    <btnLabel>download URL</btnLabel>
-  </element>
-  <element name="dct:issued"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:issued">
-    <label>Date Issued</label>
-    <description>Date of formal issuance (e.g., publication) of the resource.</description>
-    <btnLabel>Date Issued</btnLabel>
-  </element>
-  <element name="dct:modified"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:modified">
-    <label>update/ modification date</label>
-    <description>Tooltip: update/ modification date</description>
-    <btnLabel>update/ modification date</btnLabel>
-  </element>
-  <element name="dct:format"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format">
-    <label>format</label>
-    <description>Tooltip: format</description>
-    <btnLabel>format</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept">
-    <label>format</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:format/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dcat:mediaType"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType">
-    <label>media type</label>
-    <description>Tooltip: media type</description>
-    <btnLabel>media type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept">
-    <label>media type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:mediaType/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:language"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept">
-    <label>language</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:language/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:license"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license">
-    <label>License</label>
-    <description>A legal document giving official permission to do something with the resource.</description>
-    <btnLabel>License</btnLabel>
-  </element>
-  <element name="dct:LicenseDocument"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument">
-    <label>licentie</label>
-    <description>Tooltip: licentie</description>
-    <btnLabel>licentie</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:type"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type">
-    <label>type</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept">
-    <label>type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="dct:identifier"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:license/dct:LicenseDocument/dct:identifier">
-    <label>identifier</label>
-    <description>Tooltip: identifier</description>
-    <btnLabel>identifier</btnLabel>
-  </element>
-  <element name="dct:rights"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights">
-    <label>rights</label>
-    <description>Tooltip: rights</description>
-    <btnLabel>rights</btnLabel>
-  </element>
-  <element name="dct:RightsStatement"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement">
-    <label>statement</label>
-    <description>Tooltip: statement</description>
-    <btnLabel>statement</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="dcat:byteSize"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dcat:byteSize">
-    <label>byte size</label>
-    <description>Tooltip: byte size</description>
-    <btnLabel>byte size</btnLabel>
-  </element>
-  <element name="spdx:checksum"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/spdx:checksum">
-    <label>checksum</label>
-    <description>Tooltip: checksum</description>
-    <btnLabel>checksum</btnLabel>
-  </element>
-  <element name="spdx:Checksum"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/spdx:checksum/spdx:Checksum">
-    <label>checksum</label>
-    <description>Tooltip: checksum</description>
-    <btnLabel>checksum</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/spdx:checksum/spdx:Checksum/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="spdx:algorithm"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/spdx:checksum/spdx:Checksum/spdx:algorithm/@rdf:resource">
-    <label>algorithm</label>
-    <description>Tooltip: algorithm</description>
-    <btnLabel>algorithm</btnLabel>
-  </element>
-  <element name="spdx:checksumValue"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/spdx:checksum/spdx:Checksum/spdx:checksumValue">
-    <label>checksum value</label>
-    <description>Tooltip: checksum value</description>
-    <btnLabel>checksum value</btnLabel>
-  </element>
-  <element name="foaf:page"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/foaf:page">
-    <label>documentation</label>
-    <description>Tooltip: documentation</description>
-    <btnLabel>documentation</btnLabel>
-  </element>
-  <element name="foaf:Document"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/foaf:page/foaf:Document">
-    <label>document</label>
-    <description>Tooltip: document</description>
-    <btnLabel>document</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/foaf:page/foaf:Document/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="foaf:name"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/foaf:page/foaf:Document/foaf:name">
-    <label>name</label>
-    <description>Tooltip: name</description>
-    <btnLabel>name</btnLabel>
-  </element>
-  <element name="dct:conformsTo"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo">
-    <label>Conforms to standard</label>
-    <description>Tooltip: Conforms to standard</description>
-    <btnLabel>Conforms to standard</btnLabel>
-  </element>
-  <element name="dct:Standard"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard">
-    <label>standard</label>
-    <description>Tooltip: standard</description>
-    <btnLabel>standard</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="adms:status"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status">
-    <label>change type</label>
-    <description>Tooltip: change type</description>
-    <btnLabel>change type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept">
-    <label>change type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/dcat:distribution/dcat:Distribution/adms:status/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="adms:sample"
-           context="/dcat:Dataset/adms:sample">
-    <label>sample</label>
-    <description>Tooltip: sample</description>
-    <btnLabel>sample</btnLabel>
-  </element>
-  <element name="dcat:Distribution"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution">
-    <label>dataset distribution</label>
-    <description>Tooltip: dataset distribution</description>
-    <btnLabel>dataset distribution</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:accessURL/@rdf:resource">
-    <label>access URL</label>
-    <description>Tooltip: access URL</description>
-    <btnLabel>access URL</btnLabel>
-  </element>
-  <element name="dcat:accessURL"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:accessURL">
-    <label>access URL</label>
-    <description>Tooltip: access URL</description>
-    <btnLabel>access URL</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:downloadURL/@rdf:resource">
-    <label>download URL</label>
-    <description>Tooltip: download URL</description>
-    <btnLabel>download URL</btnLabel>
-  </element>
-  <element name="dcat:downloadURL"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:downloadURL">
-    <label>download URL</label>
-    <description>Tooltip: download URL</description>
-    <btnLabel>download URL</btnLabel>
-  </element>
-  <element name="dct:issued"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:issued">
-    <label>release date</label>
-    <description>Tooltip: release date</description>
-    <btnLabel>release date</btnLabel>
-  </element>
-  <element name="dct:modified"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:modified">
-    <label>update/ modification date</label>
-    <description>Tooltip: update/ modification date</description>
-    <btnLabel>update/ modification date</btnLabel>
-  </element>
-  <element name="dct:format"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:format">
-    <label>format</label>
-    <description>Tooltip: format</description>
-    <btnLabel>format</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept">
-    <label>format</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:format/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dcat:mediaType"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType">
-    <label>media type</label>
-    <description>Tooltip: media type</description>
-    <btnLabel>media type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept">
-    <label>media type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:mediaType/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:language"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language">
-    <label>language</label>
-    <description>Tooltip: language</description>
-    <btnLabel>language</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept">
-    <label>language</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:type"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="rdf:resource"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:language/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:license"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license">
-    <label>licence</label>
-    <description>Tooltip: licence</description>
-    <btnLabel>licence</btnLabel>
-  </element>
-  <element name="dct:LicenseDocument"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument">
-    <label>licentie</label>
-    <description>Tooltip: licentie</description>
-    <btnLabel>licentie</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:type"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type">
-    <label>type</label>
-    <description>Tooltip: type</description>
-    <btnLabel>type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept">
-    <label>type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:type"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="skos:inScheme"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:type/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="dct:identifier"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:license/dct:LicenseDocument/dct:identifier">
-    <label>identifier</label>
-    <description>Tooltip: identifier</description>
-    <btnLabel>identifier</btnLabel>
-  </element>
-  <element name="dct:rights"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights">
-    <label>rights</label>
-    <description>Tooltip: rights</description>
-    <btnLabel>rights</btnLabel>
-  </element>
-  <element name="dct:RightsStatement"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement">
-    <label>statement</label>
-    <description>Tooltip: statement</description>
-    <btnLabel>statement</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:rights/dct:RightsStatement/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="dcat:byteSize"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dcat:byteSize">
-    <label>byte size</label>
-    <description>Tooltip: byte size</description>
-    <btnLabel>byte size</btnLabel>
-  </element>
-  <element name="spdx:checksum"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/spdx:checksum">
-    <label>checksum</label>
-    <description>Tooltip: checksum</description>
-    <btnLabel>checksum</btnLabel>
-  </element>
-  <element name="spdx:Checksum"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/spdx:checksum/spdx:Checksum">
-    <label>checksum</label>
-    <description>Tooltip: checksum</description>
-    <btnLabel>checksum</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/spdx:checksum/spdx:Checksum/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="spdx:algorithm"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/spdx:checksum/spdx:Checksum/spdx:algorithm/@rdf:resource">
-    <label>algorithm</label>
-    <description>Tooltip: algorithm</description>
-    <btnLabel>algorithm</btnLabel>
-  </element>
-  <element name="spdx:checksumValue"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/spdx:checksum/spdx:Checksum/spdx:checksumValue">
-    <label>checksum value</label>
-    <description>Tooltip: checksum value</description>
-    <btnLabel>checksum value</btnLabel>
-  </element>
-  <element name="foaf:page"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/foaf:page">
-    <label>documentation</label>
-    <description>Tooltip: documentation</description>
-    <btnLabel>documentation</btnLabel>
-  </element>
-  <element name="foaf:Document"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/foaf:page/foaf:Document">
-    <label>document</label>
-    <description>Tooltip: document</description>
-    <btnLabel>document</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/foaf:page/foaf:Document/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="foaf:name"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/foaf:page/foaf:Document/foaf:name">
-    <label>name</label>
-    <description>Tooltip: name</description>
-    <btnLabel>name</btnLabel>
-  </element>
-  <element name="dct:conformsTo"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo">
-    <label>conforms to standard</label>
-    <description>Tooltip: conforms to standard</description>
-    <btnLabel>conforms to standard</btnLabel>
-  </element>
-  <element name="dct:Standard"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard">
-    <label>standard</label>
-    <description>Tooltip: standard</description>
-    <btnLabel>standard</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="dct:title"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/dct:title">
-    <label>title</label>
-    <description>Tooltip: title</description>
-    <btnLabel>title</btnLabel>
-  </element>
-  <element name="dct:description"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/dct:conformsTo/dct:Standard/dct:description">
-    <label>description</label>
-    <description>Tooltip: description</description>
-    <btnLabel>description</btnLabel>
-  </element>
-  <element name="adms:status"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status">
-    <label>change type</label>
-    <description>Tooltip: change type</description>
-    <btnLabel>change type</btnLabel>
-  </element>
-  <element name="skos:Concept"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept">
-    <label>change type</label>
-    <description>Tooltip: concept</description>
-    <btnLabel>concept</btnLabel>
-  </element>
-  <element name="rdf:about"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept/@rdf:about">
-    <label>URI</label>
-    <description>Tooltip: URI</description>
-    <btnLabel>URI</btnLabel>
-  </element>
-  <element name="rdf:type"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept/rdf:type/@rdf:resource">
-    <label>rdf class</label>
-    <description>Tooltip: rdf class</description>
-    <btnLabel>rdf class</btnLabel>
-  </element>
-  <element name="skos:prefLabel"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept/skos:prefLabel">
-    <label>preferred label</label>
-    <description>Tooltip: preferred label</description>
-    <btnLabel>preferred label</btnLabel>
-  </element>
-  <element name="skos:inScheme"
-
-           context="/dcat:Dataset/adms:sample/dcat:Distribution/adms:status/skos:Concept/skos:inScheme/@rdf:resource">
-    <label>in scheme</label>
-    <description>Tooltip: in scheme</description>
-    <btnLabel>in scheme</btnLabel>
+    <label>End</label>
+  </element>
+  <element name="prov:wasGeneratedBy">
+    <label>Generated by (genealogy)</label>
+    <description>An activity that generated, or provides the business context for, the creation of the dataset.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_was_generated_by">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>generated by</btnLabel>
+  </element>
+
+
+  <element name="dcat:DataService">
+    <label>Data Service</label>
+    <description>A collection of operations that provides access to one or more datasets or data processing functions.
+    </description>
+    <btnLabel>dataset</btnLabel>
+  </element>
+  <element name="dcat:endpointURL">
+    <label>Endpoint URL</label>
+    <description>The root location or primary endpoint of the service (a Web-resolvable IRI).
+    </description>
+    <btnLabel>dataset</btnLabel>
+  </element>
+  <element name="dcat:endpointDescription">
+    <label>Endpoint description</label>
+    <description>A description of the services available via the end-points, including their operations, parameters etc.
+    </description>
+    <help for="reference"><![CDATA[
+    <ul>
+    <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:data_service_endpoint_description">
+           W3C recommendations</a>
+    </li>
+    </ul>
+    ]]></help>
+    <btnLabel>endpoint description</btnLabel>
+  </element>
+  <element name="dcat:servesDataset">
+    <label>Served datasets</label>
+    <description>A collection of data that this data service can distribute.
+    </description>
+    <btnLabel></btnLabel>
   </element>
 </labels>

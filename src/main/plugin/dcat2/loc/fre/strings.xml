@@ -4,7 +4,4 @@
   <advanced>Advanced</advanced>
   <xml>XML</xml>
   <metadata.section>Metadata details</metadata.section>
-  <dcat.addThemes>Themes</dcat.addThemes>
-  <dcat.addTags>Tags/Keywords</dcat.addTags>
-  <dcat.addType>Dataset type</dcat.addType>
 </strings>
