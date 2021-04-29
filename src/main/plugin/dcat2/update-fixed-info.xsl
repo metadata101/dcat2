@@ -510,5 +510,9 @@
    TODO: Issue related to keyword picker ? -->
   <xsl:template match="dcat:keyword[count(@*) = 0 and count(*) = 0]
                        |dcat:theme[count(@*) = 0 and count(*) = 0]
-                       |dct:type[count(@*) = 0 and count(*) = 0]"/>
+                       |dct:type[count(@*) = 0 and count(*) = 0]
+                       |dct:format[count(@*) = 0 and count(*) = 0]
+                       |dcat:packageFormat[count(@*) = 0 and count(*) = 0]
+                       |dcat:compressFormat[count(@*) = 0 and count(*) = 0]
+                       |dcat:mediaType[count(@*) = 0 and count(*) = 0]"/>
 </xsl:stylesheet>

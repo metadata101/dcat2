@@ -38,48 +38,23 @@
                 exclude-result-prefixes="#all">
 
   <xsl:variable name="dcatKeywordConfig">
-    <element name="dcat:theme">
-      <thesaurus>external.theme.eu.europa.data-theme</thesaurus>
-      <xpath>/dcat:theme</xpath>
-      <max></max>
-      <labelKey>dcat.addThemes</labelKey>
-    </element>
-    <element name="dct:type">
-      <thesaurus>external.theme.dcat-type</thesaurus>
-      <xpath>/dct:type</xpath>
-      <max>1</max>
-      <labelKey>dcat.addType</labelKey>
-    </element>
-    <element name="dcat:keyword">
-      <thesaurus>external.none.allThesaurus</thesaurus>
-      <xpath>/dcat:keyword</xpath>
-      <max></max>
-      <labelKey>dcat.addTags</labelKey>
-    </element>
-    <element name="dct:format">
-      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
-      <xpath>//dcat:Distribution/dct:format</xpath>
-      <max>1</max>
-      <labelKey>dcat.addFormat</labelKey>
-    </element>
-    <element name="dcat:packageFormat">
-      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
-      <xpath>//dcat:Distribution/dcat:packageFormat</xpath>
-      <max>1</max>
-      <labelKey>dcat.addPackageFormat</labelKey>
-    </element>
-    <element name="dcat:compressFormat">
-      <thesaurus>external.theme.eu.europa.file-type</thesaurus>
-      <xpath>//dcat:Distribution/dcat:compressFormat</xpath>
-      <max>1</max>
-      <labelKey>dcat.addCompressFormat</labelKey>
-    </element>
-    <element name="dcat:mediaType">
-      <thesaurus>external.theme.org.iana.media-type</thesaurus>
-      <xpath>//dcat:Distribution/dcat:mediaType</xpath>
-      <max>1</max>
-      <labelKey>dcat.addMediaType</labelKey>
-    </element>
+    <xsl:for-each select="$editorConfig/editor/fields/for[@use='thesaurus-list-picker']">
+      <element>
+        <xsl:attribute name="name" select="./@name"/>
+        <thesaurus>
+          <xsl:value-of select="./directiveAttributes/@thesaurus"/>
+        </thesaurus>
+        <xpath>
+          <xsl:value-of select="./directiveAttributes/@xpath"/>
+        </xpath>
+        <max>
+          <xsl:value-of select="./directiveAttributes/@max"/>
+        </max>
+        <labelKey>
+          <xsl:value-of select="./directiveAttributes/@labelKey"/>
+        </labelKey>
+      </element>
+    </xsl:for-each>
   </xsl:variable>
 
   <!-- Theme can only be set by thesaurus eu.europa.data-theme.

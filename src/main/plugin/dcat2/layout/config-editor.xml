@@ -32,6 +32,58 @@
         data-default-role="creator"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
+
+
+    <for name="dcat:theme" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.data-theme"
+        xpath="/dcat:theme"
+        max=""
+        labelKey="dcat.addThemes"/>
+    </for>
+    <for name="dct:type" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.dcat-type"
+        xpath="/dct:type"
+        max="1"
+        labelKey="dcat.addType"/>
+    </for>
+    <for name="dcat:keyword" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.none.allThesaurus"
+        xpath="/dcat:keyword"
+        max=""
+        labelKey="dcat.addTags"/>
+    </for>
+    <for name="dct:format" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.file-type"
+        xpath="//dcat:Distribution/dct:format"
+        max="1"
+        labelKey="dcat.addFormat"/>
+    </for>
+    <for name="dcat:packageFormat" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.file-type"
+        xpath="//dcat:Distribution/dcat:packageFormat"
+        max="1"
+        labelKey="dcat.addPackageFormat"/>
+    </for>
+    <for name="dcat:compressFormat" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.file-type"
+        xpath="//dcat:Distribution/dcat:compressFormat"
+        max="1"
+        labelKey="dcat.addCompressFormat"/>
+    </for>
+    <for name="dcat:mediaType" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.org.iana.media-type"
+        xpath="//dcat:Distribution/dcat:mediaType"
+        max="1"
+        labelKey="dcat.addMediaType"/>
+    </for>
+
     <!--
     TODO: We can't use that. See layout-custom-fields-keywords.xsl to add a snippet skos:Concept
     <for name="dct:type"
