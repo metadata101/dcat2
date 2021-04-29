@@ -33,15 +33,16 @@
     <xsl:variable name="inSchemeAuthorityBaseUrl" select="'http://publications.europa.eu/resource/authority/'"/>
     <xsl:variable name="inSchemeAdmsBaseUrl" select="'http://purl.org/adms/'"/>
     <xsl:variable name="inSchemeIanaBaseUrl" select="'https://www.iana.org/assignments/'"/>
+    <xsl:variable name="inSchemeGeonetworkBaseUrl" select="'https://registry.geonetwork-opensource.org/dcat/'"/>
     <xsl:variable name="keyPrefix" select="'external.theme.'"/>
     <xsl:choose>
-      <xsl:when test="$key = concat($keyPrefix,'publisher-type')">
+      <xsl:when test="$key = concat($keyPrefix,'org.purl.adms.publisher-type')">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'publishertype/1.0')"/>
       </xsl:when>
       <xsl:when test="$key = concat($keyPrefix,'eu.europa.data-theme')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'data-theme')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix,'frequency')">
+      <xsl:when test="$key = concat($keyPrefix,'eu.europa.frequency')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'frequency')"/>
       </xsl:when>
       <xsl:when test="$key = concat($keyPrefix,'language')">
@@ -59,11 +60,14 @@
       <xsl:when test="$key = concat($keyPrefix,'status')">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'status/1.0')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix,'licence-type')">
+      <xsl:when test="$key = concat($keyPrefix,'org.purl.adms.license-type')">
         <xsl:value-of select="concat($inSchemeAdmsBaseUrl,'licencetype/1.0')"/>
       </xsl:when>
-      <xsl:when test="$key = concat($keyPrefix, 'access-right')">
+      <xsl:when test="$key = concat($keyPrefix, 'eu.europa.access-right')">
         <xsl:value-of select="concat($inSchemeAuthorityBaseUrl,'access-right')"/>
+      </xsl:when>
+      <xsl:when test="$key = concat($keyPrefix, 'dcat-type')">
+        <xsl:value-of select="concat($inSchemeGeonetworkBaseUrl,'type')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:message select="concat($key, ' not found. Check process-utility.xsl.')"/>
