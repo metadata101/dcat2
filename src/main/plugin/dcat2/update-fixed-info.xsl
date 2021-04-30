@@ -236,6 +236,32 @@
     <xsl:namespace name="gml" select="'http://www.opengis.net/gml/3.2'"/>
   </xsl:template>
 
+  <xsl:template name="add-resource-type">
+    <xsl:variable name="inScheme" select="'https://registry.geonetwork-opensource.org/dcat/type'"/>
+    <xsl:variable name="typeURI">
+      <xsl:choose>
+        <xsl:when test="name() = 'dcat:Dataset'">
+          <xsl:value-of select="concat($inScheme, '/', 'dataset')"/>
+        </xsl:when>
+        <xsl:when test="name() = 'dcat:DataService'">
+          <xsl:value-of select="concat($inScheme, '/', 'service')"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="thesaurusKey" select="'external.theme.dcat-type'"/>
+
+    <dct:type>
+      <skos:Concept rdf:about="{$typeURI}">
+        <xsl:for-each select="$locales/lang/@code">
+          <skos:prefLabel xml:lang="{.}">
+            <xsl:value-of select="java:getKeywordValueByUri($typeURI, $thesaurusKey, .)"/>
+          </skos:prefLabel>
+        </xsl:for-each>
+        <skos:inScheme rdf:resource="{$inScheme}"/>
+      </skos:Concept>
+    </dct:type>
+  </xsl:template>
+
   <xsl:template match="rdf:RDF" priority="10">
     <xsl:copy>
       <xsl:call-template name="add-namespaces"/>
@@ -274,7 +300,15 @@
 <!--      <xsl:message><xsl:copy-of select="."/></xsl:message>-->
       <xsl:apply-templates select="dcat:theme"/>
       <xsl:apply-templates select="dcat:keyword"/>
-      <xsl:apply-templates select="dct:type"/>
+
+      <xsl:choose>
+        <xsl:when test="dct:type">
+          <xsl:apply-templates select="dct:type"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="add-resource-type"/>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <xsl:apply-templates select="dct:creator"/>
       <xsl:apply-templates select="dct:publisher"/>

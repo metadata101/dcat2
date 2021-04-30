@@ -64,20 +64,6 @@
         max=""
         labelKey="dcat.addThemes"/>
     </for>
-    <for name="dct:type" xpath="dcat:Dataset" use="thesaurus-list-picker">
-      <directiveAttributes
-        thesaurus="external.theme.dcat-type"
-        xpath="/dct:type"
-        max="1"
-        labelKey="dcat.addType"/>
-    </for>
-    <for name="dct:type" xpath="dcat:DataService" use="thesaurus-list-picker">
-      <directiveAttributes
-        thesaurus="external.theme.dcat-type"
-        xpath="/dct:type"
-        max="1"
-        labelKey="dcat.addType"/>
-    </for>
     <for name="dcat:keyword" use="thesaurus-list-picker">
       <directiveAttributes
         thesaurus="external.none.allThesaurus"
@@ -138,6 +124,13 @@
       <directiveAttributes
         thesaurus="external.theme.eu.europa.access-right"
         xpath="/dct:accessRights"
+        max="1"
+        labelKey="dcat.addAccessRight"/>
+    </for>
+    <for name="dct:accessRights" xpath="dcat:Distribution" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.access-right"
+        xpath="//dcat:Distribution/dct:accessRights"
         max="1"
         labelKey="dcat.addAccessRight"/>
     </for>
@@ -258,7 +251,6 @@
 
           <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:type" or="type" in="rdf:RDF/*"/>
 
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:issued" or="issued" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:modified" or="modified" in="rdf:RDF/*"/>
