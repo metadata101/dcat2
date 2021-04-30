@@ -103,9 +103,15 @@
     <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
-           context="dct:language">
+           context="/dcat:Dataset/dct:language/@rdf:resource">
     <label>Dataset language</label>
     <description>The language of the dataset.</description>
+    <btnLabel>language</btnLabel>
+  </element>
+  <element name="rdf:resource"
+           context="/dcat:DataService/dct:language/@rdf:resource">
+    <label>Service language</label>
+    <description>The language of the service.</description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier">

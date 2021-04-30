@@ -8,4 +8,6 @@
   <dcat.addTags>Tags/Keywords</dcat.addTags>
   <dcat.addType>Type</dcat.addType>
   <dcat.addAccessRight>Access rights</dcat.addAccessRight>
+  <dcat.resource>Resource</dcat.resource>
+  <dcat.catalog-record>Record</dcat.catalog-record>
 </strings>

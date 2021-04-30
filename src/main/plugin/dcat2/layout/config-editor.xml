@@ -304,8 +304,12 @@
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
-      <tab id="advanced" default="true" >
-        <section xpath="rdf:RDF"/>
+      <tab id="dcat.resource" default="true" name="">
+        <section xpath="rdf:RDF/dcat:Dataset"/>
+        <section xpath="rdf:RDF/dcat:DataService"/>
+      </tab>
+      <tab id="dcat.catalog-record">
+        <section xpath="rdf:RDF/dcat:CatalogRecord"/>
       </tab>
     </view>
 
