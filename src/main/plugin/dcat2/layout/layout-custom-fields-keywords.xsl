@@ -146,7 +146,7 @@
       data-element-ref="{concat('_P', $ref, '_', replace($config/@name, ':', 'COLON'))}"
       data-element-xpath="{concat(if ($isDcatService) then './dcat:DataService' else './dcat:Dataset', $config/xpath)}"
       data-wrapper="{$config/@name}"
-      data-thesaurus-title="{{{{'{$config/labelKey}' | translate}}}}"
+      data-thesaurus-title="{$strings/*[name() = $config/labelKey]}"
       data-thesaurus-key="{$config/thesaurus}"
       data-keywords="{$values}"
       data-transformations="{$transformation}"

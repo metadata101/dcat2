@@ -7,4 +7,5 @@
   <dcat.addThemes>Themes</dcat.addThemes>
   <dcat.addTags>Tags/Keywords</dcat.addTags>
   <dcat.addType>Type</dcat.addType>
+  <dcat.addAccessRight>Access rights</dcat.addAccessRight>
 </strings>
