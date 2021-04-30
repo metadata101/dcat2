@@ -301,7 +301,14 @@
       <xsl:apply-templates select="dcat:theme"/>
       <xsl:apply-templates select="dcat:keyword"/>
 
-      <xsl:call-template name="add-resource-type"/>
+      <xsl:choose>
+        <xsl:when test="dct:type">
+          <xsl:apply-templates select="dct:type"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="add-resource-type"/>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <xsl:apply-templates select="dct:creator"/>
       <xsl:apply-templates select="dct:publisher"/>
