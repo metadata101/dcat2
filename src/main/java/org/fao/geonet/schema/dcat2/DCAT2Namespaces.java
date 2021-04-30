@@ -36,6 +36,20 @@ public class DCAT2Namespaces {
             Namespace.getNamespace("vcard", "http://www.w3.org/2006/vcard/ns#");
     public static final Namespace FOAF =
             Namespace.getNamespace("foaf", "http://xmlns.com/foaf/0.1/");
+    public static final Namespace PROV =
+            Namespace.getNamespace("prov", "http://www.w3.org/ns/prov#");
+    public static final Namespace LOCN =
+            Namespace.getNamespace("locn", "http://www.w3.org/ns/locn#");
+    public static final Namespace OWL =
+            Namespace.getNamespace("owl", "http://www.w3.org/2002/07/owl#");
+    public static final Namespace ADMS =
+            Namespace.getNamespace("adms", "http://www.w3.org/ns/adms#");
+    public static final Namespace SKOS =
+            Namespace.getNamespace("skos", "http://www.w3.org/2004/02/skos/core#");
+    public static final Namespace SPDX =
+            Namespace.getNamespace("spdx", "http://spdx.org/rdf/terms#");
     public static final Namespace RDF =
             Namespace.getNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+    public static final Namespace RDFS =
+            Namespace.getNamespace("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
 }
