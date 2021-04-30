@@ -35,7 +35,7 @@
   <xs:import namespace="http://www.w3.org/2006/vcard/ns#" schemaLocation="vcard.xsd"/>
   <xs:import namespace="http://www.w3.org/ns/prov#" schemaLocation="prov.xsd"/>
   <xs:import namespace="http://www.w3.org/ns/odrl/2/" schemaLocation="odrl.xsd"/>
-
+  <xs:import namespace="http://www.w3.org/2004/02/skos/core#" schemaLocation="skos.xsd"/>
 
   <xs:complexType name="ResourceType" abstract="true">
     <xs:annotation>
@@ -60,7 +60,8 @@
       <xs:element ref="dct:title" minOccurs="1" maxOccurs="unbounded"/>
       <xs:element ref="dct:description" minOccurs="1" maxOccurs="unbounded"/>
 
-      <xs:element name="theme" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="theme" type="skos:Concept" minOccurs="0" maxOccurs="unbounded" />
+
       <xs:element name="keyword" type="rdf:PlainLiteral" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:type" minOccurs="0" maxOccurs="unbounded"/>
 

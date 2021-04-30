@@ -71,7 +71,6 @@
       <gn_replace_all>
         <xsl:for-each select="//keyword">
           <xsl:element name="{$wrapper}">
-            <!-- TODO: Add mode to encode using @rdf:resource ?-->
             <skos:Concept>
               <xsl:attribute name="rdf:about">
                 <xsl:value-of select="if (contains(uri, '@@@'))
@@ -99,6 +98,52 @@
               </xsl:choose>
               <skos:inScheme rdf:resource="{$inSchemeURI}"/>
             </skos:Concept>
+          </xsl:element>
+        </xsl:for-each>
+      </gn_replace_all>
+    </xsl:variable>
+    <xsl:copy-of select="$response"/>
+  </xsl:template>
+
+
+  <xsl:template name="to-dcat2-concept-reference">
+    <xsl:variable name="listOfLanguage"
+                  select="tokenize(/root/request/lang, ',')"/>
+
+    <xsl:apply-templates mode="to-dcat2-concept-reference" select=".">
+      <xsl:with-param name="listOfLanguage" select="$listOfLanguage"/>
+    </xsl:apply-templates>
+  </xsl:template>
+
+  <!-- Surround the skos:Concept xml element with a parent xml element on the thesaurus key -->
+  <xsl:template mode="to-dcat2-concept-reference"
+                match="*[not(/root/request/skipdescriptivekeywords)]">
+    <xsl:param name="listOfLanguage"/>
+    <xsl:param name="wrapper"
+               select="if (/root/request/wrapper)
+                       then /root/request/wrapper
+                       else 'dcat:keyword'"/>
+
+    <!-- Get thesaurus ID from keyword or from request parameter if no keyword found. -->
+    <xsl:variable name="currentThesaurus"
+                  select="if (thesaurus/key) then thesaurus/key else /root/request/thesaurus"/>
+    <xsl:variable name="keywordThesaurus"
+                  select="if ($currentThesaurus = 'external.none.allThesaurus')
+                          then replace(./uri, 'http://org.fao.geonet.thesaurus.all/([^@]+)@@@.+', '$1')
+                          else $currentThesaurus"/>
+    <xsl:variable name="inSchemeURI"
+                  select="gn-fn-dcat2:getInSchemeURIByThesaurusId($keywordThesaurus)"/>
+
+    <!-- Loop on all keyword from the same thesaurus -->
+    <xsl:variable name="response">
+      <gn_replace_all>
+        <xsl:for-each select="//keyword">
+          <xsl:element name="{$wrapper}">
+            <xsl:attribute name="rdf:resource">
+              <xsl:value-of select="if (contains(uri, '@@@'))
+                                  then substring-after(uri, '@@@')
+                                  else uri"/>
+            </xsl:attribute>
           </xsl:element>
         </xsl:for-each>
       </gn_replace_all>
