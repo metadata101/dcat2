@@ -631,8 +631,13 @@
       </gn:attribute>
     </xsl:variable>
 
+
     <xsl:variable name="labelConfig"
-                  select="gn-fn-metadata:getLabel($schema, $attributeName, $labels, name(..), '', if (name(.)='xml:lang') then '' else gn-fn-metadata:getXPath(.))"/>
+                  select="gn-fn-metadata:getLabel($schema,
+                            $attributeName,
+                            $labels,
+                            name(..), '',
+                            if (name(.) = 'xml:lang') then '' else gn-fn-metadata:getXPath(.))"/>
 
     <xsl:variable name="helper"
                   select="gn-fn-metadata:getHelper($labelConfig/helper, .)"/>

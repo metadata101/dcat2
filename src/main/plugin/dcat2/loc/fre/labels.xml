@@ -90,8 +90,15 @@
     <btnLabel>langue</btnLabel>
   </element>
   <element name="rdf:resource"
+           context="/dcat:CatalogRecord/dct:language/@rdf:resource">
+    <label>Langue de la fiche</label>
+    <description>La langue de la fiche. Se réfère à la langue naturelle utilisée pour les métadonnés textuelles (ex. titres, descriptions, etc) de la ressource cataloguée
+    </description>
+    <btnLabel>langue</btnLabel>
+  </element>
+  <element name="rdf:resource"
            context="dct:language">
-    <label>Langue de la ressource</label>
+    <label>Langue de la donnée</label>
     <description>La langue de la fiche. Se réfère à la langue naturelle utilisée pour les métadonnés textuelles
       (ex. titres, descriptions, etc) de la ressource cataloguée
     </description>

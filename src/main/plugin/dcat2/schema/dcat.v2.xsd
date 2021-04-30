@@ -144,15 +144,22 @@
       <xs:documentation>
         dcat:CatalogRecord represents a metadata item in the catalog, primarily concerning the registration information,
         such as who added the item and when.
+
+        https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog_Record
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="dct:description" minOccurs="0"/>
+      <xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="dct:modified" minOccurs="1" maxOccurs="1"/>
-      <xs:element ref="dct:title" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="foaf:primaryTopic" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="dct:conformsTo" minOccurs="0" maxOccurs="1"/>
+
+      <!-- DCAT-AP adds -->
+      <!-- TODO: adms:status 0..1 -->
+      <xs:element ref="dct:language" minOccurs="0" maxOccurs="unbounded"/>
+      <!-- TODO: dct:source 0..1 -->
     </xs:sequence>
     <xs:attribute ref="rdf:about"/>
   </xs:complexType>

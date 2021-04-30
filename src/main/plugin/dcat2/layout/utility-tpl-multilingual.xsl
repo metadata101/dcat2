@@ -25,6 +25,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:xslutil="java:org.fao.geonet.util.XslUtil"
                 version="2.0"
@@ -33,7 +34,7 @@
   <!-- Get the main metadata languages -->
   <xsl:template name="get-dcat2-language">
     <xsl:param name="languageIri"
-               select="$metadata/*/dct:language[1]/@rdf:resource"
+               select="$metadata/dcat:CatalogRecord/dct:language[1]/@rdf:resource"
                required="no"/>
 
     <xsl:variable name="languageCode"
@@ -58,7 +59,7 @@
   <!-- Get the list of other languages in JSON -->
   <xsl:template name="get-dcat2-other-languages-as-json">
     <xsl:variable name="langs">
-      <xsl:for-each select="$metadata/*/dct:language/@rdf:resource">
+      <xsl:for-each select="$metadata/dcat:CatalogRecord/dct:language/@rdf:resource">
 
         <xsl:variable name="languageCode">
           <xsl:call-template name="get-dcat2-language">
@@ -83,8 +84,8 @@
   <xsl:template name="get-dcat2-other-languages">
     <xsl:choose>
       <xsl:when test="count($metadata/descendant::node()/*[@xml:lang != '']) > 1
-                      or count($metadata/*/dct:language) > 1">
-        <xsl:for-each select="$metadata/*/dct:language/@rdf:resource">
+                      or count($metadata/dcat:CatalogRecord/dct:language) > 1">
+        <xsl:for-each select="$metadata/dcat:CatalogRecord/dct:language/@rdf:resource">
           <xsl:variable name="languageCode">
             <xsl:call-template name="get-dcat2-language">
               <xsl:with-param name="languageIri"
