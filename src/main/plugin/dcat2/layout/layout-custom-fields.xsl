@@ -93,6 +93,11 @@
 
 
 
+  <xsl:template mode="mode-dcat2"
+                match="dct:creator[$isFlatMode]
+                       |dct:publisher[$isFlatMode]
+                       |dcat:contactPoint[$isFlatMode]"
+                priority="2000"/>
 
   <xsl:template mode="mode-dcat2"
                 match="dct:spatial"

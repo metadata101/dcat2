@@ -270,10 +270,8 @@
       <!-- Fixed order of elements. -->
       <xsl:apply-templates select="dct:title"/>
       <xsl:apply-templates select="dct:description"/>
-      <xsl:apply-templates select="dcat:endpointDescription"/>
-      <xsl:apply-templates select="dcat:endpointURL"/>
-      <xsl:apply-templates select="dcat:servesDataset"/>
 
+<!--      <xsl:message><xsl:copy-of select="."/></xsl:message>-->
       <xsl:apply-templates select="dcat:theme"/>
       <xsl:apply-templates select="dcat:keyword"/>
       <xsl:apply-templates select="dct:type"/>
@@ -310,6 +308,10 @@
       <xsl:apply-templates select="adms:sample"/>
       <xsl:apply-templates select="prov:qualifiedInvalidation"/>
       <xsl:apply-templates select="locn:address"/>
+
+      <xsl:apply-templates select="dcat:endpointDescription"/>
+      <xsl:apply-templates select="dcat:endpointURL"/>
+      <xsl:apply-templates select="dcat:servesDataset"/>
     </xsl:copy>
   </xsl:template>
 
@@ -466,6 +468,9 @@
   <xsl:template match="dcat:keyword[count(@*) = 0 and count(*) = 0]
                        |dcat:theme[count(@*) = 0 and count(*) = 0]
                        |dct:type[count(@*) = 0 and count(*) = 0]
+                       |dct:creator[count(@*) = 0 and count(*) = 0]
+                       |dct:publisher[count(@*) = 0 and count(*) = 0]
+                       |dcat:contactPoint[count(@*) = 0 and count(*) = 0]
                        |dct:format[count(@*) = 0 and count(*) = 0]
                        |dcat:packageFormat[count(@*) = 0 and count(*) = 0]
                        |dcat:compressFormat[count(@*) = 0 and count(*) = 0]

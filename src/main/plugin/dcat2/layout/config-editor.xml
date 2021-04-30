@@ -24,11 +24,30 @@
 
     <for name="dct:creator" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-        data-template-add-action="true"
-        data-search-action="true"
-        data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes="text,xlink"
+        data-element-xpath="./dcat:Dataset/dct:creator"
+        data-max-tags="1"
+        data-insert-modes="tags"
+        data-values="xpath::string-join(.//dct:creator/@xlink:href, '◿')"
+        data-default-role="creator"
+        data-transformation="contact-from-iso19139-to-foaf-agent"/>
+    </for>
+    <for name="dct:publisher" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+        data-template-type="contact"
+        data-element-xpath="./dcat:Dataset/dct:publisher"
+        data-max-tags="1"
+        data-insert-modes="tags"
+        data-values="xpath::string-join(.//dct:publisher/@xlink:href, '◿')"
+        data-default-role="creator"
+        data-transformation="contact-from-iso19139-to-foaf-agent"/>
+    </for>
+    <for name="dcat:contactPoint" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+        data-template-type="contact"
+        data-insert-modes="tags"
+        data-element-xpath="./dcat:Dataset/dcat:contactPoint"
+        data-values="xpath::string-join(.//dcat:contactPoint/@xlink:href, '◿')"
         data-default-role="creator"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>

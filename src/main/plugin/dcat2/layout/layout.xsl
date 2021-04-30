@@ -65,7 +65,9 @@
   <!-- Template to display non existing element ie. geonet:child element
   of the metadocument. Display in editing mode only and if
   the editor mode is not flat mode. -->
-  <xsl:template mode="mode-dcat2" match="gn:child" priority="2000">
+  <xsl:template mode="mode-dcat2"
+                match="gn:child"
+                priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
 
@@ -106,6 +108,51 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
+
+
+
+
+  <!-- Force rendering of + for mandatory fields managed by a directive in flat mode. -->
+  <xsl:template mode="mode-dcat2"
+                match="dct:publisher[$isFlatMode]|dct:creator[$isFlatMode]"
+                priority="2000">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+
+    <xsl:variable name="name" select="name(.)"/>
+    <xsl:variable name="xpath">
+      <xsl:choose>
+        <xsl:when test="starts-with(concat(gn-fn-metadata:getXPath(..),'/',$name), '/dcat:Dataset/')">
+          <xsl:value-of select="concat('/rdf:RDF/dcat:Catalog/dcat:dataset', gn-fn-metadata:getXPath(..),'/',$name)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat(gn-fn-metadata:getXPath(..),'/',$name)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="directive"
+                  select="gn-fn-metadata:getFieldAddDirective($editorConfig, $name)"/>
+
+    <xsl:variable name="labelConfig"
+                  select="gn-fn-metadata:getLabel($schema, $name, $labels, name(..), '', $xpath)"/>
+    <xsl:variable name="child" as="node()">
+      <gn:child name="{local-name()}" prefix="dct" namespace="http://purl.org/dc/terms/"/>
+    </xsl:variable>
+
+    <xsl:call-template name="render-element-to-add">
+      <!-- TODO: add xpath and isoType to get label ? -->
+      <xsl:with-param name="label" select="$labelConfig/label"/>
+      <xsl:with-param name="btnLabel" select="if($name != 'dct:license') then $labelConfig/btnLabel else ''"/>
+      <xsl:with-param name="btnClass" select="if ($labelConfig/btnClass) then $labelConfig/btnClass else ''"/>
+      <xsl:with-param name="directive" select="$directive"/>
+      <xsl:with-param name="childEditInfo" select="$child"/>
+      <xsl:with-param name="parentEditInfo" select="../gn:element"/>
+      <xsl:with-param name="isFirst" select="count(preceding-sibling::*[name() = $name]) = 0"/>
+      <!--<xsl:with-param name="isForceLabel" select="true()"/> -->
+    </xsl:call-template>
+  </xsl:template>
+
 
 
   <xsl:template mode="mode-dcat2" priority="200"
