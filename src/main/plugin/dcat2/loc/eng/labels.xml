@@ -74,7 +74,7 @@
     </description>
   </element>
   <element name="foaf:primaryTopic">
-    <label>Primary Topic</label>
+    <label>Resource (Dataset or DataService)</label>
     <description>The dcat:Resource (dataset or service) described in the record.</description>
   </element>
   <element name="dcat:Dataset">

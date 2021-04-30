@@ -62,6 +62,7 @@
                 priority="1000">
   </xsl:template>
 
+
   <!-- Template to display non existing element ie. geonet:child element
   of the metadocument. Display in editing mode only and if
   the editor mode is not flat mode. -->
@@ -111,11 +112,13 @@
   </xsl:template>
 
 
-
+  <xsl:template mode="mode-dcat2"
+                match="dcat:contactPoint"
+                priority="10000"/>
 
   <!-- Force rendering of + for mandatory fields managed by a directive in flat mode. -->
   <xsl:template mode="mode-dcat2"
-                match="dct:publisher[$isFlatMode]|dct:creator[$isFlatMode]"
+                match="dct:publisher|dct:creator"
                 priority="2000">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
@@ -571,6 +574,11 @@
                           (name(.) = 'dct:conformsTo' and name(..)='dcat:Distribution') or
                           (name(.) = 'adms:status' and name(..)='dcat:Distribution')) and
                           $isFlatMode]"/>
+
+  <!-- Ignore some others in all views -->
+  <xsl:template mode="mode-dcat2"
+                match="foaf:primaryTopic|gn:child[@name = 'primaryTopic']"
+                priority="10000"/>
 
   <!--
     * Ignore all attributes in flatMode

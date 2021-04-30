@@ -74,7 +74,7 @@
     </description>
   </element>
   <element name="foaf:primaryTopic">
-    <label>Sujet principal</label>
+    <label>Resource (Jeu de données ou Service)</label>
     <description>La ressource dcat:Resource (jeu de données ou service) décrite dans cette fiche.</description>
   </element>
   <element name="dcat:Dataset">
