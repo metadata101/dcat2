@@ -51,7 +51,7 @@
   </element>
   <element name="dcat:CatalogRecord">
     <label>Catalogusrecord</label>
-    <description>Catalog-related information</description>
+    <description>Catalog-related information.</description>
   </element>
   <element name="rdf:about">
     <label>URI</label>
@@ -60,62 +60,60 @@
   <element name="rdf:about"
            context="/dcat:CatalogRecord/@rdf:about">
     <label>Record URI</label>
-    <description>Landing page of the record</description>
+    <description>Landingspagina van het record.</description>
   </element>
   <element name="dct:conformsTo">
     <label>Conform</label>
-    <description>An established standard to which the described resource conforms.</description>
+    <description>Een protocol waaraan de resource voldoet.</description>
+    <btnLabel>conform</btnLabel>
   </element>
   <element name="dct:Standard">
     <label>Standard</label>
-    <description>An established standard to which the described resource conforms.
-      This property SHOULD be used to indicate the model, schema, ontology, view or profile that the catalog
-      record metadata conforms to.
+    <description>Een gevestigde norm waaraan het beschreven resource voldoet. Deze eigenschap MOET worden gebruikt om het
+      model, schema, ontologie, view of profiel aan te geven dat de catalogus bevat catalog record voldoet aan.
     </description>
   </element>
   <element name="foaf:primaryTopic">
     <label>Primary Topic</label>
-    <description>The dcat:Resource (dataset or service) described in the record.</description>
+    <description>De dcat:Resource (dataset of service) beschreven in de catalog record.</description>
+    <btnLabel>primary Topic</btnLabel>
   </element>
   <element name="dcat:Dataset">
     <label>Dataset</label>
-    <description>A dataset is a collection of data, published or curated by a single agent.
-      Data comes in many forms including numbers, words, pixels, imagery, sound and other multi-media, and potentially
-      other types, any of which might be collected into a dataset.
-    </description>
+    <description>Een dataset is een verzameling gegevens, gepubliceerd of beheerd door een agent.</description>
     <btnLabel>dataset</btnLabel>
   </element>
   <element name="dct:language">
     <label>Taal</label>
     <description>A language of the item. This refers to the natural language used for textual metadata (i.e. titles,
       descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset
-      distribution
+      distribution.
     </description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="rdf:resource"
            context="dct:language">
-    <label>Record language</label>
+    <label>Taal record</label>
     <description>A language of the item. This refers to the natural language used for textual metadata (i.e. titles,
       descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset
-      distribution
+      distribution.
     </description>
     <btnLabel>language</btnLabel>
   </element>
   <element name="dct:identifier">
     <label>Identificator</label>
-    <description>A unique identifier of the item.
-    </description>
+    <description>De unieke identificator van de resource.</description>
     <btnLabel>identifier</btnLabel>
   </element>
   <element name="dct:issued">
     <label>Aanmaakdatum</label>
-    <description>Date of formal issuance (e.g., publication) of the item.</description>
+    <description>Datum waarop de resource gepubliceerd is.</description>
+    <btnLabel>aanmaakdatum</btnLabel>
   </element>
   <element name="dct:issued"
            context="/dcat:CatalogRecord/dct:issued">
     <label>Aanmaakdatum</label>
-    <description>Date of formal issuance (e.g., publication) of the record in the catalog.</description>
+    <description>Datum waarop de catalog record  gepubliceerd is.</description>
     <help><![CDATA[
     <ul>
     <li><a href="https://www.w3.org/TR/vocab-dcat-2/#Property:record_listing_date">W3C recommendations</a></li>
@@ -124,101 +122,108 @@
   </element>
   <element name="dct:modified">
     <label>Wijzigingsdatum</label>
-    <description>Most recent date on which the element was changed, updated or modified.</description>
+    <description>Datum waarop de gegevens van de resource het laatst gewijzigd zijn.</description>
+    <btnLabel>wijzigingsdatum</btnLabel>
   </element>
   <element name="dct:modified"
            context="/dcat:CatalogRecord/dct:modified">
     <label>Modification date</label>
-    <description>Most recent date on which the catalog record was changed, updated or modified.</description>
+    <description>Datum waarop de gegevens van de catalog record  het laatst gewijzigd zijn.</description>
   </element>
   <element name="dct:title">
     <label>Titel</label>
-    <description>A name given to the item.</description>
+    <description>Beknopte en sprekende benaming van de resource.</description>
     <help><![CDATA[
     <ul>
     <li><a href="https://www.w3.org/TR/2020/REC-vocab-dcat-2-20200204/#Property:record_title">W3C recommendations</a></li>
     </ul>
     ]]></help>
-    <btnLabel>title</btnLabel>
+    <btnLabel>titel</btnLabel>
   </element>
   <element name="dct:description">
     <label>Beschrijving</label>
-    <description>A free-text account of the record.</description>
-    <btnLabel>description</btnLabel>
+    <description>Beknopte beschrijving van de inhoud, de bedoeling/functie, de belangrijkste kenmerken van de resource.</description>
+    <btnLabel>beschrijving</btnLabel>
   </element>
   <element name="dcat:contactPoint">
     <label>Contactinformatie</label>
-    <description>Contact information for the cataloged resource.</description>
-    <btnLabel>point of contact</btnLabel>
+    <description>De relevante contactinformatie waarmee een eindgebruiker in contact kan treden met de verantwoordelijken van de resource.</description>
+    <btnLabel>contactinformatie</btnLabel>
   </element>
   <element name="vcard:Organization">
-    <label>Organization</label>
+    <label>Organisatie</label>
     <description> An organization is a single entity, and might represent a business or government, a department or
       division within a business or government, a club, an association, or the like.
     </description>
-    <btnLabel>organization</btnLabel>
+    <btnLabel>organisatie</btnLabel>
   </element>
   <element name="vcard:fn">
-    <label>Contact name</label>
-    <description></description>
-    <btnLabel>contact name</btnLabel>
+    <label>Naam Contactpunt</label>
+    <description>Naam/benaming van het contactpunt voor de resource. Via een contactpunt kunnen gebruikers bijkomende
+      informatie over de resource bekomen of opmerkingen over je dataset bezorgen.
+    </description>
+    <btnLabel>naam Contactpunt</btnLabel>
   </element>
   <element name="vcard:organization-name">
-    <label>Organization name</label>
-    <description></description>
+    <label>Organisatie</label>
+    <description>Naam van de organisatie die instaat voor het contactpunt.</description>
+    <btnLabel>organisatie</btnLabel>
     <!-- REMOVE ? Possible duplicate with vcard:fn -->
   </element>
   <element name="vcard:hasAddress">
-    <label>Address</label>
-    <description>Postal address</description>
+    <label>Adres</label>
+    <description>Postal address.</description>
+    <btnLabel>adres</btnLabel>
   </element>
   <element name="vcard:Address">
     <label>Address</label>
-    <description>Postal address</description>
+    <description>Postadres.</description>
     <btnLabel>address</btnLabel>
   </element>
   <element name="vcard:street-address">
-    <label>Street</label>
-    <description>Street name and number</description>
-    <btnLabel>street</btnLabel>
+    <label>Straat en huisnummer</label>
+    <description>Straatnaam en huisnummer van het adres van het contactpunt.</description>
+    <btnLabel>straat en huisnummer</btnLabel>
   </element>
   <element name="vcard:locality">
-    <label>Locality</label>
-    <description>City/Municipality</description>
-    <btnLabel>locality</btnLabel>
+    <label>Gemeente</label>
+    <description>Gemeentenaam van het adres van het contactpunt.</description>
+    <btnLabel>gemeente</btnLabel>
   </element>
   <element name="vcard:postal-code">
-    <label>Postal code</label>
-    <description>Zip code</description>
-    <btnLabel>postal code</btnLabel>
+    <label>Postcode</label>
+    <description>Postcode van het adres van het contactpunt.</description>
+    <btnLabel>postcode</btnLabel>
   </element>
   <element name="vcard:country-name">
-    <label>Country</label>
-    <btnLabel>country</btnLabel>
+    <label>Land</label>
+    <description>Naam van het land van het adres van het contactpunt.</description>
+    <btnLabel>land</btnLabel>
   </element>
   <element name="vcard:hasURL">
-    <label>Website</label>
-    <description>Website URL</description>
-    <btnLabel>URL</btnLabel>
+    <label>Contactpagina</label>
+    <description>Website van het contactpunt.</description>
+    <btnLabel>contactpagina</btnLabel>
   </element>
   <element name="vcard:hasTelephone">
-    <label>Phone number</label>
-    <description>Phone number, with country indicator</description>
-    <btnLabel>phone number</btnLabel>
+    <label>Telefoonnummer</label>
+    <description>Telefoonnummer van het contactpunt.</description>
+    <btnLabel>telefoonnummer</btnLabel>
   </element>
-
   <element name="dct:creator">
-    <label>Creator</label>
-    <description>The entity responsible for producing the resource.</description>
+    <label>Schepper</label>
+    <description>De entiteit die verantwoordelijk is voor het produceren van de resource.</description>
+    <btnLabel>schepper</btnLabel>
   </element>
   <element name="dct:publisher">
     <label>Uitgever</label>
-    <description>The entity responsible for making the item available.</description>
+    <description>De entiteit die verantwoordelijk is voor het beschikbaar stellen van het resource.</description>
+    <btnLabel>uitgever</btnLabel>
   </element>
   <element name="dct:issued"
            context="/dcat:Dataset/dct:issued">
-    <label>Release date</label>
-    <description>Date of formal issuance (e.g., publication) of the resource.</description>
+    <label>Aanmaakdatum</label>
+    <description>Datum waarop de dataset gepubliceerd is.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_release_date">
@@ -226,11 +231,12 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>aanmaakdatum</btnLabel>
   </element>
   <element name="dct:modified"
            context="/dcat:Dataset/dcat:distribution/dcat:Distribution/dct:modified">
-    <label>Update/modification date</label>
-    <description>Most recent date on which the resource was changed, updated or modified.</description>
+    <label>Wijzigingsdatum</label>
+    <description>Datum waarop de gegevens van de resource het laatst gewijzigd zijn.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_update_date">
@@ -238,17 +244,18 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>wijzigingsdatum</btnLabel>
   </element>
   <element name="dcat:landingPage">
     <label>Landingspagina</label>
-    <description>A Web page that can be navigated to in a Web browser to gain access to the catalog,
-      a dataset, its distributions and/or additional information.
+    <description>Een algemene webpagina waarnaar kan worden genavigeerd in een webbrowser, met algemene aanvullende
+      informatie over de resource.
     </description>
-    <btnLabel></btnLabel>
+    <btnLabel>landingspagina</btnLabel>
   </element>
   <element name="dct:accessRights">
     <label>Toegankelijkheid</label>
-    <description>Information about who can access the resource or an indication of its security status.</description>
+    <description>De toegankelijkheid voor de resource.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_access_rights">
@@ -256,11 +263,11 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>access rights</btnLabel>
+    <btnLabel>toegankelijkheid</btnLabel>
   </element>
   <element name="dct:license">
     <label>Licentie</label>
-    <description>A legal document under which the resource is made available.</description>
+    <description>Een juridisch document waaronder de resource beschikbaar wordt gesteld.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_license">
@@ -268,23 +275,26 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>licentie</btnLabel>
   </element>
   <element name="dct:LicenseDocument">
-    <label>License document</label>
-    <description>A legal document giving official permission to do something with a resource.</description>
+    <label>Document</label>
+    <description>Een juridisch document dat officiële toestemming geeft om iets met met de resource te doen.</description>
+    <btnLabel>document</btnLabel>
   </element>
   <element name="dct:rights">
     <label>Rechten</label>
-    <description>Information about rights held in and over the distribution.</description>
-    <btnLabel>rights</btnLabel>
+    <description>Bepalingen van juridische aard die gelden op de resource.</description>
+    <btnLabel>rechten</btnLabel>
   </element>
   <element name="dct:RightsStatement">
-    <label>Rights statement</label>
-    <description>A rights statement that concerns how the distribution is accessed.</description>
+    <label>Bepaling</label>
+    <description>Een rechtenverklaring die betreft hoe de distributie wordt benaderd.</description>
+    <btnLabel>bepaling</btnLabel>
   </element>
   <element name="odrl:hasPolicy">
     <label>Beleid</label>
-    <description>An ODRL conformant policy expressing the rights associated with the resource.</description>
+    <description>Een ODRL-conform beleid dat de rechten uitdrukt die aan de resource zijn gekoppeld.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_has_policy">
@@ -292,10 +302,11 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>beleid</btnLabel>
   </element>
   <element name="prov:qualifiedAttribution">
     <label>Toegekende bevoegdheid</label>
-    <description>Link to an Agent having some form of responsibility for the resource</description>
+    <description>Link naar een agent die een of andere vorm van verantwoordelijkheid heeft voor de resource.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_qualified_attribution">
@@ -303,23 +314,22 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>qualified attribution</btnLabel>
+    <btnLabel>toegekende bevoegdheid</btnLabel>
   </element>
   <element name="dct:relation">
-    <label>Gerelateerde bron</label>
-    <description>A related resource. Recommended practice is to identify the related resource by means of a URI. If this is not possible
-      or feasible, a string conforming to a formal identification system may be provided.</description>
-    <btnLabel>relation</btnLabel>
+    <label>Verwante resource</label>
+    <description>Verwijzing (titel, identificator,..) naar een verwante dataset of verwante bron van de resource.</description>
+    <btnLabel>verwante resource</btnLabel>
   </element>
   <element name="dcat:qualifiedRelation">
-    <label>Relatie</label>
-    <description>Link to a description of a relationship with another resource</description>
-    <btnLabel>qualified relation</btnLabel>
+    <label>Kwalificeerde relatie</label>
+    <description>Link naar een beschrijving van een relatie met een andere resource.</description>
+    <btnLabel>kwalificeerde relatie</btnLabel>
   </element>
   <element name="dct:isReferencedBy">
-    <label>Referentie</label>
-    <description>A related resource, such as a publication, that references, cites, or otherwise points to the
-      cataloged resource.
+    <label>Verwezen door</label>
+    <description>cataloged resourceEen gerelateerde bron, zoals een publicatie, die verwijst naar, citeert of anderszins
+      verwijst naar de gecatalogiseerde resource.
     </description>
     <help for="reference"><![CDATA[
     <ul>
@@ -328,25 +338,27 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>ref. by</btnLabel>
+    <btnLabel>verwezen door</btnLabel>
   </element>
   <element name="dcat:distribution">
     <label>Distributie</label>
-    <description>An available distribution of the dataset.
-    </description>
-    <btnLabel>distribution</btnLabel>
+    <description>Een beschikbare distributie van de dataset.</description>
+    <btnLabel>distributie</btnLabel>
   </element>
   <element name="dcat:Distribution">
+    <label>Distributie</label>
+    <description>Een beschikbare distributie van de dataset.</description>
+    <btnLabel>distributie</btnLabel>
     <label>Distribution</label>
-    <description>A specific representation of a dataset. A dataset might be available in multiple serializations
-      that may differ in various ways, including natural language, media-type or format, schematic organization,
-      temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
+    <description>Een specifieke representatie van een dataset. Een dataset kan beschikbaar zijn in meerdere
+      serialisaties die op verschillende manieren kunnen verschillen, onder meer wat betreft natuurlijke taal, mediatype
+      of -formaat, schematische organisatie, temporele en ruimtelijke resolutie, mate van detail of profielen (die een
+      of meer van de bovenstaande elementen kunnen specificeren).
     </description>
   </element>
   <element name="dcat:accessService">
     <label>Wordt aangeboden door</label>
-    <description>A data service that gives access to the distribution of the dataset
-    </description>
+    <description>De dataservice die deze distributie aanbiedt.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_access_service">
@@ -354,11 +366,11 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>wordt aangeboden door</btnLabel>
   </element>
   <element name="dcat:mediaType">
-    <label>Media type</label>
-    <description>The media type of the distribution as defined by IANA.
-    </description>
+    <label>Mediatype</label>
+    <description>Het mediatype van de distributie zoals gedefinieerd door IANA.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:distribution_media_type">
@@ -366,11 +378,12 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>mediatype</btnLabel>
   </element>
   <element name="dcat:packageFormat">
-    <label>Package format</label>
-    <description>The package format of the distribution in which one or more data files are grouped together, e.g. to
-      enable a set of related files to be downloaded together.
+    <label>Package formaat</label>
+    <description>De pakketindeling van de distributie waarin een of meer gegevensbestanden zijn gegroepeerd,
+      bijvoorbeeld om een reeks verwante bestanden samen te kunnen downloaden.
     </description>
     <help for="reference"><![CDATA[
     <ul>
@@ -379,16 +392,17 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>package formaat</btnLabel>
   </element>
   <element name="dcat:byteSize">
-    <label>Byte size</label>
-    <description>The size of a distribution in bytes.
-    </description>
+    <label>Grootte (bytes)</label>
+    <description>Grootte van de distributie in bytes.</description>
+    <btnLabel>grootte (bytes)</btnLabel>
   </element>
   <element name="dcat:compressFormat">
-    <label>Compression format</label>
-    <description>The compression format of the distribution in which the data is contained in a compressed form, e.g.
-      to reduce the size of the downloadable file.
+    <label>Compressie formaat</label>
+    <description>Het compressieformaat van de distributie waarin de gegevens in gecomprimeerde vorm zijn opgenomen, bv.
+      om de grootte van het downloadbare bestand te beperken.
     </description>
     <help for="reference"><![CDATA[
     <ul>
@@ -397,11 +411,11 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>compressie formaat</btnLabel>
   </element>
   <element name="dcat:temporalResolution">
-    <label>Temporal resolution</label>
-    <description>Minimum time period resolvable in the dataset.
-    </description>
+    <label>Temporele resolutie</label>
+    <description>Minimale periode die in de dataset kan worden opgelost.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_temporal_resolution">
@@ -409,12 +423,11 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>temporal resolution</btnLabel>
+    <btnLabel>temporele resolutie</btnLabel>
   </element>
   <element name="dct:accrualPeriodicity">
-    <label>Accrual periodicity</label>
-    <description>The frequency at which dataset is published.
-    </description>
+    <label>Updatefrequentie</label>
+    <description>De frequentie waarmee de dataset wordt bijgewerkt.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_frequency">
@@ -422,11 +435,11 @@
     </li>
     </ul>
     ]]></help>
+    <btnLabel>updatefrequentie</btnLabel>
   </element>
   <element name="dct:spatial">
     <label>Ruimtelijke begrenzing</label>
-    <description>The geographical area covered by the dataset.
-    </description>
+    <description>Het geografische begrenzing dat door de dataset wordt bestreken.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_spatial">
@@ -434,12 +447,11 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>spatial extent</btnLabel>
+    <btnLabel>ruimtelijke begrenzing</btnLabel>
   </element>
   <element name="dct:temporal">
-    <label>Temporal extent</label>
-    <description>The temporal period that the dataset covers.
-    </description>
+    <label>Temporele begrenzing</label>
+    <description>Tijsdsperiode waarop de gegevens in de dataset betrekking hebben.</description>
     <help for="reference"><![CDATA[
     <ul>
     <li><a target="_blank" href="https://www.w3.org/TR/vocab-dcat-2/#Property:dataset_temporal">
@@ -450,15 +462,22 @@
     <btnLabel>Temporele begrenzing</btnLabel>
   </element>
   <element name="dct:PeriodOfTime">
-    <label>Period of time</label>
-    <description>The covered period of time
-    </description>
+    <label>Begrenzing</label>
+    <description>De gedekte periode.</description>
+    <btnLabel>begrenzing</btnLabel>
   </element>
   <element name="schema:startDate">
-    <label>Start</label>
+    <label>Vanaf (datum/tijd)</label>
+    <description>Startdatum en/of -tijdstip van de periode waarop de gegevens van de dataset betrekking hebben.
+    </description>
+    <btnLabel>vanaf (datum/tijd)</btnLabel>
   </element>
   <element name="schema:endDate">
-    <label>End</label>
+    <label>Tot (datum/tijd)</label>
+    <description>Vul aan met einddatum en/of -tijdstip van de periode waarop de gegevens van de dataset betrekking
+      hebben.
+    </description>
+    <btnLabel>tot (datum/tijd)</btnLabel>
   </element>
   <element name="prov:wasGeneratedBy">
     <label>Generated by (genealogy)</label>
@@ -476,20 +495,21 @@
 
 
   <element name="dcat:DataService">
-    <label>Data Service</label>
-    <description>A collection of operations that provides access to one or more datasets or data processing functions.
+    <label>Dataservice</label>
+    <description>Een verzameling van operaties die ofwel toegang bieden tot één of meer datasets ofwel een
+      dataverwerkingsdoel hebben.
     </description>
-    <btnLabel>data service</btnLabel>
+    <btnLabel>dataservice</btnLabel>
   </element>
   <element name="dcat:endpointURL">
     <label>EndpointURL</label>
-    <description>The root location or primary endpoint of the service (a Web-resolvable IRI).
-    </description>
-    <btnLabel>URL</btnLabel>
+    <description>De rootlocatie of het primaire endpoint van de dienst (een web-resolvable URI).</description>
+    <btnLabel>endpointURL</btnLabel>
   </element>
   <element name="dcat:endpointDescription">
     <label>Endpointbeschrijving</label>
-    <description>A description of the services available via the end-points, including their operations, parameters etc.
+    <description>Een beschrijving van de diensten die beschikbaar zijn via de end-points, met inbegrip van hun
+      operaties, parameters, enz.
     </description>
     <help for="reference"><![CDATA[
     <ul>
@@ -498,12 +518,11 @@
     </li>
     </ul>
     ]]></help>
-    <btnLabel>endpoint description</btnLabel>
+    <btnLabel>endpointbeschrijving</btnLabel>
   </element>
   <element name="dcat:servesDataset">
     <label>Biedt informatie aan over</label>
-    <description>A collection of data that this data service can distribute.
-    </description>
-    <btnLabel></btnLabel>
+    <description>De data die via deze dataservice worden aangeboden.</description>
+    <btnLabel>biedt informatie aan over</btnLabel>
   </element>
 </labels>
