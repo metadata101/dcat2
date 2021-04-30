@@ -53,14 +53,19 @@
     <label>Catalog Record</label>
     <description>Catalog-related information</description>
   </element>
-  <element name="rdf:about">
-    <label>URI</label>
+  <element name="rdf:about"
+           context="/rdf:RDF/dcat:Dataset/dcat:landingPage/foaf:Document/@rdf:about">
+    <label>Landing page</label>
     <description></description>
   </element>
   <element name="rdf:about"
            context="/dcat:CatalogRecord/@rdf:about">
     <label>Record URI</label>
     <description>Landing page of the record</description>
+  </element>
+  <element name="rdf:about">
+    <label>URI</label>
+    <description></description>
   </element>
   <element name="dct:conformsTo">
     <label>Conforms to</label>
@@ -251,6 +256,7 @@
     </ul>
     ]]></help>
   </element>
+
   <element name="dcat:landingPage">
     <label>Landing page</label>
     <description>A Web page that can be navigated to in a Web browser to gain access to the catalog,

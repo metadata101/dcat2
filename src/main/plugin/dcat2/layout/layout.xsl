@@ -248,7 +248,7 @@
     <xsl:variable name="theElement"
                   select="if(foaf:Document) then foaf:Document else ."/>
 
-    <!-- TODO: Style - Label above field class not applied -->
+    <!-- TODO: Here removal should remove the parent, not the attribute only. -->
     <xsl:apply-templates mode="render-for-field-for-attribute"
                          select="$theElement/@rdf:resource
                                  |$theElement/@rdf:about">

@@ -206,6 +206,7 @@
       <name>dcat:startDate</name>
       <name>dcat:endDate</name>
       <name>vcard:hasEmail</name>
+      <name>foaf:Document</name>
       <name>dcat:spatialResolutionInMeters</name>
       <name>dcat:temporalResolution</name>
     </exclude>

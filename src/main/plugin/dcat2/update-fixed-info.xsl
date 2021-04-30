@@ -349,6 +349,15 @@
     </xsl:copy>
   </xsl:template>
 
+
+  <xsl:template match="foaf:Document[not(@rdf:about)]" priority="10">
+    <xsl:copy>
+      <xsl:attribute name="rdf:about"/>
+      <xsl:apply-templates select="@*|*"/>
+    </xsl:copy>
+  </xsl:template>
+
+
   <!-- Fix value for attribute -->
   <xsl:template match="rdf:Statement/rdf:object" priority="10">
     <xsl:copy>
@@ -502,6 +511,8 @@
   <xsl:template match="dcat:keyword[count(@*) = 0 and count(*) = 0]
                        |dcat:theme[count(@*) = 0 and count(*) = 0]
                        |dct:type[count(@*) = 0 and count(*) = 0]
+                       |dct:accessRights[count(@*) = 0 and count(*) = 0]
+                       |dct:accrualPeriodicity[count(@*) = 0 and count(*) = 0]
                        |dct:creator[count(@*) = 0 and count(*) = 0]
                        |dct:publisher[count(@*) = 0 and count(*) = 0]
                        |dcat:contactPoint[count(@*) = 0 and count(*) = 0]
