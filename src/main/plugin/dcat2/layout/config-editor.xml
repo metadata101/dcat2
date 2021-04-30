@@ -127,6 +127,13 @@
         max="1"
         labelKey="dcat.addAccessRight"/>
     </for>
+    <for name="dct:accessRights" xpath="dcat:Distribution" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.access-right"
+        xpath="//dcat:Distribution/dct:accessRights"
+        max="1"
+        labelKey="dcat.addAccessRight"/>
+    </for>
 
     <!--
     TODO: We can't use that. See layout-custom-fields-keywords.xsl to add a snippet skos:Concept
