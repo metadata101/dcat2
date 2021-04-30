@@ -103,8 +103,9 @@
         <xsl:with-param name="directive" select="$directive"/>
         <xsl:with-param name="childEditInfo" select="."/>
         <xsl:with-param name="parentEditInfo" select="../gn:element"/>
-        <xsl:with-param name="isFirst" select="count(preceding-sibling::*[name() = $name]) = 0"/>
-        <!--<xsl:with-param name="isForceLabel" select="true()"/> -->
+        <xsl:with-param name="isFirst"
+                        select="if($name = 'dcat:contactPoint') then true()
+                                else count(preceding-sibling::*[name() = $name]) = 0"/>
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
