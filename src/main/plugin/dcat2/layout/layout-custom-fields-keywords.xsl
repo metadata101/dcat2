@@ -41,6 +41,9 @@
     <xsl:for-each select="$editorConfig/editor/fields/for[@use='thesaurus-list-picker']">
       <element>
         <xsl:attribute name="name" select="./@name"/>
+        <xsl:if test="./@xpath">
+          <xsl:attribute name="parent" select="./@xpath"/>
+        </xsl:if>
         <thesaurus>
           <xsl:value-of select="./directiveAttributes/@thesaurus"/>
         </thesaurus>
@@ -70,13 +73,19 @@
   -->
   <xsl:template mode="mode-dcat2" priority="4000" match="*[name() = $dcatKeywordConfig//@name]">
     <xsl:variable name="name" select="name()"/>
+    <xsl:variable name="parent" select="name(..)"/>
     <xsl:variable name="hasGnChild" select="count(../gn:child[concat(@prefix, ':', @name) = $name]) > 0"/>
 
     <xsl:if test="not($hasGnChild)">
       <xsl:variable name="isFirst" select="count(preceding-sibling::*[name() = $name]) &lt; 1"/>
       <xsl:if test="$isFirst">
+        <xsl:variable name="config"
+                      select="if ($dcatKeywordConfig/*[@name = $name and @parent = $parent]) then
+                                $dcatKeywordConfig/*[@name = $name and @parent = $parent] else
+                                $dcatKeywordConfig/*[@name = $name and not(@parent)]"/>
+
         <xsl:call-template name="thesaurus-picker-list">
-          <xsl:with-param name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+          <xsl:with-param name="config" select="$config"/>
           <xsl:with-param name="ref" select="../gn:element/@ref"/>
         </xsl:call-template>
       </xsl:if>
@@ -86,8 +95,14 @@
   <xsl:template mode="mode-dcat2" priority="4000"
                 match="gn:child[concat(@prefix, ':', @name) = $dcatKeywordConfig//@name]">
     <xsl:variable name="name" select="concat(@prefix, ':', @name)"/>
+    <xsl:variable name="parent" select="name(..)"/>
+    <xsl:variable name="config"
+                  select="if ($dcatKeywordConfig/*[@name = $name and @parent = $parent]) then
+                                $dcatKeywordConfig/*[@name = $name and @parent = $parent] else
+                                $dcatKeywordConfig/*[@name = $name and not(@parent)]"/>
+
     <xsl:call-template name="thesaurus-picker-list">
-      <xsl:with-param name="config" select="$dcatKeywordConfig/*[@name = $name]"/>
+      <xsl:with-param name="config" select="$config"/>
       <xsl:with-param name="ref" select="../gn:element/@ref"/>
     </xsl:call-template>
   </xsl:template>

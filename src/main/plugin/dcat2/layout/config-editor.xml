@@ -33,8 +33,9 @@
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
 
+    <!-- Thesaurus list picker configuration. Handled in layout-custom-fields-keywords.xsl.
 
-    <!-- To use rdf:reference instead of skos:Concept, configure in the directiveAttributes:
+         To use rdf:reference instead of skos:Concept, configure in the directiveAttributes:
           useReference="true"
     -->
     <for name="dcat:theme" use="thesaurus-list-picker">
@@ -44,7 +45,14 @@
         max=""
         labelKey="dcat.addThemes"/>
     </for>
-    <for name="dct:type" use="thesaurus-list-picker">
+    <for name="dct:type" xpath="dcat:Dataset" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.dcat-type"
+        xpath="/dct:type"
+        max="1"
+        labelKey="dcat.addType"/>
+    </for>
+    <for name="dct:type" xpath="dcat:DataService" use="thesaurus-list-picker">
       <directiveAttributes
         thesaurus="external.theme.dcat-type"
         xpath="/dct:type"
@@ -85,6 +93,34 @@
         xpath="//dcat:Distribution/dcat:mediaType"
         max="1"
         labelKey="dcat.addMediaType"/>
+    </for>
+    <for name="dct:accrualPeriodicity" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.frequency"
+        xpath="/dct:accrualPeriodicity"
+        max="1"
+        labelKey="dcat.addAccrualPeriodicity"/>
+    </for>
+    <for name="dct:type" xpath="foaf:Agent" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.org.purl.adms.publisher-type"
+        xpath="/dct:publisher/foaf:Agent/dct:type"
+        max="1"
+        labelKey="dcat.addType"/>
+    </for>
+    <for name="dct:type" xpath="dct:LicenseDocument" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.org.purl.adms.license-type"
+        xpath="//dct:LicenseDocument/dct:type"
+        max="1"
+        labelKey="dcat.addType"/>
+    </for>
+    <for name="dct:accessRights" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.access-right"
+        xpath="dct:accessRights"
+        max="1"
+        labelKey="dcat.addAccessRight"/>
     </for>
 
     <!--
