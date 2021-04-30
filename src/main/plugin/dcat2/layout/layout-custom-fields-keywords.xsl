@@ -67,17 +67,20 @@
 
   Catch all elements first.
   On gn:child, build the keyword picker directive using XPath mode.
-
-  TODO: Get thesaurus from config (if not thesaurus, render as text ?)
   TODO: How to deal with value not in the thesaurus ?
   -->
-  <xsl:template mode="mode-dcat2" priority="4000" match="*[name() = $dcatKeywordConfig//@name]">
+  <xsl:template mode="mode-dcat2" priority="4000"
+                match="*[name() = $dcatKeywordConfig//@name]">
     <xsl:variable name="name" select="name()"/>
     <xsl:variable name="parent" select="name(..)"/>
+
+    <!-- Element with cardinality 0..1 once defined, does not have gn:child equivalent.
+    Render form here. -->
     <xsl:variable name="hasGnChild" select="count(../gn:child[concat(@prefix, ':', @name) = $name]) > 0"/>
 
     <xsl:if test="not($hasGnChild)">
-      <xsl:variable name="isFirst" select="count(preceding-sibling::*[name() = $name]) &lt; 1"/>
+      <xsl:variable name="isFirst"
+                    select="count(preceding-sibling::*[name() = $name]) &lt; 1"/>
       <xsl:if test="$isFirst">
         <xsl:variable name="config"
                       select="if ($dcatKeywordConfig/*[@name = $name and @parent = $parent]) then
@@ -125,9 +128,9 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="string-join(
-                          if ($lang and ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang])
+                          if ($metadataLanguage and ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $metadataLanguage])
                           then
-                          ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang]/replace(text(), ',', ',,')
+                          ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $metadataLanguage]/replace(text(), ',', ',,')
                           else ../*[name() = $config/@name]//skos:prefLabel[not(@xml:lang)]/replace(text(), ',', ',,'), ',')" />
         </xsl:otherwise>
       </xsl:choose>

@@ -137,7 +137,7 @@
     <for name="dct:accessRights" use="thesaurus-list-picker">
       <directiveAttributes
         thesaurus="external.theme.eu.europa.access-right"
-        xpath="dct:accessRights"
+        xpath="/dct:accessRights"
         max="1"
         labelKey="dcat.addAccessRight"/>
     </for>
