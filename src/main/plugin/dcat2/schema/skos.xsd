@@ -29,7 +29,7 @@
   <!-- skos:Concept-->
   <xs:complexType name="Concept">
     <xs:sequence>
-      <xs:element name="Concept">
+      <xs:element name="Concept" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="rdf:type" minOccurs="0" maxOccurs="unbounded"/>
@@ -44,6 +44,7 @@
         </xs:complexType>
       </xs:element>
     </xs:sequence>
+    <xs:attribute ref="rdf:resource" use="optional"/>
   </xs:complexType>
   <!-- individual elements-->
   <xs:element name="notation" type="rdf:TypedLiteral"/>

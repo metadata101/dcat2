@@ -53,6 +53,9 @@
         <labelKey>
           <xsl:value-of select="./directiveAttributes/@labelKey"/>
         </labelKey>
+        <useReference>
+          <xsl:value-of select="./directiveAttributes/@useReference"/>
+        </useReference>
       </element>
     </xsl:for-each>
   </xsl:variable>
@@ -92,6 +95,33 @@
   <xsl:template name="thesaurus-picker-list">
     <xsl:param name="config" as="node()"/>
     <xsl:param name="ref" as="xs:string"/>
+
+    <xsl:variable name="values">
+      <xsl:choose>
+        <xsl:when test="$config/useReference = 'true' and ../*[name() = $config/@name]/@rdf:resource">
+          <xsl:for-each select="../*[name() = $config/@name]">
+           <xsl:variable name="v" select="replace(java:getKeywordValueByUri(@rdf:resource, $config/thesaurus, $lang), ',', ',,')" />
+
+            <xsl:if test="string($v)">
+              <xsl:value-of select="$v" /><xsl:if test="position() != last()">,</xsl:if>
+            </xsl:if>
+
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="string-join(
+                          if ($lang and ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang])
+                          then
+                          ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang]/replace(text(), ',', ',,')
+                          else ../*[name() = $config/@name]//skos:prefLabel[not(@xml:lang)]/replace(text(), ',', ',,'), ',')" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="transformation" select="if ($config/useReference = 'true')
+                                                then 'to-dcat2-concept-reference'
+                                                else 'to-dcat2-concept'" />
+
     <div
       data-gn-keyword-selector="tagsinput"
       data-metadata-id=""
@@ -100,13 +130,9 @@
       data-wrapper="{$config/@name}"
       data-thesaurus-title="{{{{'{$config/labelKey}' | translate}}}}"
       data-thesaurus-key="{$config/thesaurus}"
-      data-keywords="{string-join(
-                          if ($lang and ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang])
-                          then
-                          ../*[name() = $config/@name]//skos:prefLabel[@xml:lang = $lang]/replace(text(), ',', ',,')
-                          else ../*[name() = $config/@name]//skos:prefLabel[not(@xml:lang)]/replace(text(), ',', ',,'), ',')}"
-      data-transformations="to-dcat2-concept"
-      data-current-transformation="to-dcat2-concept"
+      data-keywords="{$values}"
+      data-transformations="{$transformation}"
+      data-current-transformation="{$transformation}"
       data-max-tags="{$config/max}"
       data-lang="{$metadataOtherLanguagesAsJson}"
       data-textgroup-only="false"
