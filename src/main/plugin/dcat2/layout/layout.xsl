@@ -249,7 +249,7 @@
                          select="$theElement/@rdf:resource
                                  |$theElement/@rdf:about">
       <xsl:with-param name="ref" select="$theElement/gn:element/@ref"/>
-      <xsl:with-param name="insertRef" select="$theElement/gn:element/@ref"/>
+      <xsl:with-param name="class" select="'gn-field'"/>
     </xsl:apply-templates>
 
   </xsl:template>
