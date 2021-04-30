@@ -273,7 +273,8 @@
           <field xpath="rdf:RDF/*/dcat:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
         </section>
 
-        <section name="dcat.spatial-info">
+        <section name="dcat.spatial-info"
+                 displayIfRecord="count(rdf:RDF/dcat:Dataset) > 0">
           <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
         </section>
