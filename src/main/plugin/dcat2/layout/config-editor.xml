@@ -14,6 +14,10 @@
 
     <for name="adms:versionNotes" use="textarea"/>
     <for name="dct:description" use="textarea"/>
+    <for name="dct:issued" use="date"/>
+    <for name="dct:modified" use="date"/>
+    <for name="schema:startDate" use="date"/>
+    <for name="schema:endDate" use="date"/>
 
     <for name="dcat:spatialResolutionInMeters" use="number"/>
     <for name="dcat:temporalResolution" use="data-gn-field-duration-div"/>
@@ -248,7 +252,6 @@
           <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
           <field xpath="rdf:RDF/*/dcat:endpointURL"/>
 
-
           <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
 
@@ -304,7 +307,7 @@
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
-      <tab id="dcat.resource" default="true" name="">
+      <tab id="dcat.resource" default="true">
         <section xpath="rdf:RDF/dcat:Dataset"/>
         <section xpath="rdf:RDF/dcat:DataService"/>
       </tab>

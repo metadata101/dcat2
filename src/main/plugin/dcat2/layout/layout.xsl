@@ -474,6 +474,11 @@
           </xsl:call-template>
         </xsl:when>
         <xsl:otherwise>
+
+          <xsl:variable name="isReadOnlyElement"
+                        select="name(..) = 'dcat:CatalogRecord'
+                                and name(.) = ('dct:identifier', 'dct:issued', 'dct:modified')"/>
+
           <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
           <xsl:call-template name="render-element">
             <xsl:with-param name="label" select="$labelConfig"/>
@@ -485,7 +490,9 @@
             <!--xsl:with-param name="forceDisplayAttributes" select="gn-fn-dcat2:isForceDisplayAttributes(.)"/-->
             <xsl:with-param name="attributesSnippet" select="$attributes"/>
             <xsl:with-param name="type"
-                            select="if ($config and $config/@use != '')
+                            select="if ($isReadOnlyElement)
+                              then 'text'
+                              else if ($config and $config/@use != '')
                               then $config/@use
                               else gn-fn-metadata:getFieldType($editorConfig, name(), '', $xpath)"/>
             <xsl:with-param name="directiveAttributes">
@@ -521,8 +528,7 @@
                             (not(gn:element/@down) and not(gn:element/@up)))"/>
             <!--          <xsl:with-param name="isForceLabel" select="true()"/>-->
             <xsl:with-param name="isDisabled"
-                            select="(name(.) = ('dct:identifier')
-                                    and name(..) = 'dcat:CatalogRecord')
+                            select="$isReadOnlyElement
                                     or
                                     count($metadata//*[
                                       gn:element/@ref = $theElement/gn:element/@ref]
@@ -575,46 +581,6 @@
                        |@gn:xsderror|@gn:addedObj"
                 priority="101"/>
 
-
-  <xsl:template mode="mode-dcat2"
-                match="dcat:Dataset/dct:issued
-                      |dcat:Dataset/dct:modified
-                      |dcat:DataService/dct:issued
-                      |dcat:DataService/dct:modified
-                      |schema:startDate|schema:endDate"
-                priority="2000">
-    <xsl:param name="schema" select="$schema" required="no"/>
-    <xsl:param name="labels" select="$labels" required="no"/>
-    <xsl:param name="refToDelete" required="no"/>
-    <xsl:param name="editInfo" required="no"/>
-    <xsl:param name="parentEditInfo" required="no"/>
-
-    <xsl:variable name="isRequired" as="xs:boolean">
-      <xsl:choose>
-        <xsl:when
-          test="($parentEditInfo and $parentEditInfo/@min = 1 and $parentEditInfo/@max = 1) or
-            (not($parentEditInfo) and $editInfo and $editInfo/@min = 1 and $editInfo/@max = 1)">
-          <xsl:value-of select="true()"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="false()"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:variable name="xpath" select="gn-fn-metadata:getXPath(.)"/>
-    <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', $xpath)"/>
-
-
-    <div data-gn-date-picker="{.}"
-         data-label="{$labelConfig/label}"
-         data-element-name="{name()}"
-         data-element-ref="{concat('_X', gn:element/@ref)}"
-         data-required="{$isRequired}"
-         data-tag-name="{name()}"
-         data-hide-time="{if ($viewConfig/@hideTimeInCalendar = 'true') then 'true' else 'false'}">
-    </div>
-  </xsl:template>
 
 
   <xsl:template mode="render-for-field-for-attribute-dcat2"
