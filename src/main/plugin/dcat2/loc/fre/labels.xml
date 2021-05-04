@@ -53,14 +53,19 @@
     <label>Fiche</label>
     <description>Information liée au catalogue</description>
   </element>
-  <element name="rdf:about">
-    <label>URI</label>
-    <description>Identifiant de Ressource Universel</description>
+  <element name="rdf:about"
+           context="/rdf:RDF/dcat:Dataset/dcat:landingPage/foaf:Document/@rdf:about">
+    <label>Landing page</label>
+    <description></description>
   </element>
   <element name="rdf:about"
            context="/dcat:CatalogRecord/@rdf:about">
     <label>URI de la fiche</label>
     <description>Page d'accueil de la fiche</description>
+  </element>
+  <element name="rdf:about">
+    <label>URI</label>
+    <description>Identifiant de Ressource Universel</description>
   </element>
   <element name="dct:conformsTo">
     <label>Conforme à</label>
