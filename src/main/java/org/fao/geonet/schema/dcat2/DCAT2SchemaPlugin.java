@@ -57,6 +57,13 @@ public class DCAT2SchemaPlugin
                 .add(DCAT2Namespaces.DCAT)
                 .add(DCAT2Namespaces.VCARD)
                 .add(DCAT2Namespaces.FOAF)
+                .add(DCAT2Namespaces.RDF)
+                .add(DCAT2Namespaces.RDFS)
+                .add(DCAT2Namespaces.LOCN)
+                .add(DCAT2Namespaces.SPDX)
+                .add(DCAT2Namespaces.ADMS)
+                .add(DCAT2Namespaces.OWL)
+                .add(DCAT2Namespaces.PROV)
                 .build();
 
         allTypenames = ImmutableMap.<String, Namespace>builder()

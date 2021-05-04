@@ -14,6 +14,10 @@
 
     <for name="adms:versionNotes" use="textarea"/>
     <for name="dct:description" use="textarea"/>
+    <for name="dct:issued" use="date"/>
+    <for name="dct:modified" use="date"/>
+    <for name="schema:startDate" use="date"/>
+    <for name="schema:endDate" use="date"/>
 
     <for name="dcat:spatialResolutionInMeters" use="number"/>
     <for name="dcat:temporalResolution" use="data-gn-field-duration-div"/>
@@ -24,11 +28,30 @@
 
     <for name="dct:creator" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-        data-template-add-action="true"
-        data-search-action="true"
-        data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes="text,xlink"
+        data-element-xpath="./dcat:Dataset/dct:creator"
+        data-max-tags="1"
+        data-insert-modes="tags"
+        data-values="xpath::string-join(.//dct:creator/@xlink:href, '◿')"
+        data-default-role="creator"
+        data-transformation="contact-from-iso19139-to-foaf-agent"/>
+    </for>
+    <for name="dct:publisher" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+        data-template-type="contact"
+        data-element-xpath="./dcat:Dataset/dct:publisher"
+        data-max-tags="1"
+        data-insert-modes="tags"
+        data-values="xpath::string-join(.//dct:publisher/@xlink:href, '◿')"
+        data-default-role="creator"
+        data-transformation="contact-from-iso19139-to-foaf-agent"/>
+    </for>
+    <for name="dcat:contactPoint" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+        data-template-type="contact"
+        data-insert-modes="tags"
+        data-element-xpath="./dcat:Dataset/dcat:contactPoint"
+        data-values="xpath::string-join(.//dcat:contactPoint/@xlink:href, '◿')"
         data-default-role="creator"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
@@ -44,20 +67,6 @@
         xpath="/dcat:theme"
         max=""
         labelKey="dcat.addThemes"/>
-    </for>
-    <for name="dct:type" xpath="dcat:Dataset" use="thesaurus-list-picker">
-      <directiveAttributes
-        thesaurus="external.theme.dcat-type"
-        xpath="/dct:type"
-        max="1"
-        labelKey="dcat.addType"/>
-    </for>
-    <for name="dct:type" xpath="dcat:DataService" use="thesaurus-list-picker">
-      <directiveAttributes
-        thesaurus="external.theme.dcat-type"
-        xpath="/dct:type"
-        max="1"
-        labelKey="dcat.addType"/>
     </for>
     <for name="dcat:keyword" use="thesaurus-list-picker">
       <directiveAttributes
@@ -118,7 +127,14 @@
     <for name="dct:accessRights" use="thesaurus-list-picker">
       <directiveAttributes
         thesaurus="external.theme.eu.europa.access-right"
-        xpath="dct:accessRights"
+        xpath="/dct:accessRights"
+        max="1"
+        labelKey="dcat.addAccessRight"/>
+    </for>
+    <for name="dct:accessRights" xpath="dcat:Distribution" use="thesaurus-list-picker">
+      <directiveAttributes
+        thesaurus="external.theme.eu.europa.access-right"
+        xpath="//dcat:Distribution/dct:accessRights"
         max="1"
         labelKey="dcat.addAccessRight"/>
     </for>
@@ -190,6 +206,7 @@
       <name>dcat:startDate</name>
       <name>dcat:endDate</name>
       <name>vcard:hasEmail</name>
+      <name>foaf:Document</name>
       <name>dcat:spatialResolutionInMeters</name>
       <name>dcat:temporalResolution</name>
     </exclude>
@@ -230,34 +247,37 @@
 
       <tab id="default" default="true"  mode="flat">
         <!-- TODO: One page layout, with sections ? or tabs ?-->
-        <section>
+        <section name="dcat.basic-info">
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:title"/>
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:description"/>
           <field xpath="rdf:RDF/*/dcat:endpointDescription"/>
           <field xpath="rdf:RDF/*/dcat:endpointURL"/>
 
-
           <field xpath="rdf:RDF/*/dcat:theme" or="theme" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/*/dcat:keyword" or="keyword" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:type" or="type" in="rdf:RDF/*"/>
 
-          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:issued" or="issued" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:modified" or="modified" in="rdf:RDF/*"/>
-
-          <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
-          <field xpath="rdf:RDF/*/dct:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
-
-          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:accessRight" or="accessRights" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:accessRights" or="accessRights" in="rdf:RDF/*"/>
         </section>
 
-        <section>
+        <section name="dcat.contacts">
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:creator" or="creator" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:publisher" or="publisher" in="rdf:RDF/*"/>
           <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dcat:contactPoint" or="contactPoint" in="rdf:RDF/*"/>
         </section>
 
+        <section name="dcat.temporal-info">
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:issued" or="issued" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/(dcat:Dataset|dcat:DataService)/dct:modified" or="modified" in="rdf:RDF/*"/>
+
+          <field xpath="rdf:RDF/*/dct:temporal" or="temporal" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:temporalResolution" or="temporalResolution" in="rdf:RDF/*"/>
+        </section>
+
+        <section name="dcat.spatial-info"
+                 displayIfRecord="count(rdf:RDF/dcat:Dataset) > 0">
+          <field xpath="rdf:RDF/*/dct:spatial" or="spatial" in="rdf:RDF/*"/>
+          <field xpath="rdf:RDF/*/dcat:spatialResolutionInMeters" or="spatialResolutionInMeters" in="rdf:RDF/*"/>
+        </section>
 
         <!--<section>
           <field xpath="rdf:RDF/*/dcat:landingPage"/>
@@ -269,9 +289,12 @@
         <for name="dcat:keyword"/>
         <for name="dcat:contactPoint"/>
         <for name="dct:spatial"/>
+        <for name="dcat:spatialResolutionInMeters"/>
+        <for name="dcat:temporalResolution"/>
         <for name="dct:temporal"/>
         <for name="dct:issued"/>
         <for name="dct:modified"/>
+        <for name="dct:accessRights"/>
         <for name="dct:creator"/>
         <for name="dct:publisher"/>
         <for name="vcard:fn"/>
@@ -293,8 +316,12 @@
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
-      <tab id="advanced" default="true" >
-        <section xpath="rdf:RDF"/>
+      <tab id="dcat.resource" default="true">
+        <section xpath="rdf:RDF/dcat:Dataset"/>
+        <section xpath="rdf:RDF/dcat:DataService"/>
+      </tab>
+      <tab id="dcat.catalog-record">
+        <section xpath="rdf:RDF/dcat:CatalogRecord"/>
       </tab>
     </view>
 

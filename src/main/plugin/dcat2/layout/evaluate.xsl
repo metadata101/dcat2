@@ -35,6 +35,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:schema="http://schema.org/"
                 xmlns:locn="http://www.w3.org/ns/locn#"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:gn="http://www.fao.org/geonetwork"
                 xmlns:saxon="http://saxon.sf.net/"
                 version="2.0"

@@ -93,7 +93,6 @@
 
 
 
-
   <xsl:template mode="mode-dcat2"
                 match="dct:spatial"
                 priority="2000">
