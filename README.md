@@ -12,7 +12,9 @@ Add new records:
 
 ![Add record](doc/en/img/dcat-add-record.png)
 
-### Editor
+### Editing records
+
+#### Basic form
 
 The DCAT editor default view is composed of 4 sections:
 
@@ -42,7 +44,7 @@ Creator, Publisher and point of contact can only be selected in a contact direct
 ![](doc/en/img/dcat-editor-spatial.png)
 
 
-### Multilingual record
+#### Multilingual record
 
 By adding a language in the record tab of the advanced view, user can create multilingual description of a record:
 
@@ -51,7 +53,7 @@ By adding a language in the record tab of the advanced view, user can create mul
 The first language is the "main" one.
 
 
-### Distribution
+#### Distribution
 
 [Distribution](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution) can be added using associated resource panel:
 
@@ -62,13 +64,14 @@ Online link in distribution is limited to:
 * title
 * description
 
+TODO: Add licence support
 
-### Associated resources
+#### Associated resources
 
 Not yet supported.
 
 
-### Advanced editor
+#### Advanced editor
 
 The advanced view is composed of 2 tabs:
 * the dataset or data service
@@ -87,7 +90,21 @@ DCAT metadata record are encoded as RDF/XML. A metadata record is composed of:
 ![XML encoding](doc/en/img/dcat-encoding.png)
 
 
+Some elements can be encoded using an element or using a `rdf:resource` attribute. This needs improvements.
 
+### Viewing details
+
+TODO: Improve indexing.
+
+### Importing record
+
+TODO: which formats?
+
+### Output formats
+
+TODO:
+* RDF dump support?
+* Test OGC API Records DCAT output formats.
 
 
 ## Installation
