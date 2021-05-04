@@ -77,7 +77,11 @@
         <xsl:copy-of select="gn-fn-index:add-field('docType', 'metadata')"/>
         <xsl:copy-of select="gn-fn-index:add-field('documentStandard', 'dcat2')"/>
 
-        <dateStamp><xsl:value-of select="date-util:convertToISOZuluDateTime(normalize-space($dateStamp))"/></dateStamp>
+        <xsl:variable name="dateStamp"
+                      select="date-util:convertToISOZuluDateTime(normalize-space($dateStamp))"/>
+        <xsl:if test="$dateStamp != ''">
+          <dateStamp><xsl:value-of select="$dateStamp"/></dateStamp>
+        </xsl:if>
 
         <metadataIdentifier>
           <xsl:value-of select="@rdf:about"/>
@@ -244,6 +248,31 @@
           </resolutionScaleDenominator>
         </xsl:for-each>
 
+
+
+
+        <xsl:variable name="overviews"
+                      select="dcat:distribution/*[dct:format/*/skos:prefLabel = 'WWW:OVERVIEW' and dcat:accessURL != '']"/>
+        <xsl:copy-of select="gn-fn-index:add-field('hasOverview', if (count($overviews) > 0) then 'true' else 'false')"/>
+
+
+        <xsl:variable name="isStoringOverviewInIndex"
+                      select="true()"/>
+        <xsl:for-each select="$overviews">
+          <overview type="object">{
+            "url": "<xsl:value-of select="normalize-space(dcat:accessURL)"/>"
+            <xsl:if test="$isStoringOverviewInIndex">
+              <xsl:variable name="data"
+                            select="util:buildDataUrl(dcat:accessURL, 140)"/>
+              <xsl:if test="$data != ''">,
+                "data": "<xsl:value-of select="$data"/>"
+              </xsl:if>
+            </xsl:if>
+            <xsl:if test="normalize-space(dct:title) != ''">,
+              "text": <xsl:value-of select="gn-fn-index:add-multilingual-field('name', dct:title, $allLanguages, true())"/>
+            </xsl:if>
+            }</overview>
+        </xsl:for-each>
       </doc>
     </xsl:for-each>
   </xsl:template>
