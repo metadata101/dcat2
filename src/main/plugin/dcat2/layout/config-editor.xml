@@ -236,13 +236,6 @@
       <sidePanel>
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
-
-        <section name="metadata.section">
-          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:identifier"/>
-          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:issued"/>
-          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:modified"/>
-          <field xpath="rdf:RDF/dcat:CatalogRecord/dct:conformsTo"/>
-        </section>
       </sidePanel>
 
       <tab id="default" default="true"  mode="flat">

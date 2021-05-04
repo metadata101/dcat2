@@ -15,7 +15,7 @@
   <dcat.addAccrualPeriodicity>Update frequency</dcat.addAccrualPeriodicity>
   <dcat.resource>Resource</dcat.resource>
   <dcat.catalog-record>Record</dcat.catalog-record>
-  <dcat.basic-info>Basic information</dcat.basic-info>
+  <dcat.basic-info>Main information</dcat.basic-info>
   <dcat.temporal-info>Temporal information</dcat.temporal-info>
   <dcat.spatial-info>Spatial information</dcat.spatial-info>
   <dcat.contacts>Contacts</dcat.contacts>
