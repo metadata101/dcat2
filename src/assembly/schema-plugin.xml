@@ -8,9 +8,20 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>src/main/plugin/</directory>
-      <outputDirectory></outputDirectory>
-      <useDefaultExcludes>true</useDefaultExcludes>
+      <directory>${project.basedir}/src/main/plugin/dcat2</directory>
+      <outputDirectory>dcat2</outputDirectory>
     </fileSet>
   </fileSets>
+  <files>
+    <file>
+      <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+
+    <file>
+      <source>src/assembly/README.txt</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+  </files>
 </assembly>
