@@ -26,7 +26,7 @@
       <directiveAttributes data-prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
     </for>
 
-    <for name="dct:creator" addDirective="data-gn-directory-entry-selector">
+    <!--<for name="dct:creator" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
         data-template-type="contact"
         data-element-xpath="./dcat:Dataset/dct:creator"
@@ -54,7 +54,7 @@
         data-values="xpath::string-join(.//dcat:contactPoint/@xlink:href, '◿')"
         data-default-role="creator"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
-    </for>
+    </for>-->
 
     <!-- Thesaurus list picker configuration. Handled in layout-custom-fields-keywords.xsl.
 

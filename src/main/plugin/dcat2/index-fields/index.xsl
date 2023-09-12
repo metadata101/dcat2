@@ -272,6 +272,55 @@
             </xsl:if>
             }</overview>
         </xsl:for-each>
+
+
+        <xsl:for-each select="dcat:distribution/*[dct:format/*/skos:prefLabel != 'WWW:OVERVIEW' and dcat:accessURL != '']">
+
+          <xsl:variable name="transferGroup"
+                        select="count(ancestor::dcat:distribution/preceding-sibling::dcat:distribution)"/>
+
+          <xsl:variable name="protocol"
+                        select="dct:format/*/skos:prefLabel/text()"/>
+
+          <linkUrl>
+            <xsl:value-of select="dcat:accessURL/text()"/>
+          </linkUrl>
+          <xsl:if test="normalize-space($protocol) != ''">
+            <linkProtocol>
+              <xsl:value-of select="$protocol"/>
+            </linkProtocol>
+          </xsl:if>
+          <xsl:element name="linkUrlProtocol{replace($protocol[1], '[^a-zA-Z0-9]', '')}">
+            <xsl:value-of select="dcat:accessURL/text()"/>
+          </xsl:element>
+
+          <link type="object">{
+            "protocol":"<xsl:value-of select="gn-fn-index:json-escape(($protocol)[1])"/>",
+            "urlObject":{"default": "<xsl:value-of select="gn-fn-index:json-escape(dcat:accessURL/text())"/>"},
+            <xsl:if test="normalize-space(dct:description[1]) != ''">
+              "nameObject": <xsl:value-of select="gn-fn-index:add-multilingual-field(
+                                'name', dct:description[1], $allLanguages)"/>,
+            </xsl:if>
+            <xsl:if test="normalize-space(dct:description[1]) != ''">
+              "descriptionObject": <xsl:value-of select="gn-fn-index:add-multilingual-field(
+                                'description', dct:description[1], $allLanguages)"/>,
+            </xsl:if>
+            "function":"",
+            "group": <xsl:value-of select="$transferGroup"/>
+            }
+            <!--Link object in Angular used to be
+            //     name: linkInfos[0],
+            //     title: linkInfos[0],
+            //     url: linkInfos[2],
+            //     desc: linkInfos[1],
+            //     protocol: linkInfos[3],
+            //     contentType: linkInfos[4],
+            //     group: linkInfos[5] ? parseInt(linkInfos[5]) : undefined,
+            //     applicationProfile: linkInfos[6]-->
+          </link>
+        </xsl:for-each>
+
+
       </doc>
     </xsl:for-each>
   </xsl:template>
