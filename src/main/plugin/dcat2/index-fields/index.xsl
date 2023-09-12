@@ -274,16 +274,18 @@
         </xsl:for-each>
 
 
-        <xsl:for-each select="dcat:distribution/*[dct:format/*/skos:prefLabel != 'WWW:OVERVIEW' and dcat:accessURL != '']">
-
+        <xsl:for-each select="dcat:distribution/*[dct:format/*/skos:prefLabel != 'WWW:OVERVIEW' and (dcat:accessURL != '' or dcat:downloadURL != '')]">
           <xsl:variable name="transferGroup"
                         select="count(ancestor::dcat:distribution/preceding-sibling::dcat:distribution)"/>
 
           <xsl:variable name="protocol"
                         select="dct:format/*/skos:prefLabel/text()"/>
 
+          <xsl:variable name="url"
+                        select="(dcat:accessURL|dcat:downloadURL)"/>
+
           <linkUrl>
-            <xsl:value-of select="dcat:accessURL/text()"/>
+            <xsl:value-of select="$url"/>
           </linkUrl>
           <xsl:if test="normalize-space($protocol) != ''">
             <linkProtocol>
@@ -291,12 +293,12 @@
             </linkProtocol>
           </xsl:if>
           <xsl:element name="linkUrlProtocol{replace($protocol[1], '[^a-zA-Z0-9]', '')}">
-            <xsl:value-of select="dcat:accessURL/text()"/>
+            <xsl:value-of select="$url"/>
           </xsl:element>
 
           <link type="object">{
             "protocol":"<xsl:value-of select="gn-fn-index:json-escape(($protocol)[1])"/>",
-            "urlObject":{"default": "<xsl:value-of select="gn-fn-index:json-escape(dcat:accessURL/text())"/>"},
+            "urlObject":{"default": "<xsl:value-of select="gn-fn-index:json-escape($url)"/>"},
             <xsl:if test="normalize-space(dct:description[1]) != ''">
               "nameObject": <xsl:value-of select="gn-fn-index:add-multilingual-field(
                                 'name', dct:description[1], $allLanguages)"/>,
