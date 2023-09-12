@@ -75,7 +75,6 @@
     <xsl:for-each select=".//(dcat:Dataset|dcat:DataService|dcat:Catalog)">
       <doc>
         <xsl:copy-of select="gn-fn-index:add-field('docType', 'metadata')"/>
-        <xsl:copy-of select="gn-fn-index:add-field('documentStandard', 'dcat2')"/>
 
         <xsl:variable name="dateStamp"
                       select="date-util:convertToISOZuluDateTime(normalize-space($dateStamp))"/>
