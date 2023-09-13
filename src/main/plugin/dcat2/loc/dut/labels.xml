@@ -530,4 +530,16 @@
     <description>De data die via deze dataservice worden aangeboden.</description>
     <btnLabel>biedt informatie aan over</btnLabel>
   </element>
+
+  <element name="dcat:accessURL">
+    <label>Access URL</label>
+    <description></description>
+    <btnLabel></btnLabel>
+  </element>
+
+  <element name="dcat:downloadURL">
+    <label>Download URL</label>
+    <description></description>
+    <btnLabel></btnLabel>
+  </element>
 </labels>

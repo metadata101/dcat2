@@ -524,4 +524,16 @@
     </description>
     <btnLabel></btnLabel>
   </element>
+
+  <element name="dcat:accessURL">
+    <label>Access URL</label>
+    <description></description>
+    <btnLabel></btnLabel>
+  </element>
+
+  <element name="dcat:downloadURL">
+    <label>Download URL</label>
+    <description></description>
+    <btnLabel></btnLabel>
+  </element>
 </labels>

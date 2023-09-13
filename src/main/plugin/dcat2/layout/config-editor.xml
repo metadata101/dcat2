@@ -313,11 +313,11 @@
         <directive data-gn-onlinesrc-list="" data-types="thumbnail|onlinesrc|source"/>
         <directive data-gn-validation-report=""/>
       </sidePanel>
-      <tab id="dcat.resource" default="true">
+      <tab id="dcatResource" default="true">
         <section xpath="/rdf:RDF/dcat:Dataset"/>
         <section xpath="/rdf:RDF/dcat:DataService"/>
       </tab>
-      <tab id="dcat.catalog-record">
+      <tab id="dcatCatalogRecord">
         <section xpath="/rdf:RDF/dcat:CatalogRecord"/>
       </tab>
     </view>

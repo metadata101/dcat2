@@ -13,6 +13,6 @@
   <dcat.addCompressFormat>Format de compression</dcat.addCompressFormat>
   <dcat.addMediaType>Type de média</dcat.addMediaType>
   <dcat.addAccrualPeriodicity>Fréquence de mise à jour</dcat.addAccrualPeriodicity>
-  <dcat.resource>Resource</dcat.resource>
-  <dcat.catalog-record>Fiche</dcat.catalog-record>
+  <dcatResource>Resource</dcatResource>
+  <dcatCatalogRecord>Fiche</dcatCatalogRecord>
 </strings>
