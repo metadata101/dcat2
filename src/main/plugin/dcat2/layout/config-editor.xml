@@ -33,7 +33,8 @@
         data-max-tags="1"
         data-insert-modes="tags"
         data-values="xpath::string-join(.//dct:creator/@xlink:href, '◿')"
-        data-default-role="creator"
+        data-default-role="author"
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~author"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
     <for name="dct:publisher" addDirective="data-gn-directory-entry-selector">
@@ -43,7 +44,8 @@
         data-max-tags="1"
         data-insert-modes="tags"
         data-values="xpath::string-join(.//dct:publisher/@xlink:href, '◿')"
-        data-default-role="creator"
+        data-default-role="publisher"
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~publisher"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
     <for name="dcat:contactPoint" addDirective="data-gn-directory-entry-selector">
@@ -52,7 +54,8 @@
         data-insert-modes="tags"
         data-element-xpath="./dcat:Dataset/dcat:contactPoint"
         data-values="xpath::string-join(.//dcat:contactPoint/@xlink:href, '◿')"
-        data-default-role="creator"
+        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~pointOfContact"
+        data-default-role="pointOfContact"
         data-transformation="contact-from-iso19139-to-foaf-agent"/>
     </for>
 

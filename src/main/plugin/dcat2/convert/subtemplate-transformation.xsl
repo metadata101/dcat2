@@ -28,7 +28,7 @@
       <foaf:name><xsl:value-of select=".//gmd:organisationName/*/text()"/></foaf:name>
       <dct:type>
         <skos:Concept>
-          <skos:prefLabel xml:lang="en"/>
+          <skos:prefLabel xml:lang="en"><xsl:value-of select=".//gmd:role/gmd:CI_RoleCode/@codeListValue" /></skos:prefLabel>
           <skos:inScheme rdf:resource="http://purl.org/adms/publishertype/1.0"/>
         </skos:Concept>
       </dct:type>
