@@ -32,8 +32,17 @@
           <skos:inScheme rdf:resource="http://purl.org/adms/publishertype/1.0"/>
         </skos:Concept>
       </dct:type>
-      <foaf:phone rdf:resource=""/>
-      <foaf:mbox rdf:resource=""/>
+      <xsl:if test="string(.//gmd:contactInfo/*/gmd:phone/*/gmd:voice/gco:CharacterString)">
+        <foaf:phone rdf:resource="tel:{.//gmd:contactInfo/*/gmd:phone/*/gmd:voice/gco:CharacterString}"/>
+      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="string(.//gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString)">
+          <foaf:mbox rdf:resource="mailto:{.//gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString}"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <foaf:mbox rdf:resource=""/>
+        </xsl:otherwise>
+      </xsl:choose>
     </foaf:Agent>
   </xsl:template>
 
