@@ -464,7 +464,7 @@
   <!-- Render values for text with clickable URL ... -->
   <xsl:template mode="render-value"
                 match="dct:title|dct:description|owl:versionInfo|adms:versionNotes|dct:LicenseDocument/dct:identifier">
-    <xsl:call-template name="linkify">
+    <xsl:call-template name="addLineBreaksAndHyperlinks">
       <xsl:with-param name="txt" select="."/>
     </xsl:call-template>
   </xsl:template>
