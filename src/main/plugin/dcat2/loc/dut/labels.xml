@@ -354,12 +354,6 @@
     <label>Distributie</label>
     <description>Een beschikbare distributie van de dataset.</description>
     <btnLabel>distributie</btnLabel>
-    <label>Distribution</label>
-    <description>Een specifieke representatie van een dataset. Een dataset kan beschikbaar zijn in meerdere
-      serialisaties die op verschillende manieren kunnen verschillen, onder meer wat betreft natuurlijke taal, mediatype
-      of -formaat, schematische organisatie, temporele en ruimtelijke resolutie, mate van detail of profielen (die een
-      of meer van de bovenstaande elementen kunnen specificeren).
-    </description>
   </element>
   <element name="dcat:accessService">
     <label>Wordt aangeboden door</label>
