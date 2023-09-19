@@ -377,7 +377,7 @@
     <xsl:variable name="logo" select="''"/>
     <xsl:variable name="website" select="''"/>
     <xsl:variable name="email"
-                  select="foaf:Agent/foaf:mbox/@rdf:resource"/>
+                  select="replace(foaf:Agent/foaf:mbox/@rdf:resource, 'mailto:', '')"/>
     <xsl:variable name="phone"
                   select="foaf:Agent/foaf:phone/@rdf:resource"/>
     <xsl:variable name="individualName"
