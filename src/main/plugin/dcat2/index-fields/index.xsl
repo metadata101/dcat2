@@ -299,7 +299,11 @@
           <link type="object">{
             "protocol":"<xsl:value-of select="gn-fn-index:json-escape(($protocol)[1])"/>",
             "urlObject":{"default": "<xsl:value-of select="gn-fn-index:json-escape($url)"/>"},
-            <xsl:if test="normalize-space(dct:description[1]) != ''">
+            <xsl:if test="normalize-space(dct:title[1]) != ''">
+              "nameObject": <xsl:value-of select="gn-fn-index:add-multilingual-field(
+                                'name', dct:title[1], $allLanguages)"/>,
+            </xsl:if>
+            <xsl:if test="(normalize-space(dct:title[1]) = '') and (normalize-space(dct:description[1]) != '')">
               "nameObject": <xsl:value-of select="gn-fn-index:add-multilingual-field(
                                 'name', dct:description[1], $allLanguages)"/>,
             </xsl:if>
