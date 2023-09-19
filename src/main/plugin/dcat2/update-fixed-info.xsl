@@ -282,7 +282,12 @@
         <dct:issued><xsl:value-of select="/root/env/createDate"/></dct:issued>
         <dct:modified><xsl:value-of select="/root/env/changeDate"/></dct:modified>
 
-        <xsl:apply-templates select="dcat:CatalogRecord/*[not(name() = ('dct:identifier', 'dct:issued', 'dct:modified'))]"/>
+        <xsl:variable name="rdfAbout"
+                      select="concat($uuidUrlPrefix,
+                                   /root/env/uuid)"/>
+        <foaf:primaryTopic rdf:resource="{$rdfAbout}"></foaf:primaryTopic>
+
+        <xsl:apply-templates select="dcat:CatalogRecord/*[not(name() = ('dct:identifier', 'dct:issued', 'dct:modified', 'foaf:primaryTopic'))]"/>
       </dcat:CatalogRecord>
   </xsl:template>
 

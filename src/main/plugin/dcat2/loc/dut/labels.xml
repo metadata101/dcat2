@@ -216,9 +216,9 @@
     <btnLabel>telefoonnummer</btnLabel>
   </element>
   <element name="dct:creator">
-    <label>Schepper</label>
+    <label>Auteur</label>
     <description>De entiteit die verantwoordelijk is voor het produceren van de resource.</description>
-    <btnLabel>schepper</btnLabel>
+    <btnLabel>auteur</btnLabel>
   </element>
   <element name="dct:publisher">
     <label>Uitgever</label>

@@ -120,7 +120,6 @@
           <xs:element ref="dct:hasPart" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="foaf:homepage" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
-        <xs:attribute ref="rdf:about"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -149,6 +148,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element ref="dct:identifier" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:title" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:description" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="dct:issued" minOccurs="0" maxOccurs="1"/>
