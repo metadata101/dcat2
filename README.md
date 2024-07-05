@@ -1,6 +1,6 @@
 # DCAT2 Schema Plugin for GeoNetwork
 
-DCAT2 plugin for GeoNetwork. This plugin is currently under development. See progress in https://github.com/metadata101/dcat2/projects/1.
+DCAT2 plugin for GeoNetwork. This plugin is archived and may be replaced by a new generic plugin. See progress in https://github.com/metadata101/dcat2/projects/1.
 
 ## Description
 
